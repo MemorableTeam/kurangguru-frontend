@@ -2,7 +2,6 @@ import { Container, Row, Col, Button } from "react-bootstrap";
 import Link from 'next/link'
 import {useState, useEffect} from 'react'
 import { Header } from "../../components";
-import style from '../../styles/auth.module.scss'
 
 const Login = () => {
   //variable state untuk visible invisible password
@@ -56,14 +55,14 @@ const Login = () => {
                 <label htmlFor="input-password" className="form-label kanit">
                   Password
                 </label>
-                <div className={`input-group ${style.brnone}`}>
+                <div className={`input-group brnone`}>
                   <input
                     type="password"
-                    className={`form-control border-radius-10 py-4 ${style.rnone}`}
+                    className={`form-control border-radius-10 py-4 rnone`}
                     id="input-password"
                     onChange={(e)=>{setData({...data, password: e.target.value})}}
                   />
-                  <div className={`px-2 input-group-append ${style.toogle}`}>
+                  <div className={`px-2 input-group-append toogle`}>
                     {(!visible)?(
                       <img src='./icon/open-eyes-icon.svg' onClick={()=>setVisible(true)}/>
                     ):(
@@ -92,7 +91,7 @@ const Login = () => {
                   className="border-radius-10 bg-grey w-100 text-black shadow-sm kanit"
                   size="lg"
                   >
-                  <img src="icon/google-icon.svg" className={`mr-3 ${style.icon}`}></img>
+                  <img src="icon/google-icon.svg" className='mr-3 icon'></img>
                   <span>Login with google</span>
                 </Button>
               </div>

@@ -11,10 +11,12 @@
   max-width: 1em;
   max-height: 1em;
 }
-.rnone{
+.r-none{
   border-right-style: none !important;
 }
-.fieldverify{
+.field-verify{
+  text-align: center;
+  font-size: 3em;
   border-top-style: none;
   border-right: none;
   border-left: none;
@@ -23,5 +25,7 @@
   border-color: black;
   border-radius: none;
   background-color: transparent;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
 }
 
