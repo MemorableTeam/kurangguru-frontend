@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300&family=Montserrat:wght@300&family=Roboto:wght@300&display=swap');
+
+$blue-light:#E6EDF6;
+$blue-dark:#5784BA;
+$pink:#F4CFDF;
+$light:#F9F9F9;
+
+.kanit{
+    font-family: 'Kanit', sans-serif;
+}
+.montserrat{
+    font-family: 'Montserrat', sans-serif;
+}
+.roboto{
+    font-family: 'Roboto', sans-serif;
+}
+.bg-main{
+    min-height: 100vh;
+}
+.bg-blue-light{
+    background-color: $blue-light;
+}
+.bg-blue-dark{
+    background-color: $blue-dark;
+}
+.bg-pink{
+    background-color: $pink;
+}
+.bg-grey{
+    background-color: $light;
+}
+.text-blue-light{
+    color: $blue-light;
+}
+.text-blue-dark{
+    color: $blue-dark;
+}
+.text-black{
+    color: black;
+}
+.text-pink{
+    color: $pink;
+}
+.text-grey{
+    color:$light
+}
+
+.btn-blue-dark{
+    color: white;
+    background-color: $blue-dark;
+}
+.btn-light-grey{
+
+}
+.border-radius-10{
+    border-radius: 10px;
+}
+.w-100{
+    width: 100%;
+}
+
