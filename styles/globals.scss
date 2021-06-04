@@ -4,6 +4,8 @@ $blue-light:#E6EDF6;
 $blue-dark:#5784BA;
 $pink:#F4CFDF;
 $light:#F9F9F9;
+$dark:#837F8F;
+$white: #FFFFFF;
 
 .kanit{
     font-family: 'Kanit', sans-serif;
@@ -29,6 +31,9 @@ $light:#F9F9F9;
 .bg-grey{
     background-color: $light;
 }
+.bg-white{
+    background-color: $white;
+}
 .text-blue-light{
     color: $blue-light;
 }
@@ -44,7 +49,9 @@ $light:#F9F9F9;
 .text-grey{
     color:$light
 }
-
+.text-grey-dark{
+    color:$dark;
+}
 .btn-blue-dark{
     color: white;
     background-color: $blue-dark;
@@ -57,5 +64,13 @@ $light:#F9F9F9;
 }
 .w-100{
     width: 100%;
+}
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] {
+  -moz-appearance: textfield;
 }
 
