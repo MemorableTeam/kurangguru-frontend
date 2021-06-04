@@ -25,16 +25,16 @@ const CreateNew = () => {
             <Header title="Craete New Password" />
             <Container fluid className="bg-blue-light bg-main">
                 <Row className='g-0'>
-                    <Col md={6} xs={12}>
+                    <Col md={6} xs={12} className="sm-hidden">
                         <Row className="justify-content-center align-items-center bg-main">
                             <Col md={6}>
-                                <Image className='logo' src="/images/face1.png" />
+                                <Image className='logo' src="/images/face2.png" />
                             </Col>
                         </Row>
                     </Col>
                     <Col md={6} xs={12} className="bg-white kanit">
                         <Row className="justify-content-center align-items-center bg-main text-center">
-                            <Col md={8}>
+                            <Col md={8} xs={10}>
                                 <h2 className='fw-bolder'>Create New Password</h2>
                                 <p className='mt-5 fw-bolder'>Your new password must be different from previous used password!</p>
                                 <form>

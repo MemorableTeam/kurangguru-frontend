@@ -7,19 +7,19 @@ const ForgotPassword = () => {
             <Header title="Forgot Password" />
             <Container fluid className="bg-blue-light bg-main">
                 <Row>
-                    <Col md={6} xs={12}>
+                    <Col md={6} xs={12} className="fg-left">
                         <Image className='p-back' src="/icon/back-icon.svg" />
                         <Row className="justify-content-center align-items-center bg-main">
-                            <Col md={6}>
-                                <Image className='logo' src="/images/face1.png" />
+                            <Col md={6} xs={7} className="mx-auto">
+                                <Image className='logo mx-4' src="/images/face1.png" />
                             </Col>
                         </Row>
                     </Col>
-                    <Col md={6} xs={12} className="bg-white kanit">
+                    <Col md={6} xs={12} className="fg-right bg-white kanit">
                         <Row className="justify-content-center align-items-center bg-main text-center">
-                            <Col md={8}>
-                                <h2 className='fw-bolder'>Reset Password</h2>
-                                <p className='fw-bolder'>Enter your email address linked to this account</p>
+                            <Col md={8} xs={10}>
+                                <h2 className='fw-bolder fgr-title'>Reset Password</h2>
+                                <p className='mt-5 fw-bolder'>Enter your email address linked to this account</p>
                                 <p className='mt-3 text-grey-dark mb-5 fwbold'>We will send you the verification code to reset your password</p>
                                 <form>
                                     <div className="text-left">
