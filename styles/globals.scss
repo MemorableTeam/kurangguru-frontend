@@ -1,78 +1,100 @@
-@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300&family=Montserrat:wght@300&family=Roboto:wght@300&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Kanit:wght@300&family=Montserrat:wght@300&family=Roboto:wght@300&display=swap");
 
-$blue-light:#E6EDF6;
-$blue-dark:#5784BA;
-$pink:#F4CFDF;
-$light:#F9F9F9;
-$dark:#837F8F;
-$white: #FFFFFF;
+$blue-light: #e6edf6;
+$blue-dark: #5784ba;
+$pink: #f4cfdf;
+$light: #f9f9f9;
+$dark: #837f8f;
+$white: #ffffff;
 
-.kanit{
-    font-family: 'Kanit', sans-serif;
+.kanit {
+  font-family: "Kanit", sans-serif;
 }
-.montserrat{
-    font-family: 'Montserrat', sans-serif;
+.montserrat {
+  font-family: "Montserrat", sans-serif;
 }
-.roboto{
-    font-family: 'Roboto', sans-serif;
+.roboto {
+  font-family: "Roboto", sans-serif;
 }
-.bg-main{
-    min-height: 100vh;
+.bg-main {
+  min-height: 100vh;
 }
-.bg-blue-light{
-    background-color: $blue-light;
+.bg-blue-light {
+  background-color: $blue-light;
 }
-.bg-blue-dark{
-    background-color: $blue-dark;
+.bg-blue-dark {
+  background-color: $blue-dark;
 }
-.bg-pink{
-    background-color: $pink;
+.bg-pink {
+  background-color: $pink;
 }
-.bg-grey{
-    background-color: $light;
+.bg-grey {
+  background-color: $light;
 }
-.bg-white{
-    background-color: $white;
+.bg-white {
+  background-color: $white;
 }
-.text-blue-light{
-    color: $blue-light;
+.text-blue-light {
+  color: $blue-light;
 }
-.text-blue-dark{
-    color: $blue-dark;
+.text-blue-dark {
+  color: $blue-dark;
 }
-.text-black{
-    color: black;
+.text-black {
+  color: black;
 }
-.text-pink{
-    color: $pink;
+.text-pink {
+  color: $pink;
 }
-.text-grey{
-    color:$light
+.text-grey {
+  color: $light;
 }
-.text-grey-dark{
-    color:$dark;
+.text-grey-dark {
+  color: $dark;
 }
-.btn-blue-dark{
-    color: white;
-    background-color: $blue-dark;
+.btn-blue-dark {
+  color: white;
+  background-color: $blue-dark;
 }
-.btn-light-grey{
+.btn-light-grey {
+}
+.border-radius-10 {
+  border-radius: 10px;
+}
+.w-100 {
+  width: 100%;
+}
 
+.fs-36 {
+  font-size: 36px;
 }
-.border-radius-10{
-    border-radius: 10px;
+
+.fw-900 {
+  font-weight: 900;
 }
-.w-100{
-    width: 100%;
+.fw-800 {
+  font-weight: 800;
 }
-input[type=number]::-webkit-outer-spin-button,
-input[type=number]::-webkit-inner-spin-button {
+.fw-700 {
+  font-weight: 700;
+}
+.fw-600 {
+  font-weight: 600;
+}
+.fw-500 {
+  font-weight: 500;
+}
+.fw-400 {
+  font-weight: 400;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-input[type=number] {
+input[type="number"] {
   -moz-appearance: textfield;
 }
 
-@import './_auth.scss'
-
+@import "./_auth.scss";

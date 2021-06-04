@@ -1,7 +1,6 @@
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { Header } from "../../components";
 import Link from "next/link";
-import style from '../../styles/auth.module.scss'
 import {useState,useEffect} from 'react'
 
 const Login = () => {
@@ -31,7 +30,7 @@ const Login = () => {
             <h1 className="my-5 text-center kanit">Register</h1>
             <form>
               <div className="mb-3">
-                <label htmlFor="input-password" className="form-label kanit">
+                <label htmlFor="input-password" className="form-label text-grey-dark kanit label-top">
                   Username
                 </label>
                 <input
@@ -43,7 +42,7 @@ const Login = () => {
               </div>
 
               <div className="mb-3">
-                <label htmlFor="input-email" className="form-label kanit">
+                <label htmlFor="input-email" className="form-label text-grey-dark kanit label-top">
                   Email
                 </label>
                 <input
@@ -54,17 +53,17 @@ const Login = () => {
                 />
               </div>
 
-              <div className="mb-1">
-                <label htmlFor="input-password" className="form-label kanit">
+              <div className="mb-3">
+                <label htmlFor="input-password" className="form-label text-grey-dark kanit label-top">
                   Password
                 </label>
                 <div className='input-group'>
                   <input
                     type="password"
-                    className={`form-control border-radius-10 py-4 ${style.rnone}`}
+                    className='form-control shadow-none border-radius-10 py-4 r-none'
                     id="input-password"
                   />
-                  <div className={`px-2 input-group-append ${style.toogle}`}>
+                  <div className='px-2 input-group-append toogle'>
                     {(!visiblePassword)?(
                       <img src='./icon/open-eyes-icon.svg' onClick={()=>setVisiblePassword(true)}/>
                     ):(
@@ -77,16 +76,16 @@ const Login = () => {
               </div>
 
               <div className="mb-5">
-                <label htmlFor="input-confirm-password" className="form-label kanit">
+                <label htmlFor="input-confirm-password" className="form-label text-grey-dark kanit label-top">
                   Confirm Password
                 </label>
                 <div className='input-group'>
                   <input
                     type="password"
-                    className={`form-control border-radius-10 py-4 ${style.rnone}`}
+                    className='form-control shadow-none border-radius-10 py-4 r-none'
                     id="input-confirm-password"
                   />
-                  <div className={`px-2 input-group-append ${style.toogle}`}>
+                  <div className={`px-2 input-group-append toogle`}>
                     {(!visibleConfirm)?(
                       <img src='./icon/open-eyes-icon.svg' onClick={()=>setVisibleConfirm(true)}/>
                     ):(
@@ -110,7 +109,7 @@ const Login = () => {
                   className="border-radius-10 bg-grey w-100 text-black shadow-sm kanit"
                   size="lg"
                 >
-                  <img src="icon/google-icon.svg" class={`mr-3 ${style.icon}`}></img>
+                  <img src="icon/google-icon.svg" class='mr-3 icon'></img>
                   <small>Login with google</small>
                 </Button>
               </div>

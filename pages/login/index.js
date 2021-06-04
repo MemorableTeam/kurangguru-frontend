@@ -2,6 +2,7 @@ import { Container, Row, Col, Button } from "react-bootstrap";
 import Link from 'next/link'
 import {useState, useEffect} from 'react'
 import { Header } from "../../components";
+import { userForm } from 'react-hook-form'
 
 const Login = () => {
   //variable state untuk visible invisible password
@@ -11,6 +12,8 @@ const Login = () => {
     username : '-',
     password : '-'
   })
+  //useform
+  const {register, handleSubmit, formState : {errors}} = userForm()
 
   //process login
   const processLogin = (e) =>{
@@ -33,11 +36,11 @@ const Login = () => {
       <Header title="Login" />
       <Container fluid className="bg-blue-light bg-main">
         <Row className="align-content-center">
-          <Col md={{ span: 4, offset: 4 }}>
+          <Col md={{ span: 4, offset: 4 }} className='my-auto'>
             <h1 className="my-5 text-center kanit">Login</h1>
             <form onSubmit={(e)=>processLogin(e)}>
               <div className="mb-3">
-                <label htmlFor="exampleInputEmail1" className="form-label kanit">
+                <label htmlFor="exampleInputEmail1" className="form-label text-grey-dark kanit label-top">
                   Username or Email
                 </label>
                 <input
@@ -52,13 +55,13 @@ const Login = () => {
               </div>
 
               <div className="mb-1">
-                <label htmlFor="input-password" className="form-label kanit">
+                <label htmlFor="input-password" className="form-label text-grey-dark kanit label-top">
                   Password
                 </label>
-                <div className={`input-group brnone`}>
+                <div className='input-group brnone'>
                   <input
                     type="password"
-                    className={`form-control border-radius-10 py-4 rnone`}
+                    className='form-control shadow-none border-radius-10 py-4 r-none'
                     id="input-password"
                     onChange={(e)=>{setData({...data, password: e.target.value})}}
                   />
@@ -74,7 +77,9 @@ const Login = () => {
               </div>
 
               <div className="d-flex flex-row-reverse bd-highlight mb-4">
-                <span className="p-2 font-weight-bold robot">Forgot Password ?</span>
+                <Link href='./forgot'>
+                  <span className="p-2 font-weight-bold robot">Forgot Password ?</span>
+                </Link>
               </div>
 
               <div className="d-grid gap-2 mb-5">
