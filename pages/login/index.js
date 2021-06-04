@@ -5,15 +5,30 @@ import { Header } from "../../components";
 import style from '../../styles/auth.module.scss'
 
 const Login = () => {
+  //variable state untuk visible invisible password
   const [visible, setVisible] = useState(false)
+  //variable state untuk set username & password
+  const [data, setData] = useState({
+    username : '-',
+    password : '-'
+  })
 
+  //process login
+  const processLogin = (e) =>{
+    e.preventDefault()
+    
+    console.log(data)
+  }
+
+  //ketika tekan toogle ditekan
   useEffect(()=>{
     if(visible){
       document.getElementById('input-password').type='text'
     }else{
       document.getElementById('input-password').type='password'
     }
-  }, [visible]);
+  }, [visible])
+
   return (
     <>
       <Header title="Login" />
@@ -21,7 +36,7 @@ const Login = () => {
         <Row className="align-content-center">
           <Col md={{ span: 4, offset: 4 }}>
             <h1 className="my-5 text-center kanit">Login</h1>
-            <form>
+            <form onSubmit={(e)=>processLogin(e)}>
               <div className="mb-3">
                 <label htmlFor="exampleInputEmail1" className="form-label kanit">
                   Username or Email
@@ -31,6 +46,9 @@ const Login = () => {
                   className="form-control border-radius-10 py-4"
                   id="exampleInputEmail1"
                   aria-describedby="emailHelp"
+                  onChange={(e)=>{
+                    setData({...data, username: e.target.value})
+                  }}
                 />
               </div>
 
@@ -43,6 +61,7 @@ const Login = () => {
                     type="password"
                     className={`form-control border-radius-10 py-4 ${style.rnone}`}
                     id="input-password"
+                    onChange={(e)=>{setData({...data, password: e.target.value})}}
                   />
                   <div className={`px-2 input-group-append ${style.toogle}`}>
                     {(!visible)?(
@@ -64,14 +83,16 @@ const Login = () => {
                   variant="none"
                   className="btn-blue-dark border-radius-10 w-100 my-3 shadow-sm kanit"
                   size="lg"
+                  type='submit'
                 >
                   Login
                 </Button>
                 <Button
                   variant="none"
                   className="border-radius-10 bg-grey w-100 text-black shadow-sm kanit"
-                  size="lg">
-                  <img src="icon/google-icon.svg" class={`mr-3 ${style.icon}`}></img>
+                  size="lg"
+                  >
+                  <img src="icon/google-icon.svg" className={`mr-3 ${style.icon}`}></img>
                   <span>Login with google</span>
                 </Button>
               </div>
