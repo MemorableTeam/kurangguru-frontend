@@ -5,7 +5,6 @@ import { Header } from "../../components";
 import style from '../../styles/auth.module.scss'
 
 const Verify = () => {
-  const 
   //process login
   const processLogin = (e) =>{
     e.preventDefault()
