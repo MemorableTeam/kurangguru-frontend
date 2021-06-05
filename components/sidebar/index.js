@@ -1,9 +1,14 @@
+import { useUser } from "../../pages/api/users/useUser"
+
+// const user = {
+//   photo: null,
+//   username: 'Emil Kharisma',
+//   status: 'Online'
+// }
+
 const Sidebar = ({ activeTabs }) => {
-  const user = {
-    photo: null,
-    username: 'Emil Kharisma',
-    status: 'Online'
-  }
+  const { user, mutateUser, loadUser, errUser } = useUser(1)
+  console.log(user, 'sidebarr')
 
   return (
     <>
