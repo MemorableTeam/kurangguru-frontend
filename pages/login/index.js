@@ -2,23 +2,17 @@ import { Container, Row, Col, Button } from "react-bootstrap";
 import Link from 'next/link'
 import {useState, useEffect} from 'react'
 import { Header } from "../../components";
-import { userForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 
 const Login = () => {
   //variable state untuk visible invisible password
   const [visible, setVisible] = useState(false)
-  //variable state untuk set username & password
-  const [data, setData] = useState({
-    username : '-',
-    password : '-'
-  })
+
   //useform
-  const {register, handleSubmit, formState : {errors}} = userForm()
+  const { register, handleSubmit, formState: { errors } } = useForm()
 
   //process login
-  const processLogin = (e) =>{
-    e.preventDefault()
-    
+  const processLogin = (data) =>{    
     console.log(data)
   }
 
@@ -38,34 +32,33 @@ const Login = () => {
         <Row className="align-content-center">
           <Col md={{ span: 4, offset: 4 }} className='my-auto'>
             <h1 className="my-5 text-center kanit">Login</h1>
-            <form onSubmit={(e)=>processLogin(e)}>
+            <form onSubmit={handleSubmit(processLogin)}>
               <div className="mb-3">
                 <label htmlFor="exampleInputEmail1" className="form-label text-grey-dark kanit label-top">
                   Username or Email
                 </label>
                 <input
+                  {...register("username", {required:"Username Or Email can't be empty"})}
                   type="text"
-                  className="form-control border-radius-10 py-4"
+                  className={`username form-control border-radius-10 py-4 ${errors.username ? 'is-invalid' : ''}`}
                   id="exampleInputEmail1"
                   aria-describedby="emailHelp"
-                  onChange={(e)=>{
-                    setData({...data, username: e.target.value})
-                  }}
                 />
+                <small className='text-danger font-weight-bold mt-2 me-3'>{errors?.username?.message}</small>
               </div>
 
               <div className="mb-1">
                 <label htmlFor="input-password" className="form-label text-grey-dark kanit label-top">
                   Password
                 </label>
-                <div className='input-group brnone'>
+                <div className='input-group'>
                   <input
+                  {...register("password", {required:"Password can't be empty"})}
                     type="password"
-                    className='form-control shadow-none border-radius-10 py-4 r-none'
+                    className={`password form-control shadow-none border-radius-10 py-4 r-none ${errors.password ? 'is-invalid' : ''}`}
                     id="input-password"
-                    onChange={(e)=>{setData({...data, password: e.target.value})}}
                   />
-                  <div className={`px-2 input-group-append toogle`}>
+                  <div className='px-2 input-group-append toogle'>
                     {(!visible)?(
                       <img src='./icon/open-eyes-icon.svg' onClick={()=>setVisible(true)}/>
                     ):(
@@ -74,6 +67,7 @@ const Login = () => {
                     }
                   </div>
                 </div>
+                <small className='text-danger font-weight-bold mt-2 me-3'>{errors?.password?.message}</small>
               </div>
 
               <div className="d-flex flex-row-reverse bd-highlight mb-4">
@@ -96,7 +90,7 @@ const Login = () => {
                   className="border-radius-10 bg-grey w-100 text-black shadow-sm kanit"
                   size="lg"
                   >
-                  <img src="icon/google-icon.svg" className='mr-3 icon'></img>
+                  <img src="icon/google-icon.svg" className='me-3 icon'></img>
                   <span>Login with google</span>
                 </Button>
               </div>
@@ -104,7 +98,7 @@ const Login = () => {
               <div className='mt-5 text-center kanit'>
                 <span>New user ?</span>
                 <Link href='/register'>
-                  <span className='text-blue-dark ml-2 font-weight-bold'> Register</span>
+                  <span className='text-blue-dark ms-2 font-weight-bold'> Register</span>
                 </Link>
               </div>
 
