@@ -1,9 +1,14 @@
+import { useUser } from "../../pages/api/users/useUser"
+
+// const user = {
+//   photo: null,
+//   username: 'Emil Kharisma',
+//   status: 'Online'
+// }
+
 const Sidebar = ({ activeTabs }) => {
-  const user = {
-    photo: null,
-    username: 'Emil Kharisma',
-    status: 'Online'
-  }
+  const { user, mutateUser, loadUser, errUser } = useUser(1)
+  console.log(user, 'sidebarr')
 
   return (
     <>
@@ -11,7 +16,7 @@ const Sidebar = ({ activeTabs }) => {
         <div className={`${activeTabs === 1 ? 'bg-grey' : 'bg-blue-dark'} sm-index h-100 p-4 position-absolute`} style={{ borderRadius: '30px', bottom: 0, left: 0, right: 0 }}>
           <img src={`./icon/${activeTabs === 1 ? 'notif-icon-active' : 'notif-icon'}.svg`} className='float-end sm-hidden' />
           <div className='mt-5 ms-3 sm-profile'>
-            <img width='80px' src={user?.photo ? `${process.env.API_URL_IMG}${user?.photo}` : './images/photo_profile.png'} className='rounded-circle' />
+            <img width='80px' height='80px' src={user?.photo ? `${process.env.API_URL_IMG}${user?.photo}` : './images/photo_profile.png'} className='rounded-circle' />
             <div className="sm-right">
               <h3 className='mt-4'>{user?.username}</h3>
               <p>{user?.status}</p>

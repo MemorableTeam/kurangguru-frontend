@@ -3,18 +3,20 @@ import { Col, Row, Image, Button, Modal, InputGroup, FormControl } from "react-b
 import { Header } from "../../components";
 import { useState, useEffect } from 'react'
 import { useForm } from "react-hook-form";
+import { useUser } from "../api/users/useUser";
 
 const Profile = () => {
   const {register,handleSubmit,formState: { errors }} = useForm();
+  const { user, errUser, mutateUser, loadUser } = useUser(1)
   const [showPhone, setShowPhone] = useState(false);
   const [showChange, setShowChange] = useState(false);
   const [visiblePassword, setVisiblePassword] = useState(false);
   const [visibleConfirm, setVisibleConfirm] = useState(false);
 
-  const handleClosePhone = () => setShowPhone(false);
-  const handleShowPhone = () => setShowPhone(true);
-  const handleCloseChange = () => setShowChange(false);
-  const handleShowChange = () => setShowChange(true);
+  const handleClosePhone = () => setShowPhone(false),
+    handleShowPhone = () => setShowPhone(true),
+    handleCloseChange = () => setShowChange(false),
+    handleShowChange = () => setShowChange(true)
 
   useEffect(() => {
     if(showChange){
@@ -50,11 +52,11 @@ const Profile = () => {
               <Col xs={12} className='bg-banner top-profile w-100 sm-hidden' style={{ height: '35%', borderTopLeftRadius: '30px', borderTopRightRadius: '30px' }}>
                 <Row className="justify-content-center align-items-center w-100" style={{ height: '100%' }}>
                   <Col md={2} xs={6} className="mx-auto my-auto">
-                    <Image className="ps-content mx-4" src="/images/photo_profile.png" style={{ height: '80%', width: '80%' }} />
+                    <Image className="ps-content mx-4 rounded-circle" src={user?.photo ? `${process.env.API_URL_IMG}${user?.photo}` : './images/photo_profile.png'} style={{ height: '80%', width: '80%' }} />
                     <Button className="edit bg-transparent border-0">
                       <Image className="ps-content mx-4" src="/icon/edit-icon.svg" style={{ height: '30%', width: '30%' }} />
                     </Button>
-                    <h6 className="text-white ms-4 mt-3 fw-700">Emir Kharisma</h6>
+                    <h6 className="text-white text-center ms-4 mt-3 fw-700">{user?.username}</h6>
                   </Col>
                 </Row>
               </Col>
@@ -127,7 +129,7 @@ const Profile = () => {
         <Modal.Body>
           <InputGroup className="mb-2">
             <InputGroup.Text className="bg-blue-dark text-white">+62</InputGroup.Text>
-            <FormControl id="inlineFormInputGroup" defaultValue="83334444333" />
+            <FormControl id="inlineFormInputGroup" defaultValue={user?.phone} />
           </InputGroup>
           <Button className="btn-blue-dark py-0 shadow-none">
             Save Changes
