@@ -10,22 +10,31 @@ const CodeVerify = () => {
     formState: { errors },
   } = useForm();
 
-  const handleChange = (e) =>{
+  const handleChange = (e) => {
     var nextState = e.srcElement || e.target
     let data = e.target.value
-    if(data.length == 1){
-      while(nextState = nextState.nextElementSibling){
-        if (nextState == null){
-            break
-        }
+    if (data.length == 1) {
+      while (nextState = nextState.nextElementSibling) {
+        if (nextState == null)
+          break;
         if (nextState.tagName.toLowerCase() === "input") {
-                nextState.focus();
-                break;
+          nextState.focus();
+          break;
+        }
+      }
+    } else if (data.length < 1) {
+      while (nextState = nextState.previousElementSibling) {
+        if (nextState == null)
+          break;
+        if (nextState.tagName.toLowerCase() === "input") {
+          nextState.focus();
+          break;
         }
       }
     }
   }
-  const processVerify = (data) =>{
+
+  const processVerify = (data) => {
     console.log(data)
   }
   return (
@@ -51,7 +60,7 @@ const CodeVerify = () => {
                   <div>
                     <div className="d-flex text-center">
                       <input
-                        {...register('code1',{required:"Field can't be empty"})}
+                        {...register('code1', { required: "Field can't be empty" })}
                         type="number"
                         className="mt-2 text-center form-control border-top-0 border-dark shadow-none py-4 b-bottom"
                         id="InputCode"
@@ -61,10 +70,10 @@ const CodeVerify = () => {
                             .slice(0, 1);
                         }}
                         min={0}
-                        onChange={(e)=>handleChange(e)}
+                        onChange={(e) => handleChange(e)}
                       />
                       <input
-                        {...register('code2',{required:"Field can't be empty"})}
+                        {...register('code2', { required: "Field can't be empty" })}
                         type="number"
                         className="mt-2 text-center form-control border-top-0 border-dark shadow-none py-4 b-bottom"
                         id="InputCode"
@@ -74,10 +83,10 @@ const CodeVerify = () => {
                             .slice(0, 1);
                         }}
                         min={0}
-                        onChange={(e)=>handleChange(e)}
+                        onChange={(e) => handleChange(e)}
                       />
                       <input
-                        {...register('code3',{required:"Field can't be empty"})}
+                        {...register('code3', { required: "Field can't be empty" })}
                         type="number"
                         className="mt-2 text-center form-control border-top-0 border-dark shadow-none py-4 b-bottom"
                         id="InputCode"
@@ -87,10 +96,10 @@ const CodeVerify = () => {
                             .slice(0, 1);
                         }}
                         min={0}
-                        onChange={(e)=>handleChange(e)}
+                        onChange={(e) => handleChange(e)}
                       />
                       <input
-                        {...register('code4',{required:"Field can't be empty"})}
+                        {...register('code4', { required: "Field can't be empty" })}
                         type="number"
                         className="mt-2 text-center form-control border-top-0 border-dark shadow-none py-4 b-bottom"
                         id="InputCode"
@@ -100,7 +109,7 @@ const CodeVerify = () => {
                             .slice(0, 1);
                         }}
                         min={0}
-                        onChange={(e)=>handleChange(e)}
+                        onChange={(e) => handleChange(e)}
                       />
                     </div>
                     <p className="text-grey-dark mt-3 mb-5 fw-bolder">
@@ -110,7 +119,7 @@ const CodeVerify = () => {
                       </Link>
                     </p>
                     <Button
-                      id = 'btn-submit' 
+                      id='btn-submit'
                       variant="none"
                       className="btn-verify btn-blue-dark border-radius-10 w-100 my-3 shadow-sm kanit"
                       size="lg"
