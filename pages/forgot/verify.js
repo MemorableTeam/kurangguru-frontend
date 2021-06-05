@@ -33,17 +33,17 @@ const CodeVerify = () => {
       <Header title="Reset Password" />
       <Container fluid className="bg-blue-light bg-main">
         <Row>
-          <Col md={6} xs={12}>
+          <Col md={6} xs={12} className="fg-left">
             <Row className="justify-content-center align-items-center bg-main">
               <Col md={6}>
                 <Image className="logo" src="/images/face2.png" />
               </Col>
             </Row>
           </Col>
-          <Col md={6} xs={12} className="bg-white kanit">
+          <Col md={6} xs={12} className="fg-right bg-white kanit">
             <Row className="justify-content-center align-items-center bg-main text-center">
               <Col md={8}>
-                <h2 className="fw-bolder">Reset Password</h2>
+                <h2 className="fw-bolder fgr-title">Reset Password</h2>
                 <h5 className="mt-5 fw-bolder">
                   Enter verification code we just sent to your email address
                 </h5>

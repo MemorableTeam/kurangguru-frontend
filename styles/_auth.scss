@@ -48,3 +48,32 @@
 .r-none::-ms-clear {
   display: none;
 }
+@media only screen and (max-width: 767px) {
+  .sm-hidden{
+    display: none;
+  }
+}
+@media only screen and (max-width: 425px) {
+  .fg-left{
+    background-color: white;
+    .logo{
+      margin-top: -200px;
+    }
+  }
+  .fg-right{
+    background: transparent !important;
+    margin-top: -720px;
+    .fgr-title{
+      margin-bottom: 250px;
+    }
+    form {
+      margin-left: -10px;
+    }
+    .btn-verify{
+      margin-left: 5px;
+    }
+  }
+  .sm-hidden{
+    display: none;
+  }
+}
