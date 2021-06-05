@@ -26,6 +26,12 @@
   margin-top: -12px;
   z-index: 999;
 }
+.label-top4 {
+  position: absolute;
+  left: 36%;
+  margin-top: -12px;
+  z-index: 999;
+}
 .p-back {
   position: absolute;
   top: 5%;
@@ -70,6 +76,9 @@
   }
   .label-top3{
     right: 63%;
+  }
+  .label-top4{
+    left: 8%;
   }
 }
 @media only screen and (max-width: 425px) {

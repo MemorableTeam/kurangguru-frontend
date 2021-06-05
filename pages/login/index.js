@@ -34,13 +34,13 @@ const Login = () => {
             <h1 className="my-5 text-center kanit">Login</h1>
             <form onSubmit={handleSubmit(processLogin)}>
               <div className="mb-3">
-                <label htmlFor="exampleInputEmail1" className="form-label text-grey-dark kanit label-top">
+                <label htmlFor="exampleInputEmail1" className="form-label text-grey-dark kanit label-top4">
                   Username or Email
                 </label>
                 <input
                   {...register("username", {required:"Username Or Email can't be empty"})}
                   type="text"
-                  className={`username form-control border-radius-10 py-4 ${errors.username ? 'is-invalid' : ''}`}
+                  className={`username form-control shadow-none border-radius-10 py-4 ${errors.username ? 'is-invalid' : ''}`}
                   id="exampleInputEmail1"
                   aria-describedby="emailHelp"
                 />
@@ -48,7 +48,7 @@ const Login = () => {
               </div>
 
               <div className="mb-1">
-                <label htmlFor="input-password" className="form-label text-grey-dark kanit label-top">
+                <label htmlFor="input-password" className="form-label text-grey-dark kanit label-top4">
                   Password
                 </label>
                 <div className='input-group'>
@@ -58,7 +58,7 @@ const Login = () => {
                     className={`password form-control shadow-none border-radius-10 py-4 r-none ${errors.password ? 'is-invalid' : ''}`}
                     id="input-password"
                   />
-                  <div className='px-2 input-group-append toogle'>
+                  <div className='px-2 input-group-append toogle py-4'>
                     {(!visible)?(
                       <img src='./icon/open-eyes-icon.svg' onClick={()=>setVisible(true)}/>
                     ):(

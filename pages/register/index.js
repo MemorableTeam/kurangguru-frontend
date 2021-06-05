@@ -36,7 +36,7 @@ const Login = () => {
             <h1 className="my-5 text-center kanit">Register</h1>
             <form onSubmit={handleSubmit(processRegister)}>
               <div className="mb-3">
-                <label htmlFor="input-username" className="form-label text-grey-dark kanit label-top">
+                <label htmlFor="input-username" className="form-label text-grey-dark kanit label-top4">
                   Username
                 </label>
                 <input
@@ -50,7 +50,7 @@ const Login = () => {
               </div>
 
               <div className="mb-3">
-                <label htmlFor="input-email" className="form-label text-grey-dark kanit label-top">
+                <label htmlFor="input-email" className="form-label text-grey-dark kanit label-top4">
                   Email
                 </label>
                 <input
@@ -64,7 +64,7 @@ const Login = () => {
               </div>
 
               <div className="mb-3">
-                <label htmlFor="input-password" className="form-label text-grey-dark kanit label-top">
+                <label htmlFor="input-password" className="form-label text-grey-dark kanit label-top4">
                   Password
                 </label>
                 <div className='input-group'>
@@ -74,7 +74,7 @@ const Login = () => {
                     className={`form-control shadow-none border-radius-10 py-4 r-none ${errors.password ? 'is-invalid' : ''}`}
                     id="input-password"
                   />
-                  <div className='px-2 input-group-append toogle'>
+                  <div className='px-2 input-group-append toogle py-4'>
                     {(!visiblePassword) ? (
                       <img src='./icon/open-eyes-icon.svg' onClick={() => setVisiblePassword(true)} />
                     ) : (
@@ -87,7 +87,7 @@ const Login = () => {
               </div>
 
               <div className="mb-5">
-                <label htmlFor="input-confirm-password" className="form-label text-grey-dark kanit label-top">
+                <label htmlFor="input-confirm-password" className="form-label text-grey-dark kanit label-top4">
                   Confirm Password
                 </label>
                 <div className='input-group'>
@@ -97,7 +97,7 @@ const Login = () => {
                     className={`form-control shadow-none border-radius-10 py-4 r-none ${errors.confirm_password ? 'is-invalid' : ''}`}
                     id="input-confirm-password"
                   />
-                  <div className={`px-2 input-group-append toogle`}>
+                  <div className={`px-2 input-group-append toogle py-4`}>
                     {(!visibleConfirm) ? (
                       <img src='./icon/open-eyes-icon.svg' onClick={() => setVisibleConfirm(true)} />
                     ) : (
