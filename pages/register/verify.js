@@ -1,14 +1,13 @@
 import { Container, Row, Col, Button } from "react-bootstrap";
 import Link from 'next/link'
-import {useState, useEffect} from 'react'
+import { useState, useEffect } from 'react'
 import { Header } from "../../components";
 import style from '../../styles/auth.module.scss'
 
 const Verify = () => {
   //process login
-  const processLogin = (e) =>{
+  const processLogin = (e) => {
     e.preventDefault()
-
   }
 
 
@@ -19,13 +18,13 @@ const Verify = () => {
         <Row className="align-content-center py-5">
           <Col md={{ span: 4, offset: 4 }}>
             <h1 className="my-5 text-center kanit">Verify Code</h1>
-            <form onSubmit={(e)=>processLogin(e)}>
+            <form onSubmit={(e) => processLogin(e)}>
               <div className="mb-3">
                 <div className='input-group'>
-                  <input type="text" className={`mr-3 form-control ${style.fieldverify}`}/>
-                  <input type="text" className={`mr-3 form-control ${style.fieldverify}`}/>
-                  <input type="text" className={`mr-3 form-control ${style.fieldverify}`}/>
-                  <input type="text" className={`mr-3 form-control ${style.fieldverify}`}/>
+                  <input type="text" className={`mr-3 form-control ${style.fieldverify}`} />
+                  <input type="text" className={`mr-3 form-control ${style.fieldverify}`} />
+                  <input type="text" className={`mr-3 form-control ${style.fieldverify}`} />
+                  <input type="text" className={`mr-3 form-control ${style.fieldverify}`} />
                 </div>
               </div>
 
