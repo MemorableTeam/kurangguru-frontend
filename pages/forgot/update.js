@@ -34,16 +34,16 @@ const UpdateNew = () => {
       <Header title="Craete New Password" />
       <Container fluid className="bg-blue-light bg-main">
         <Row className="g-0">
-          <Col md={6} xs={12}>
+          <Col md={6} xs={12} className="sm-hidden">
             <Row className="justify-content-center align-items-center bg-main">
               <Col md={6}>
-                <Image className="logo" src="/images/face1.png" />
+                <Image className="logo" src="/images/face2.png" />
               </Col>
             </Row>
           </Col>
           <Col md={6} xs={12} className="bg-white kanit">
             <Row className="justify-content-center align-items-center bg-main text-center">
-              <Col md={8}>
+              <Col md={8} xs={10}>
                 <h2 className="fw-bolder">Create New Password</h2>
                 <p className="mt-5 fw-bolder">
                   Your new password must be different from previous used
@@ -54,7 +54,7 @@ const UpdateNew = () => {
                     <div className="mt-5 mb-1">
                       <label
                         htmlFor="input-password"
-                        className="form-label text-grey-dark bg-white kanit label-top"
+                        className="form-label text-grey-dark bg-white kanit label-top2"
                       >
                         Password
                       </label>
@@ -64,12 +64,12 @@ const UpdateNew = () => {
                             required: "Password can't be empty ! ",
                           })}
                           type="password"
-                          className={`form-control shadow-none border-radius-10 py-4 r-none ${
+                          className={`form-control shadow-none border-radius-10 py-3 r-none ${
                             errors.password ? "is-invalid" : ""
                           }`}
                           id="input-password"
                         />
-                        <div className="px-2 input-group-append toogle">
+                        <div className="px-2 input-group-append toogle py-3">
                           {!visiblePassword ? (
                             <img
                               src="/icon/open-eyes-icon.svg"
@@ -90,7 +90,7 @@ const UpdateNew = () => {
                     <div className="mt-5 mb-5">
                       <label
                         htmlFor="input-confirm-password"
-                        className="form-label text-grey-dark bg-white kanit label-top"
+                        className="form-label text-grey-dark bg-white kanit label-top3"
                       >
                         Confirm Password
                       </label>
@@ -100,12 +100,12 @@ const UpdateNew = () => {
                             required: "Confirm password can't be empty ! ",
                           })}
                           type="password"
-                          className={`form-control shadow-none border-radius-10 py-4 r-none ${
+                          className={`form-control shadow-none border-radius-10 py-3 r-none ${
                             errors.confirm_password ? "is-invalid" : ""
                           }`}
                           id="input-confirm-password"
                         />
-                        <div className="px-2 input-group-append toogle">
+                        <div className="px-2 input-group-append toogle py-3">
                           {!visibleConfirm ? (
                             <img
                               src="/icon/open-eyes-icon.svg"
