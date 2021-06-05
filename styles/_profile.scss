@@ -1,0 +1,34 @@
+.bg-banner {
+  background-image: url("../public/images/banner_profile.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.edit{
+  position: absolute;
+  top: 18%;
+  right: 29%;
+}
+.w-max{
+  width: max-content;
+}
+.h-btn{
+  height: 9vh;
+}
+@media only screen and (max-width: 767px) {
+  .sm-bg{
+    background-color: white;
+  }
+  .sm-index{
+    z-index: 9;
+    background: $blue-dark;
+  }
+  .sm-profile{
+    display: flex;
+    color: white;
+    height: 13vh;
+    .sm-right{
+      margin-left: 30px;
+      margin-top: -10px;
+    }
+  }
+}

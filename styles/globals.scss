@@ -52,11 +52,16 @@ $white: #ffffff;
 .text-grey-dark {
   color: $dark;
 }
+.text-white {
+  color: white;
+}
 .btn-blue-dark {
   color: white;
   background-color: $blue-dark;
 }
-.btn-light-grey {
+.btn-dark-grey {
+  color: white;
+  background-color: $dark;
 }
 .border-radius-10 {
   border-radius: 10px;
@@ -98,3 +103,4 @@ input[type="number"] {
 }
 
 @import "./_auth.scss";
+@import "./_profile.scss";
