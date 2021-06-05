@@ -2,15 +2,39 @@ import Sidebar from "../../components/sidebar"
 import { Col, Row, Image, Button, Modal, InputGroup, FormControl } from "react-bootstrap"
 import { Header } from "../../components";
 import { useState, useEffect } from 'react'
+import { useForm } from "react-hook-form";
 
 const Profile = () => {
+  const {register,handleSubmit,formState: { errors }} = useForm();
   const [showPhone, setShowPhone] = useState(false);
   const [showChange, setShowChange] = useState(false);
+  const [visiblePassword, setVisiblePassword] = useState(false);
+  const [visibleConfirm, setVisibleConfirm] = useState(false);
 
   const handleClosePhone = () => setShowPhone(false);
   const handleShowPhone = () => setShowPhone(true);
   const handleCloseChange = () => setShowChange(false);
   const handleShowChange = () => setShowChange(true);
+
+  useEffect(() => {
+    if(showChange){
+      if (visiblePassword) {
+        document.getElementById("input-password").type = "text";
+      } else {
+        document.getElementById("input-password").type = "password";
+      }
+  
+      if (visibleConfirm) {
+        document.getElementById("input-confirm-password").type = "text";
+      } else {
+        document.getElementById("input-confirm-password").type = "password";
+      }
+    }
+  }, [visiblePassword, visibleConfirm]);
+
+  const processUpdate = (data) =>{
+    console.log(data)
+  }
 
 
   return (
@@ -105,7 +129,7 @@ const Profile = () => {
             <InputGroup.Text className="bg-blue-dark text-white">+62</InputGroup.Text>
             <FormControl id="inlineFormInputGroup" defaultValue="83334444333" />
           </InputGroup>
-          <Button className="btn-blue-dark py-0">
+          <Button className="btn-blue-dark py-0 shadow-none">
             Save Changes
           </Button>
         </Modal.Body>
@@ -116,12 +140,85 @@ const Profile = () => {
         </Modal.Footer>
       </Modal>
 
-      <Modal show={showChange} onHide={handleCloseChange} animation={false}>
+      <Modal show={showChange} onHide={handleCloseChange} animation={false} id="show">
         <Modal.Header className="bg-blue-dark text-white kanit">
           <Modal.Title>Change Password</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-
+          <form onSubmit={handleSubmit(processUpdate)}>
+            <div className="text-left">
+              <div className="mt-5 mb-1">
+                <label
+                  htmlFor="input-password"
+                  className="form-label text-grey-dark bg-white kanit label-top"
+                >
+                  Password
+                      </label>
+                <div className="input-group">
+                  <input
+                    {...register("password", {
+                      required: "Password can't be empty ! ",
+                    })}
+                    type="password"
+                    className={`form-control shadow-none border-radius-10 py-3 r-none ${errors.password ? "is-invalid" : ""
+                      }`}
+                    id="input-password"
+                  />
+                  <div className="px-2 input-group-append toogle py-3">
+                    {!visiblePassword ? (
+                      <img
+                        src="/icon/open-eyes-icon.svg"
+                        onClick={() => setVisiblePassword(true)}
+                      />
+                    ) : (
+                      <img
+                        src="/icon/close-eyes-icon.svg"
+                        onClick={() => setVisiblePassword(false)}
+                      />
+                    )}
+                  </div>
+                </div>
+                <small className="text-danger font-weight-bold mt-2 mr-3">
+                  {errors?.password?.message}
+                </small>
+              </div>
+              <div className="mt-5 mb-5">
+                <label
+                  htmlFor="input-confirm-password"
+                  className="form-label text-grey-dark bg-white kanit label-top"
+                >
+                  Confirm Password
+                      </label>
+                <div className="input-group">
+                  <input
+                    {...register("confirm_password", {
+                      required: "Confirm password can't be empty ! ",
+                    })}
+                    type="password"
+                    className={`form-control shadow-none border-radius-10 py-3 r-none ${errors.confirm_password ? "is-invalid" : ""
+                      }`}
+                    id="input-confirm-password"
+                  />
+                  <div className="px-2 input-group-append toogle py-3">
+                    {!visibleConfirm ? (
+                      <img
+                        src="/icon/open-eyes-icon.svg"
+                        onClick={() => setVisibleConfirm(true)}
+                      />
+                    ) : (
+                      <img
+                        src="/icon/close-eyes-icon.svg"
+                        onClick={() => setVisibleConfirm(false)}
+                      />
+                    )}
+                  </div>
+                </div>
+                <small className="text-danger font-weight-bold mt-2 mr-3">
+                  {errors?.confirm_password?.message}
+                </small>
+              </div>
+            </div>
+          </form>
           <Button className="btn-blue-dark py-0">
             Save Changes
           </Button>
