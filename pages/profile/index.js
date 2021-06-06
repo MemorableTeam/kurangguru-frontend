@@ -4,14 +4,19 @@ import { Header } from "../../components";
 import { useState, useEffect } from 'react'
 import { useForm } from "react-hook-form";
 import { useUser } from "../api/users/useUser";
+import { actionUser } from "../api/users/actionUser";
 
 const Profile = () => {
-  const {register,handleSubmit,formState: { errors }} = useForm();
   const { user, errUser, mutateUser, loadUser } = useUser(1)
   const [showPhone, setShowPhone] = useState(false);
   const [showChange, setShowChange] = useState(false);
   const [visiblePassword, setVisiblePassword] = useState(false);
   const [visibleConfirm, setVisibleConfirm] = useState(false);
+  const [disabled, setDisabled] = useState(true)
+  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register: phone, handleSubmit: phoneSubmit, formState: { errors: phoneErr } } = useForm();
+  const { register: username, handleSubmit: usernameSubmit, formState: { errors: usernameErr } } = useForm();
+  const [img, setImg] = useState(null)
 
   const handleClosePhone = () => setShowPhone(false),
     handleShowPhone = () => setShowPhone(true),
@@ -19,13 +24,13 @@ const Profile = () => {
     handleShowChange = () => setShowChange(true)
 
   useEffect(() => {
-    if(showChange){
+    if (showChange) {
       if (visiblePassword) {
         document.getElementById("input-password").type = "text";
       } else {
         document.getElementById("input-password").type = "password";
       }
-  
+
       if (visibleConfirm) {
         document.getElementById("input-confirm-password").type = "text";
       } else {
@@ -34,10 +39,19 @@ const Profile = () => {
     }
   }, [visiblePassword, visibleConfirm]);
 
-  const processUpdate = (data) =>{
-    console.log(data)
-  }
+  const processUpdate = (data) => {
+    const formData = new FormData()
+    user?.id ? formData.append('id', user?.id || undefined) : ''
+    data.email ? formData.append('email', data.email || undefined) : ''
+    data.username ? formData.append('username', data.username || undefined) : ''
+    data.phone ? formData.append('phone', data.phone || undefined) : ''
+    data.password ? formData.append('password', data.password || undefined) : ''
+    data.confirm_password ? formData.append('confirm_password', data.confirm_password || undefined) : ''
+    img ? formData.append('photo', img || undefined) : ''
 
+    mutateUser(actionUser.updateUser(formData))
+    setDisabled(true)
+  }
 
   return (
     <>
@@ -50,14 +64,32 @@ const Profile = () => {
           <Col>
             <Row className='w-100 h-100 ms-2'>
               <Col xs={12} className='bg-banner top-profile w-100 sm-hidden' style={{ height: '35%', borderTopLeftRadius: '30px', borderTopRightRadius: '30px' }}>
+                {disabled ? '' : <h5 className='p-3 position-absolute text-white' onClick={usernameSubmit(processUpdate)}>Save</h5>}
                 <Row className="justify-content-center align-items-center w-100" style={{ height: '100%' }}>
                   <Col md={2} xs={6} className="mx-auto my-auto">
-                    <Image className="ps-content mx-4 rounded-circle" src={user?.photo ? `${process.env.API_URL_IMG}${user?.photo}` : './images/photo_profile.png'} style={{ height: '80%', width: '80%' }} />
-                    <Button className="edit bg-transparent border-0">
+                    <label className='ps-content mx-auto rounded-circle'>
+                      <input type="file" name="photo" accept="image" onChange={(e) => setImg(e.target.files[0])} className='d-none' disabled={disabled} />
+                      {/* <img width='130px' height='130px' className='rounded-circle' src={(user.photo) ? `${process.env.REACT_APP_API_IMG_URL}${user.photo}` : `${process.env.PUBLIC_URL}/logo/no-photo.png`} alt='profile' /> */}
+                      <Image className="rounded-circle" src={user?.photo && user?.photo != 'null' ? `${process.env.API_URL_IMG}${user?.photo}` : './images/photo_profile.png'} style={{ height: '100%', width: '100%' }} />
+                    </label>
+                    <Button className="edit bg-transparent border-0 mt-3" onClick={() => setDisabled(!disabled)}>
                       <Image className="ps-content mx-4" src="/icon/edit-icon.svg" style={{ height: '30%', width: '30%' }} />
                     </Button>
-                    <h6 className="text-white text-center ms-4 mt-3 fw-700">{user?.username}</h6>
+                    {/* <h4 className="text-white text-center ms-4 mt-3 fw-700">{user?.username}</h4> */}
                   </Col>
+                  <div className='w-100'>
+                    <form>
+                      <input
+                        disabled={disabled}
+                        type='text'
+                        name='username'
+                        className='text-white text-center w-100 fw-700 bg-transparent border-0'
+                        defaultValue={user?.username}
+                        style={{ fontSize: '26px' }}
+                        {...username("username")}
+                      />
+                    </form>
+                  </div>
                 </Row>
               </Col>
 
@@ -127,13 +159,15 @@ const Profile = () => {
           <Modal.Title>Phone Numbers</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <InputGroup className="mb-2">
-            <InputGroup.Text className="bg-blue-dark text-white">+62</InputGroup.Text>
-            <FormControl id="inlineFormInputGroup" defaultValue={user?.phone} />
-          </InputGroup>
-          <Button className="btn-blue-dark py-0 shadow-none">
-            Save Changes
-          </Button>
+          <form onSubmit={phoneSubmit(processUpdate)}>
+            <InputGroup className="mb-2">
+              <InputGroup.Text className="bg-blue-dark text-white">+62</InputGroup.Text>
+              <FormControl id="inlineFormInputGroup" defaultValue={user?.phone} {...phone("phone")} />
+            </InputGroup>
+            <Button className="btn-blue-dark py-0 shadow-none" onClick={phoneSubmit(processUpdate)}>
+              Save Changes
+            </Button>
+          </form>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClosePhone}>
@@ -220,10 +254,10 @@ const Profile = () => {
                 </small>
               </div>
             </div>
+            <Button className="btn-blue-dark py-0" onClick={handleSubmit(processUpdate)}>
+              Save Changes
+            </Button>
           </form>
-          <Button className="btn-blue-dark py-0">
-            Save Changes
-          </Button>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleCloseChange}>

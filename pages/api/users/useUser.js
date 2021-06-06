@@ -12,10 +12,10 @@ export const useUser = (userId) => {
 
   const { data, mutate, error } = useSWR(userId ? 'get_user' : null, getUser, {})
   const loading = !data & !error
-  console.log(data, 'use User')
+
   return {
     user: data,
-    mutateUser: data,
+    mutateUser: mutate,
     errUser: error,
     loadUser: loading
   }
