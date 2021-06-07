@@ -56,7 +56,7 @@ const Register = () => {
                 <input
                   {...register('username', { required: "Username can't be empty" })}
                   type="text"
-                  className={`form-control border-radius-10 py-4 ${errors.username ? 'is-invalid' : ''}`}
+                  className={`form-control border-radius-10 py-3 ${errors.username ? 'is-invalid' : ''}`}
                   id="input-username"
                   aria-describedby="emailHelp"
                 />
@@ -70,7 +70,7 @@ const Register = () => {
                 <input
                   {...register('email', { required: "Email can't be empty" })}
                   type="email"
-                  className={`form-control border-radius-10 py-4 ${errors.email ? 'is-invalid' : ''}`}
+                  className={`form-control border-radius-10 py-3 ${errors.email ? 'is-invalid' : ''}`}
                   id="input-email"
                   aria-describedby="emailHelp"
                 />
@@ -85,10 +85,10 @@ const Register = () => {
                   <input
                     {...register('password', { required: "Password can't be empty" })}
                     type="password"
-                    className={`form-control shadow-none border-radius-10 py-4 r-none ${errors.password ? 'is-invalid' : ''}`}
+                    className={`form-control shadow-none border-radius-10 py-3 r-none ${errors.password ? 'is-invalid' : ''}`}
                     id="input-password"
                   />
-                  <div className='px-2 input-group-append toogle py-4'>
+                  <div className='px-2 input-group-append toogle py-3'>
                     {(!visiblePassword) ? (
                       <img src='./icon/open-eyes-icon.svg' onClick={() => setVisiblePassword(true)} />
                     ) : (
@@ -108,10 +108,10 @@ const Register = () => {
                   <input
                     {...register('confirm_password', {required:"Re-password can;t be empty"})}
                     type="password"
-                    className={`form-control shadow-none border-radius-10 py-4 r-none ${errors.confirm_password ? 'is-invalid' : ''}`}
+                    className={`form-control shadow-none border-radius-10 py-3 r-none ${errors.confirm_password ? 'is-invalid' : ''}`}
                     id="input-confirm-password"
                   />
-                  <div className={`px-2 input-group-append toogle py-4`}>
+                  <div className={`px-2 input-group-append toogle py-3`}>
                     {(!visibleConfirm) ? (
                       <img src='./icon/open-eyes-icon.svg' onClick={() => setVisibleConfirm(true)} />
                     ) : (

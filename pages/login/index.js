@@ -30,10 +30,10 @@ const Login = () => {
         console.log(result)
         if(result.statusCode == 200){
           console.log('success')
-          session(result.data, router)
+          session(result.data.data, router)
         }else{
           console.log(result)
-          alert(result.message)
+          alert(result.data.message)
         }   
       }catch(err){
 
@@ -64,7 +64,7 @@ const Login = () => {
                 <input
                   {...register("username", {required:"Username Or Email can't be empty"})}
                   type="text"
-                  className={`username form-control shadow-none border-radius-10 py-4 ${errors.username ? 'is-invalid' : ''}`}
+                  className={`username form-control shadow-none border-radius-10 py-3 ${errors.username ? 'is-invalid' : ''}`}
                   id="exampleInputEmail1"
                   aria-describedby="emailHelp"
                 />
@@ -79,10 +79,10 @@ const Login = () => {
                   <input
                   {...register("password", {required:"Password can't be empty"})}
                     type="password"
-                    className={`password form-control shadow-none border-radius-10 py-4 r-none ${errors.password ? 'is-invalid' : ''}`}
+                    className={`password form-control shadow-none border-radius-10 py-3 r-none ${errors.password ? 'is-invalid' : ''}`}
                     id="input-password"
                   />
-                  <div className='px-2 input-group-append toogle py-4'>
+                  <div className='px-2 input-group-append toogle py-3'>
                     {(!visible)?(
                       <img src='./icon/open-eyes-icon.svg' onClick={()=>setVisible(true)}/>
                     ):(
