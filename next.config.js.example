@@ -3,6 +3,7 @@ module.exports = {
         API_URL: URL API,
         API_URL_IMG: URL API IMG,
         ORIGIN_URL:ORIGIN URL,
-        SECRET_COOKIE_PASSWORD: SECRET COOOKIE
+        SECRET_COOKIE_PASSWORD: SECRET COOOKIE,
+        VERSION_STATE:
     },
 }

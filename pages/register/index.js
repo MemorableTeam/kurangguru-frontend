@@ -3,8 +3,11 @@ import { Header } from "../../components";
 import Link from "next/link";
 import { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
+import { globalPost } from '../../libs/fetcher'
+import {useRouter} from 'next/router'
 
-const Login = () => {
+const Register = () => {
+  const router = useRouter()
   const [visiblePassword, setVisiblePassword] = useState(false)
   const [visibleConfirm, setVisibleConfirm] = useState(false)
   const { register, handleSubmit, formState: { errors } } = useForm()
@@ -23,8 +26,19 @@ const Login = () => {
     }
   }, [visiblePassword, visibleConfirm]);
 
-  const processRegister = (data) =>{
-    console.log(data)
+  const processRegister = async(data) =>{
+      try{
+        const result = await globalPost({
+          url:`${process.env.API_URL}/auth/register`,
+          data:{...data, acc : true}
+        })
+        console.log(result)
+        router.replace({
+          pathname: `/register/${result.data.token}`
+        })
+      }catch(err){
+
+      }
   }
 
   return (
@@ -42,7 +56,7 @@ const Login = () => {
                 <input
                   {...register('username', { required: "Username can't be empty" })}
                   type="text"
-                  className={`form-control border-radius-10 py-4 ${errors.username ? 'is-invalid' : ''}`}
+                  className={`form-control border-radius-10 py-3 ${errors.username ? 'is-invalid' : ''}`}
                   id="input-username"
                   aria-describedby="emailHelp"
                 />
@@ -56,7 +70,7 @@ const Login = () => {
                 <input
                   {...register('email', { required: "Email can't be empty" })}
                   type="email"
-                  className={`form-control border-radius-10 py-4 ${errors.email ? 'is-invalid' : ''}`}
+                  className={`form-control border-radius-10 py-3 ${errors.email ? 'is-invalid' : ''}`}
                   id="input-email"
                   aria-describedby="emailHelp"
                 />
@@ -71,10 +85,10 @@ const Login = () => {
                   <input
                     {...register('password', { required: "Password can't be empty" })}
                     type="password"
-                    className={`form-control shadow-none border-radius-10 py-4 r-none ${errors.password ? 'is-invalid' : ''}`}
+                    className={`form-control shadow-none border-radius-10 py-3 r-none ${errors.password ? 'is-invalid' : ''}`}
                     id="input-password"
                   />
-                  <div className='px-2 input-group-append toogle py-4'>
+                  <div className='px-2 input-group-append toogle py-3'>
                     {(!visiblePassword) ? (
                       <img src='./icon/open-eyes-icon.svg' onClick={() => setVisiblePassword(true)} />
                     ) : (
@@ -94,10 +108,10 @@ const Login = () => {
                   <input
                     {...register('confirm_password', {required:"Re-password can;t be empty"})}
                     type="password"
-                    className={`form-control shadow-none border-radius-10 py-4 r-none ${errors.confirm_password ? 'is-invalid' : ''}`}
+                    className={`form-control shadow-none border-radius-10 py-3 r-none ${errors.confirm_password ? 'is-invalid' : ''}`}
                     id="input-confirm-password"
                   />
-                  <div className={`px-2 input-group-append toogle py-4`}>
+                  <div className={`px-2 input-group-append toogle py-3`}>
                     {(!visibleConfirm) ? (
                       <img src='./icon/open-eyes-icon.svg' onClick={() => setVisibleConfirm(true)} />
                     ) : (
@@ -122,7 +136,7 @@ const Login = () => {
                   className="border-radius-10 bg-grey w-100 text-black shadow-sm kanit"
                   size="lg"
                 >
-                  <img src="icon/google-icon.svg" class='me-3 icon'></img>
+                  <img src="icon/google-icon.svg" className='me-3 icon'></img>
                   <small>Login with google</small>
                 </Button>
               </div>
@@ -142,4 +156,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
