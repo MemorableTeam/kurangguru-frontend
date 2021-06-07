@@ -43,7 +43,7 @@ const Register = () => {
 
   return (
     <>
-      <Header title="Register" />
+      <Header title="Register" url="./images/face1.png"  />
       <Container fluid className="bg-blue-light bg-main">
         <Row className="align-content-center">
           <Col md={{ span: 4, offset: 4 }} className='mb-5'>

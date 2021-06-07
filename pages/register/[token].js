@@ -5,7 +5,7 @@ import { Header } from "../../components";
 import { useForm } from 'react-hook-form'
 import { globalPost } from "../../libs/fetcher";
 import { useRouter } from 'next/router'
-import session from "../../libs/session";
+import { session } from "../../libs/session";
 
 const Verify = () => {
   const router = useRouter()
@@ -23,8 +23,8 @@ const Verify = () => {
         headers: {token : token}
       })
       console.log(result)
-      if(result.statusCode == 200){
-        session(result.data, router)
+      if(result.status == 200){
+        session(result.data, router, "../api/users/session")
       }else{
         alert(result.message)
       }
@@ -58,7 +58,7 @@ const Verify = () => {
 
   return (
     <>
-      <Header title="Verify Code" />
+      <Header title="Verify Code" url="../images/face1.png" />
       <Container fluid className="bg-blue-light bg-main">
         <Row className="align-content-center py-5">
           <Col md={{ span: 4, offset: 4 }} className='my-5'>
