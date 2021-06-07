@@ -5,6 +5,7 @@ $blue-dark: #5784ba;
 $pink: #f4cfdf;
 $light: #f9f9f9;
 $dark: #837f8f;
+$grey: #6c757d;
 $white: #ffffff;
 
 .kanit {
@@ -33,6 +34,9 @@ $white: #ffffff;
 }
 .bg-white {
   background-color: $white;
+}
+.bg-dark {
+  background-color: $grey;
 }
 .text-blue-light {
   color: $blue-light;
@@ -104,3 +108,5 @@ input[type="number"] {
 
 @import "./_auth.scss";
 @import "./_profile.scss";
+@import "./_activity.scss";
+@import "./_dashboard.scss";
