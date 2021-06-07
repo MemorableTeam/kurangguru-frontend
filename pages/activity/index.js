@@ -12,7 +12,7 @@ const UserActivity = () => {
 
   return (
     <>
-      <Header title="User Activity" />
+      <Header title="User Activity" url="./images/face1.png" />
       <div className='container-fluid bg-blue-light sm-bg' style={{ height: '100vh' }}>
         <Row className='gx-3 p-2' style={{ height: '100vh' }}>
           <Col md={5} lg={4} xl={3} className='p-0'>

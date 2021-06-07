@@ -14,7 +14,7 @@ const ForgotPassword = () => {
   }
   return (
     <>
-      <Header title="Forgot Password" />
+      <Header title="Forgot Password" url="./images/face1.png" />
       <Container fluid className="bg-blue-light bg-main">
         <Row>
           <Col md={6} xs={12} className='fg-left'>

@@ -5,7 +5,7 @@ import { Header } from "../../components";
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
 import { globalPost } from '../../libs/fetcher'
-import session from "../../libs/session";
+import { session } from "../../libs/session";
 
 const Login = () => {
   //variable state untuk visible invisible password
@@ -33,8 +33,14 @@ const Login = () => {
         session(result.data.data, router)
       } else {
         console.log(result)
-        alert(result.data.message)
-      }
+        if(result.status == 200){
+          console.log('success')
+          session(result.data.data, router, "api/users/session")
+        }else{
+          console.log(result)
+          alert(result.data.message)
+        } 
+      }  
     } catch (err) {
 
     }
@@ -51,7 +57,7 @@ const Login = () => {
 
   return (
     <>
-      <Header title="Login" />
+      <Header title="Login" url="./images/face1.png" />
       <Container fluid className="bg-blue-light bg-main">
         <Row className="align-content-center">
           <Col md={{ span: 4, offset: 4 }} className='my-auto'>

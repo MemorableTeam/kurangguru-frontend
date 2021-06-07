@@ -55,7 +55,7 @@ const Profile = () => {
 
   return (
     <>
-      <Header title="Profile" />
+      <Header title="Profile" url="./images/face1.png" />
       <div className='container-fluid bg-blue-light bg-main sm-bg'>
         <Row className='gx-3 p-2' style={{ height: '100vh' }}>
           <Col md={5} lg={4} xl={3} className='p-0'>
