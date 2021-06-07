@@ -39,7 +39,7 @@ const CodeVerify = () => {
   }
   return (
     <>
-      <Header title="Reset Password" />
+      <Header title="Reset Password" url="./images/face1.png" />
       <Container fluid className="bg-blue-light bg-main">
         <Row>
           <Col md={6} xs={12} className="fg-left">

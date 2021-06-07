@@ -31,7 +31,7 @@ const UpdateNew = () => {
   }
   return (
     <>
-      <Header title="Craete New Password" />
+      <Header title="Craete New Password" url="./images/face1.png" />
       <Container fluid className="bg-blue-light bg-main">
         <Row className="g-0">
           <Col md={6} xs={12} className="sm-hidden">
