@@ -3,8 +3,11 @@ import { Header } from "../../components";
 import Link from "next/link";
 import { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
+import { globalPost } from '../../libs/fetcher'
+import {useRouter} from 'next/router'
 
-const Login = () => {
+const Register = () => {
+  const router = useRouter()
   const [visiblePassword, setVisiblePassword] = useState(false)
   const [visibleConfirm, setVisibleConfirm] = useState(false)
   const { register, handleSubmit, formState: { errors } } = useForm()
@@ -23,8 +26,19 @@ const Login = () => {
     }
   }, [visiblePassword, visibleConfirm]);
 
-  const processRegister = (data) =>{
-    console.log(data)
+  const processRegister = async(data) =>{
+      try{
+        const result = await globalPost({
+          url:`${process.env.API_URL}/auth/register`,
+          data:{...data, acc : true}
+        })
+        console.log(result)
+        router.replace({
+          pathname: `/register/verify/${result.data.token}`
+        })
+      }catch(err){
+
+      }
   }
 
   return (
@@ -122,7 +136,7 @@ const Login = () => {
                   className="border-radius-10 bg-grey w-100 text-black shadow-sm kanit"
                   size="lg"
                 >
-                  <img src="icon/google-icon.svg" class='me-3 icon'></img>
+                  <img src="icon/google-icon.svg" className='me-3 icon'></img>
                   <small>Login with google</small>
                 </Button>
               </div>
@@ -142,4 +156,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;

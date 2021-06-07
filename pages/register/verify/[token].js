@@ -1,15 +1,30 @@
 import { Container, Row, Col, Button } from "react-bootstrap";
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
-import { Header } from "../../components";
+import { Header } from "../../../components";
 import { useForm } from 'react-hook-form'
+import { globalPost } from "../../../libs/fetcher";
+import { useRouter } from 'next/router'
 
 const Verify = () => {
+  const router = useRouter()
   const { register, handleSubmit, formState: { errors } } = useForm()
   // const [focus, setFocus] = useState('code1')
+  
   //process login
-  const processVerify = (data) => {
-    console.log(Object.values(data).toString().replace(/,/g, ""))
+  const processVerify = async(data) => {
+    let code = Object.values(data).toString().replace(/,/g, "")
+    const { token } = router.query
+    try{
+      const result = await globalPost({
+        url:`${process.env.API_URL}/auth/register/email-verify`,
+        data:{code : code},
+        headers: {token : token}
+      })
+      console.log(result.statusCode)
+    }catch{
+      throw error
+    }
   }
   const handleChange = (e) => {
     var nextState = e.srcElement || e.target

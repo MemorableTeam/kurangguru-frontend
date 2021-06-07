@@ -3,17 +3,38 @@ import Link from 'next/link'
 import {useState, useEffect} from 'react'
 import { Header } from "../../components";
 import { useForm } from 'react-hook-form'
+import { useRouter } from 'next/router'
+import { globalPost } from '../../libs/fetcher'
+import session from "../../libs/session";
 
 const Login = () => {
   //variable state untuk visible invisible password
   const [visible, setVisible] = useState(false)
 
+  const router = useRouter()
   //useform
   const { register, handleSubmit, formState: { errors } } = useForm()
 
   //process login
-  const processLogin = (data) =>{    
-    console.log(data)
+  const processLogin = async(data) =>{    
+    const {username, password} = data
+/*     console.log(username, password) */
+      try{
+       const result = await globalPost({
+          url: `${process.env.API_URL}/auth/login`,
+          data:{
+            email:username,
+            password:password
+          }
+        })
+        if(result.data.statusCode == 200){
+          session(result.data, router)
+        }else{
+          alert(result.data.message)
+        }   
+      }catch(err){
+
+      }
   }
 
   //ketika tekan toogle ditekan
