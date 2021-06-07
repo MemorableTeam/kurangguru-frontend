@@ -1,6 +1,6 @@
 import { Container, Row, Col, Button } from "react-bootstrap";
 import Link from 'next/link'
-import {useState, useEffect} from 'react'
+import { useState, useEffect } from 'react'
 import { Header } from "../../components";
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
@@ -16,36 +16,36 @@ const Login = () => {
   const { register, handleSubmit, formState: { errors } } = useForm()
 
   //process login
-  const processLogin = async(data) =>{    
-    const {username, password} = data
-/*     console.log(username, password) */
-      try{
-       const result = await globalPost({
-          url: `${process.env.API_URL}/auth/login`,
-          data:{
-            email:username,
-            password:password
-          }
-        })
+  const processLogin = async (data) => {
+    const { username, password } = data
+    /*     console.log(username, password) */
+    try {
+      const result = await globalPost({
+        url: `${process.env.API_URL}/auth/login`,
+        data: {
+          email: username,
+          password: password
+        }
+      })
+      console.log(result)
+      if (result.status == 200) {
+        console.log('success')
+        session(result.data.data, router)
+      } else {
         console.log(result)
-        if(result.statusCode == 200){
-          console.log('success')
-          session(result.data.data, router)
-        }else{
-          console.log(result)
-          alert(result.data.message)
-        }   
-      }catch(err){
-
+        alert(result.data.message)
       }
+    } catch (err) {
+
+    }
   }
 
   //ketika tekan toogle ditekan
-  useEffect(()=>{
-    if(visible){
-      document.getElementById('input-password').type='text'
-    }else{
-      document.getElementById('input-password').type='password'
+  useEffect(() => {
+    if (visible) {
+      document.getElementById('input-password').type = 'text'
+    } else {
+      document.getElementById('input-password').type = 'password'
     }
   }, [visible])
 
@@ -62,7 +62,7 @@ const Login = () => {
                   Username or Email
                 </label>
                 <input
-                  {...register("username", {required:"Username Or Email can't be empty"})}
+                  {...register("username", { required: "Username Or Email can't be empty" })}
                   type="text"
                   className={`username form-control shadow-none border-radius-10 py-3 ${errors.username ? 'is-invalid' : ''}`}
                   id="exampleInputEmail1"
@@ -77,16 +77,16 @@ const Login = () => {
                 </label>
                 <div className='input-group'>
                   <input
-                  {...register("password", {required:"Password can't be empty"})}
+                    {...register("password", { required: "Password can't be empty" })}
                     type="password"
                     className={`password form-control shadow-none border-radius-10 py-3 r-none ${errors.password ? 'is-invalid' : ''}`}
                     id="input-password"
                   />
                   <div className='px-2 input-group-append toogle py-3'>
-                    {(!visible)?(
-                      <img src='./icon/open-eyes-icon.svg' onClick={()=>setVisible(true)}/>
-                    ):(
-                      <img src='./icon/close-eyes-icon.svg' onClick={()=>setVisible(false)}/>
+                    {(!visible) ? (
+                      <img src='./icon/open-eyes-icon.svg' onClick={() => setVisible(true)} />
+                    ) : (
+                      <img src='./icon/close-eyes-icon.svg' onClick={() => setVisible(false)} />
                     )
                     }
                   </div>
@@ -113,7 +113,7 @@ const Login = () => {
                   variant="none"
                   className="border-radius-10 bg-grey w-100 text-black shadow-sm kanit"
                   size="lg"
-                  >
+                >
                   <img src="icon/google-icon.svg" className='me-3 icon'></img>
                   <span>Login with google</span>
                 </Button>
