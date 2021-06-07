@@ -13,10 +13,10 @@ const UserDashboard = () => {
   };
   const data = [
       {
-            from : '08.00',
-            to   : '09.40',
-            name : 'Front-end fundamentals',
-            user : 24
+        from : '08.00',
+        to   : '09.40',
+        name : 'Front-end fundamentals',
+        user : 24
       },
       {
         from : '11.00',

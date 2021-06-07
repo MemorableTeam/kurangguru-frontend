@@ -3,12 +3,20 @@ import { Col, Row } from 'react-bootstrap'
 import { Header } from '../components'
 import Sidebar from '../components/sidebar'
 import styles from '../styles/Home.module.css'
-import { privatePage } from '../libs/session'
 import useSWR from 'swr'
+import {useRouter} from 'next/router'
+import { useUser } from "./api/users/useUser";
 
-export default function Home() {
-  const data = useSWR(privatePage())
-  console.log(data);
+function Home() {
+  const router = useRouter()
+  const data = useSWR('api/users/getSession')
+  console.log(data.data)
+  /*if(data.data.user.role != 'user'){
+    if(data.data.user.role == 'fasilitator'){
+      router.replace('fasilitator')
+    }
+  } */
+  /* const id_user = data.data.user.user_id */
   return (<>
     <Header title="Dashboard" url="./images/face1.png"  />
     <div className='container-fluid bg-blue-light bg-main sm-bg'>
@@ -23,3 +31,4 @@ export default function Home() {
     </div>
   </>)
 }
+export default Home

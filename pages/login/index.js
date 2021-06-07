@@ -27,19 +27,10 @@ const Login = () => {
           password: password
         }
       })
-      console.log(result)
       if (result.status == 200) {
-        console.log('success')
-        session(result.data.data, router)
+        session(result.data, router, 'api/users/session')
       } else {
-        console.log(result)
-        if(result.status == 200){
-          console.log('success')
-          session(result.data.data, router, "api/users/session")
-        }else{
-          console.log(result)
-          alert(result.data.message)
-        } 
+        alert(result.message)
       }  
     } catch (err) {
 

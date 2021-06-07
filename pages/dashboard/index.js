@@ -5,11 +5,15 @@ import { useState, useEffect } from 'react'
 import { useForm } from "react-hook-form";
 import Link from "next/link";
 import moment from 'moment'
+import {userPage} from '../../libs/session'
+import { useRouter } from 'next/router'
 
 const UserDashboard = () => {
   const [index, setIndex] = useState(0);
   const [value, setValue] = useState(null);
   const [activeTabs, setActiveTabs] = useState(1);
+  const router = useRouter()
+  const data = useSWR(userPage(router))
 
   const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);

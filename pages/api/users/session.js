@@ -2,10 +2,10 @@ import {withIronSession} from 'next-iron-session'
 
 export default withIronSession(
   async (req, res) => {
-    console.log(req.body)
+      console.log(req.body)
       req.session.set("user", req.body)
       await req.session.save()
-      return res.status(200).send("");
+      return res.status(200).send(req.session.get("user"));
   },
   {
     cookieName: "KURANG-GURU-APP",
