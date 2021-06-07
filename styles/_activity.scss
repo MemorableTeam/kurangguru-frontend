@@ -1,43 +1,43 @@
-.table{
+.table {
   table-layout: fixed;
-  th{
+  th {
     padding-top: 15px;
     padding-bottom: 15px;
   }
-  td{
+  td {
     white-space: nowrap;
     overflow: hidden;
     padding-top: 15px;
     padding-bottom: 15px;
   }
 }
-.b-table{
+.b-table {
   border-bottom: 3px solid $light;
 }
-.b-search{
+.b-search {
   background-color: white;
   border-right: none;
 }
-.search{
+.search {
   border-left: none;
 }
-.btn-search{
+.btn-search {
   padding: 10px 15px;
 }
-.b-grey{
+.b-grey {
   background: #6c757d;
 }
-.btm-table{
+.btm-table {
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
-.h-activity{
+.h-activity {
   height: 100vh;
 }
 @media only screen and (max-width: 767px) {
-  .table{
+  .table {
     table-layout: unset;
   }
-  .h-activity{
+  .h-activity {
     height: 30vh;
   }
 }

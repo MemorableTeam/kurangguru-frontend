@@ -12,11 +12,11 @@ const UserActivity = () => {
 
   return (
     <>
-      <Header title="User Activity" url="./images/face1.png"  />
-      <div className='container-fluid bg-blue-light sm-bg' style={{ height: '220vh' }}>
+      <Header title="User Activity" url="./images/face1.png" />
+      <div className='container-fluid bg-blue-light sm-bg' style={{ height: '100vh' }}>
         <Row className='gx-3 p-2' style={{ height: '100vh' }}>
           <Col md={5} lg={4} xl={3} className='p-0'>
-            <Row>
+            <Row className='sticky-top'>
               <Col md={12} className="h-activity">
                 <Sidebar activeTabs={3} />
               </Col>
@@ -24,7 +24,7 @@ const UserActivity = () => {
             </Row>
           </Col>
           <Col>
-            <Row className='w-100 h-100 ms-2'>
+            <Row className='w-100 h-100 ms-2 mb-3'>
               <Col xs={12} className='bg-transparent w-100' style={{ height: '32%', borderTopLeftRadius: '30px', borderTopRightRadius: '30px' }}>
                 <h5 className="mt-3 mb-1 fw-500">Activity</h5>
                 <h6 className="mt-3 mb-2 ms-3 fw-500">My class</h6>
@@ -32,7 +32,7 @@ const UserActivity = () => {
                   <table className="table table-borderless table-hover">
                     <thead>
                       <tr className="text-grey-dark">
-                        <th className="px-2 text-center"><input type="checkbox" disabled checked=""/></th>
+                        <th className="px-2 text-center"><input type="checkbox" disabled checked="" /></th>
                         <th colSpan={2}>Class Name</th>
                         <th colSpan={1}>Category</th>
                         <th colSpan={3}>Description</th>
@@ -43,7 +43,7 @@ const UserActivity = () => {
                     </thead>
                     <tbody className="bg-white fs-400">
                       <tr className="b-table text-grey-dark">
-                        <td className="text-center"><input type="checkbox" disabled checked=""/></td>
+                        <td className="text-center"><input type="checkbox" disabled checked="" /></td>
                         <td colSpan={2}><h6>Front-end fundamentals</h6></td>
                         <td colSpan={1}><h6>Software</h6></td>
                         <td className="description" colSpan={3}><h6>Learn the fundamentals or front end</h6></td>
@@ -52,7 +52,7 @@ const UserActivity = () => {
                         <td></td>
                       </tr>
                       <tr className="b-table text-grey-dark">
-                        <td className="text-center"><input type="checkbox" disabled checked=""/></td>
+                        <td className="text-center"><input type="checkbox" disabled checked="" /></td>
                         <td colSpan={2}><h6>Front-end fundamentals</h6></td>
                         <td colSpan={1}><h6>Software</h6></td>
                         <td colSpan={3}><h6>Learn the fundamentals or front end</h6></td>
@@ -61,7 +61,7 @@ const UserActivity = () => {
                         <td></td>
                       </tr>
                       <tr className="b-table text-grey-dark">
-                        <td className="text-center"><input type="checkbox" disabled checked=""/></td>
+                        <td className="text-center"><input type="checkbox" disabled checked="" /></td>
                         <td colSpan={2}><h6>Front-end fundamentals</h6></td>
                         <td colSpan={1}><h6>Software</h6></td>
                         <td colSpan={3}><h6>Learn the fundamentals or front end</h6></td>
@@ -79,7 +79,7 @@ const UserActivity = () => {
                 </div>
               </Col>
 
-              <Col xs={12} className='px-4 bg-white border-radius-10 w-90' style={{ height: '72%', borderBottomLeftRadius: '30px', borderBottomRightRadius: '30px' }}>
+              <Col xs={12} className='px-4 bg-white border-radius-10 w-90 mb-3' style={{ height: '72%', borderBottomLeftRadius: '30px', borderBottomRightRadius: '30px' }}>
                 <h6 className="mt-3 mb-2 ms-1 fw-500">New class</h6>
                 <div className="mt-3 input-group">
                   <div className="input-group-prepend">
@@ -93,18 +93,18 @@ const UserActivity = () => {
                   </div>
                 </div>
 
-                <div className="d-flex b-grey">
-                  <DropdownButton variant="secondary" className="b-category" title="Categories">
+                <div className="d-flex b-white border-bottom">
+                  <DropdownButton variant="transparent" className="b-category" title="Categories">
                     <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
                     <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
                     <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
                   </DropdownButton>
-                  <DropdownButton variant="secondary" title="Level">
+                  <DropdownButton variant="transparent" title="Level">
                     <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
                     <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
                     <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
                   </DropdownButton>
-                  <DropdownButton variant="secondary" title="Pricing">
+                  <DropdownButton variant="transparent" title="Pricing">
                     <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
                     <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
                     <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
@@ -211,16 +211,7 @@ const UserActivity = () => {
                 <div className="d-flex mt-3 justify-content-between">
                   <h6>Showing 10 out 64</h6>
                   <div>
-                    {/* <Pagination>
-                      <Pagination.Prev />
-                      <Pagination.Item active>{1}</Pagination.Item>
-                      <Pagination.Item>{2}</Pagination.Item>
-                      <Pagination.Item>{3}</Pagination.Item>
-                      <Pagination.Item>{4}</Pagination.Item>
-                      <Pagination.Item>{5}</Pagination.Item>
-                      <Pagination.Ellipsis />
-                      <Pagination.Next />
-                    </Pagination> */}
+                    <p></p>
                   </div>
                 </div>
               </Col>
