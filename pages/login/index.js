@@ -30,10 +30,10 @@ const Login = () => {
         console.log(result)
         if(result.statusCode == 200){
           console.log('success')
-          session(result.data.data, router)
+          session(result.data, router)
         }else{
           console.log(result)
-          alert(result.data.message)
+          alert(result.message)
         }   
       }catch(err){
 
