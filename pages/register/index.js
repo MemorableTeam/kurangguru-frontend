@@ -34,7 +34,7 @@ const Register = () => {
         })
         console.log(result)
         router.replace({
-          pathname: `/register/verify/${result.data.token}`
+          pathname: `/register/${result.data.token}`
         })
       }catch(err){
 

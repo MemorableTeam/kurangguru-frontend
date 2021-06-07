@@ -1,11 +1,11 @@
 import { Container, Row, Col, Button } from "react-bootstrap";
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
-import { Header } from "../../../components";
+import { Header } from "../../components";
 import { useForm } from 'react-hook-form'
-import { globalPost } from "../../../libs/fetcher";
+import { globalPost } from "../../libs/fetcher";
 import { useRouter } from 'next/router'
-import session from "../../../libs/session";
+import session from "../../libs/session";
 
 const Verify = () => {
   const router = useRouter()
