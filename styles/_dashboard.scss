@@ -8,3 +8,32 @@
     width: 100%;
   }
 }
+input[type="date"] {
+  background:#fff url("../public/icon/calendar-icon.svg") 97% 50% no-repeat ;
+}
+input[type="date"]::-webkit-inner-spin-button {
+  display: none;
+}
+input[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0;
+}
+input[type="date"]::-webkit-datetime-edit-fields-wrapper {
+  display: none;
+}
+input[type="date"]{
+  border: 0
+}
+input[type="date"]:focus {
+  outline: none
+}
+.b-hover:hover{
+    color: black;
+}
+.d-tab{
+  .tab{
+    cursor: pointer;
+  }
+}
+.t-schedule{
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
