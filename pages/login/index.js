@@ -27,9 +27,12 @@ const Login = () => {
             password:password
           }
         })
-        if(result.data.statusCode == 200){
-          session(result.data, router)
+        console.log(result)
+        if(result.statusCode == 200){
+          console.log('success')
+          session(result.data.data, router)
         }else{
+          console.log(result)
           alert(result.data.message)
         }   
       }catch(err){

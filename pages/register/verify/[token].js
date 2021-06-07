@@ -5,6 +5,7 @@ import { Header } from "../../../components";
 import { useForm } from 'react-hook-form'
 import { globalPost } from "../../../libs/fetcher";
 import { useRouter } from 'next/router'
+import session from "../../../libs/session";
 
 const Verify = () => {
   const router = useRouter()
@@ -21,7 +22,12 @@ const Verify = () => {
         data:{code : code},
         headers: {token : token}
       })
-      console.log(result.statusCode)
+      console.log(result)
+      if(result.statusCode == 200){
+        session(result.data, router)
+      }else{
+        alert(result.message)
+      }
     }catch{
       throw error
     }

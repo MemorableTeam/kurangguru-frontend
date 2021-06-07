@@ -13,4 +13,8 @@ const session = async(data, cb)=>{
     }
 }
 
+const privatePage = async()=>{
+    
+}
+
 export default session
