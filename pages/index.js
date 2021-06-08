@@ -6,7 +6,6 @@ import styles from '../styles/Home.module.css'
 import useSWR from 'swr'
 import {useRouter} from 'next/router'
 import { useUser } from "./api/users/useUser";
-import { userPage } from '../libs/session'
 import { useState, useEffect } from 'react'
 import { useForm } from "react-hook-form";
 import Link from "next/link";
@@ -14,7 +13,6 @@ import moment from 'moment'
 
 function Home() {
   const router = useRouter()
-  console.log(userPage)
   // const data = useSWR(userPage())
   /*if(data.data.user.role != 'user'){
     if(data.data.user.role == 'fasilitator'){
@@ -25,7 +23,6 @@ function Home() {
   const [index, setIndex] = useState(0);
   const [value, setValue] = useState(null);
   const [activeTabs, setActiveTabs] = useState(1);
-  const data = useSWR(userPage(router))
 
   const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);

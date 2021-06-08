@@ -10,6 +10,8 @@ import moment from 'moment'
 import { fasilitatorPage } from '../../libs/session'
 
 const UserDashboard = () => {
+  const {data: auth} =useSWR('api/users/getSession')
+  
   const [show, setShow] = useState(false)
   const [index, setIndex] = useState(0);
   const [value, setValue] = useState(null);

@@ -15,38 +15,13 @@ const session = async(data, cb, route, cb2)=>{
         alert('error')
     }
 }
-
-const fasilitatorPage = async(cb)=>{
-    const response = await axios("api/users/getSession", {
+const userLogout = async(cb)=>{
+    const response = await fetch('api/users/logoutSession',{
+        method : 'GET',
         headers : { "Content-Type": "application/json" }
     })
-    if(response.status == 200){
-        if(response.data.role === 'fasilitator'){
-            return response.data;
-        }else{
-            console.log('anda bukan fasilitator')
-            cb.replace('/login')
-        }
-    }else{
-        console.log('error get session')
+    if(response.ok){
+        cb.replace('/login')
     }
 }
-const userPage = async(cb)=>{
-    const response = await axios("api/users/getSession", {
-        headers : { "Content-Type": "application/json" }
-    })
-    if(response.status == 200){
-        if(response.data.user.role === 'user'){
-            const id = response.data.user.user_id
-            console.log('anda user', response.data.user.user_id)
-            return id;
-        }else{
-            console.log('anda bukan user')
-            cb.replace('/login')
-        }
-    }else{
-        console.log('error get session')
-    }
-}
-
-export {session, fasilitatorPage, userPage}
+export {session, userLogout}
