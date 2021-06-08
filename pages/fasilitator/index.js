@@ -7,17 +7,20 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 import moment from 'moment'
-import { fasilitatorPage } from '../../libs/session'
+import { useClassByUser } from "../api/class/useClassByUser";
 
 const UserDashboard = () => {
-  const {data: auth} =useSWR('api/users/getSession')
-  
+  const { data: auth } = useSWR('api/users/getSession')
+  const { class: classUser } = useClassByUser({
+    userId: auth?.user?.user_id,
+    token: `${auth?.user?.token}`
+  })
+  console.log('class', classUser)
   const [show, setShow] = useState(false)
   const [index, setIndex] = useState(0);
   const [value, setValue] = useState(null);
   const [activeTabs, setActiveTabs] = useState(1);
   const router = useRouter()
-  const data = useSWR(fasilitatorPage(router))
 
   const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);
@@ -159,14 +162,14 @@ const UserDashboard = () => {
                       </Button>
                     </div>
                     <Card className='w-100 shadow-lg border-0 mb-5'>
-                    {dataDummy.map((element)=>(
+                    {classUser.map((element)=>(
                     <div className="d-flex bg-white py-2 px-3">
                     <Card className='w-100 shadow-lg border-0 py-3'>
                         <Card.Body>
                             <Row>
-                                <Col className='fw-bolder roboto col-3'>{`${element.from} - ${element.to}`}</Col>
-                                <Col className='fw-bolder montserrat col-7'>{element.name}</Col>
-                                <Col className='col-2 montserrat'>{element.user} <img src='./icon/student-icon.svg' className='icon'/></Col>
+                                <Col className='fw-bolder roboto col-3'>{moment(element?.start_time).format('LT')}</Col>
+                                <Col className='fw-bolder montserrat col-7'>coba</Col>
+                                <Col className='col-2 montserrat'>coba <img src='./icon/student-icon.svg' className='icon'/></Col>
                             </Row>
                         </Card.Body>
                     </Card>
