@@ -1,16 +1,19 @@
 import { useRouter } from "next/router"
 import { Card, Col, Row } from "react-bootstrap"
+import useSWR from "swr"
 import Header from '../../components/header'
 import Sidebar from '../../components/sidebar'
+import { globalGet } from "../../libs/fetcher"
+import { useClassById } from "../api/class/useClassById"
 
-const data = {
-  id: 1,
-  name: 'Beginner Javascript',
-  day: 'Friday',
-  start_time: '18:00:00',
-  end_time: '20:00:00',
-  description: 'Mempelajari dasar- dasar Javascript.'
-}
+// const data = {
+//   id: 1,
+//   name: 'Beginner Javascript',
+//   day: 'Friday',
+//   start_time: '18:00:00',
+//   end_time: '20:00:00',
+//   description: 'Mempelajari dasar- dasar Javascript.'
+// }
 
 const topics = [
   {
@@ -65,6 +68,9 @@ const member = [
 const classDetail = () => {
   const router = useRouter()
   const { id } = router.query
+  const { class: data } = useClassById(id)
+
+  console.log(data, 'Dataaaaaaaaaaaa')
 
   const setColor = (score) => {
     if (score >= 90 && score <= 100) return 'text-success'
