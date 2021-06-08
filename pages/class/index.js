@@ -6,7 +6,6 @@ import { useForm } from "react-hook-form";
 import Link from "next/link";
 
 const UserActivity = () => {
-
   return (
     <>
       <Header title="My Class" />

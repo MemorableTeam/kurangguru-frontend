@@ -4,11 +4,19 @@ import { Header } from "../../components";
 import { useState, useEffect } from 'react'
 import { useForm } from "react-hook-form";
 import Link from "next/link";
+import { useAllClass } from '../api/class/useAllClass'
+import { useClassByUser } from "../api/class/useClassByUser";
 
 const UserActivity = () => {
+  const { class: data } = useAllClass(1)
+  const { class: classUser } = useClassByUser({
+    userId: 2,
+    token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJyb2xlIjoidXNlciIsInZlcmlmaWVkIjpmYWxzZSwiaWF0IjoxNjIzMTQwNjQ4fQ.6JhmlybMRMaKAu00FL-f67GHeGJCftuE3eooSDWseCw'
+  })
   //   const [visiblePassword, setVisiblePassword] = useState(false);
   //   const [visibleConfirm, setVisibleConfirm] = useState(false);
-
+  console.log(data, 'dataaaaaaaaaa')
+  console.log(classUser, 'tessssssssssss')
 
   return (
     <>
