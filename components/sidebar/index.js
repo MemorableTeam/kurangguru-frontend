@@ -2,7 +2,7 @@ import { useUser } from "../../pages/api/users/useUser"
 
 const Sidebar = ({ activeTabs }) => {
   const { user, mutateUser, loadUser, errUser } = useUser(1)
-
+  
   return (
     <>
       <div className='bg-transparent h-100 p-4 position-relative w-100' style={{ borderRadius: '30px' }}>
