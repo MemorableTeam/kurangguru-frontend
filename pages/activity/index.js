@@ -6,17 +6,23 @@ import { useForm } from "react-hook-form";
 import Link from "next/link";
 import { useAllClass } from '../api/class/useAllClass'
 import { useClassByUser } from "../api/class/useClassByUser";
+import useSWR from "swr";
+import { useRouter } from "next/router";
+import { userPage } from '../../libs/session'
 
 const UserActivity = () => {
-  const { class: data } = useAllClass(1)
+  const router = useRouter()
+  const { data: auth } = useSWR('api/users/getSession')
+  const { class: data } = useAllClass(auth?.user?.user_id)
   const { class: classUser } = useClassByUser({
-    userId: 2,
-    token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJyb2xlIjoidXNlciIsInZlcmlmaWVkIjpmYWxzZSwiaWF0IjoxNjIzMTQwNjQ4fQ.6JhmlybMRMaKAu00FL-f67GHeGJCftuE3eooSDWseCw'
+    userId: auth?.user?.user_id,
+    token: `${auth?.user?.token}`
   })
   //   const [visiblePassword, setVisiblePassword] = useState(false);
   //   const [visibleConfirm, setVisibleConfirm] = useState(false);
   console.log(data, 'dataaaaaaaaaa')
   console.log(classUser, 'tessssssssssss')
+  console.log(auth, 'auth')
 
   return (
     <>
@@ -136,78 +142,6 @@ const UserActivity = () => {
                         <td colSpan={2} className="px-2">ClassName</td>
                         <td colSpan={1}>Category</td>
                         <td colSpan={3}>Learn the fundamentals or front end Learn the fundamentals or front end</td>
-                        <td colSpan={1}>Level</td>
-                        <td>Pricing</td>
-                        <td></td>
-                      </tr>
-                      <tr className="b-table text-grey-dark">
-                        <td colSpan={2} className="px-2">ClassName</td>
-                        <td colSpan={1}>Category</td>
-                        <td colSpan={3}>Description</td>
-                        <td colSpan={1}>Level</td>
-                        <td>Pricing</td>
-                        <td></td>
-                      </tr>
-                      <tr className="b-table text-grey-dark">
-                        <td colSpan={2} className="px-2">ClassName</td>
-                        <td colSpan={1}>Category</td>
-                        <td colSpan={3}>Description</td>
-                        <td colSpan={1}>Level</td>
-                        <td>Pricing</td>
-                        <td></td>
-                      </tr>
-                      <tr className="b-table text-grey-dark">
-                        <td colSpan={2} className="px-2">ClassName</td>
-                        <td colSpan={1}>Category</td>
-                        <td colSpan={3}>Description</td>
-                        <td colSpan={1}>Level</td>
-                        <td>Pricing</td>
-                        <td></td>
-                      </tr>
-                      <tr className="b-table text-grey-dark">
-                        <td colSpan={2} className="px-2">ClassName</td>
-                        <td colSpan={1}>Category</td>
-                        <td colSpan={3}>Description</td>
-                        <td colSpan={1}>Level</td>
-                        <td>Pricing</td>
-                        <td></td>
-                      </tr>
-                      <tr className="b-table text-grey-dark">
-                        <td colSpan={2} className="px-2">ClassName</td>
-                        <td colSpan={1}>Category</td>
-                        <td colSpan={3}>Description</td>
-                        <td colSpan={1}>Level</td>
-                        <td>Pricing</td>
-                        <td></td>
-                      </tr>
-                      <tr className="b-table text-grey-dark">
-                        <td colSpan={2} className="px-2">ClassName</td>
-                        <td colSpan={1}>Category</td>
-                        <td colSpan={3}>Description</td>
-                        <td colSpan={1}>Level</td>
-                        <td>Pricing</td>
-                        <td></td>
-                      </tr>
-                      <tr className="b-table text-grey-dark">
-                        <td colSpan={2} className="px-2">ClassName</td>
-                        <td colSpan={1}>Category</td>
-                        <td colSpan={3}>Description</td>
-                        <td colSpan={1}>Level</td>
-                        <td>Pricing</td>
-                        <td></td>
-                      </tr>
-                      <tr className="b-table text-grey-dark">
-                        <td colSpan={2} className="px-2">ClassName</td>
-                        <td colSpan={1}>Category</td>
-                        <td colSpan={3}>Description</td>
-                        <td colSpan={1}>Level</td>
-                        <td>Pricing</td>
-                        <td></td>
-                      </tr>
-                      <tr className="b-table text-grey-dark">
-                        <td colSpan={2} className="px-2">ClassName</td>
-                        <td colSpan={1}>Category</td>
-                        <td colSpan={3}>Description</td>
                         <td colSpan={1}>Level</td>
                         <td>Pricing</td>
                         <td></td>
