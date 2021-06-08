@@ -99,7 +99,7 @@ const UserActivity = () => {
                 </div>
               </Col>
 
-              <Col xs={12} className='px-4 bg-white border-radius-10 w-90 mb-3' style={{ height: '72%', borderBottomLeftRadius: '30px', borderBottomRightRadius: '30px' }}>
+              <Col xs={12} className='px-4 bg-white border-radius-10 w-90 mb-3 mt-3' style={{ height: '72%', borderBottomLeftRadius: '30px', borderBottomRightRadius: '30px' }}>
                 <h6 className="mt-3 mb-2 ms-1 fw-500">New class</h6>
                 <div className="mt-3 input-group">
                   <div className="input-group-prepend">
