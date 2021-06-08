@@ -1,15 +1,25 @@
 import { useUser } from "../../pages/api/users/useUser"
+import { useEffect, useState } from "react";
+import withIronSession from '../../pages/api/users/getSession'
+import useSWR from 'swr'
+import axios from 'axios'
+import {useRouter} from 'next/router'
+import {userLogout} from '../../libs/session'
 
-const Sidebar = ({ activeTabs, rootDir }) => {
-  const { user, mutateUser, loadUser, errUser } = useUser(1)
-  
+const fetcher = url => axios.get(url).then(res => res.data)
+
+const Sidebar = ({ activeTabs, rootDir }) => { 
+  const router = useRouter()
+  const {data : auth} = useSWR('api/users/getSession', fetcher)
+  const { user , mutateUser, loadUser, errUser } = useUser(auth?.user?.user_id)
+  console.log('user',user)
   return (
     <>
       <div className='bg-transparent h-100 p-4 position-relative w-100' style={{ borderRadius: '30px' }}>
         <div className={`${activeTabs === 1 ? 'bg-grey' : 'bg-blue-dark'} sm-index h-100 p-4 position-absolute`} style={{ borderRadius: '30px', bottom: 0, left: 0, right: 0 }}>
           <img src={`${rootDir?.icon || './icon'}/${activeTabs === 1 ? 'notif-icon-active' : 'notif-icon'}.svg`} className='float-end sm-hidden' />
           <div className='mt-5 ms-3 sm-profile'>
-            <img width='80px' height='80px' src={user?.photo && user?.photo != 'null' ? `${process.env.API_URL_IMG}${user?.photo}` : `${rootDir?.img || './images'}/photo_profile.png`} className='rounded-circle' />
+            <img width='80px' height='80px' src={user?.photo && user?.photo != 'null' ? `${process.env.API_URL_IMG}${user?.photo}` : `./images/photo_profile.png`} className='rounded-circle' />
             <div className="sm-right">
               <h3 className='mt-4'>{user?.username}</h3>
               <p>{user?.status}</p>
@@ -41,7 +51,7 @@ const Sidebar = ({ activeTabs, rootDir }) => {
           </div>
         </div >
         <div className={`${activeTabs === 6 ? 'bg-grey' : 'bg-blue-dark'} position-absolute`} style={{ borderRadius: '30px', bottom: 0, left: 0, right: 0, zIndex: 6, height: '33%' }}>
-          <div className='w-100 d-flex justify-content-start mx-5 align-items-center pt-2'>
+          <div className='w-100 d-flex justify-content-start mx-5 align-items-center pt-2' onClick={()=>userLogout(router)}>
             <img src={`${rootDir?.icon || './icon'}/logout-icon.svg`} className='me-3' />
             <p className='text-danger pt-3 fw-bold'>Logout</p>
           </div>
@@ -50,5 +60,6 @@ const Sidebar = ({ activeTabs, rootDir }) => {
     </>
   )
 }
+
 
 export default Sidebar
