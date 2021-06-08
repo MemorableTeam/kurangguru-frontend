@@ -5,9 +5,11 @@ import { useState, useEffect } from 'react'
 import { useForm } from "react-hook-form";
 import { useUser } from "../api/users/useUser";
 import { actionUser } from "../api/users/actionUser";
+import useSWR from "swr";
 
 const Profile = () => {
-  const { user, errUser, mutateUser, loadUser } = useUser(1)
+  const { data: auth } = useSWR('api/users/getSession')
+  const { user, errUser, mutateUser, loadUser } = useUser(auth?.user?.user_id)
   const [showPhone, setShowPhone] = useState(false);
   const [showChange, setShowChange] = useState(false);
   const [visiblePassword, setVisiblePassword] = useState(false);
