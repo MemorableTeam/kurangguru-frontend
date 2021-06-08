@@ -8,7 +8,7 @@ export const useClassByUser = (form) => {
       Authorization: `Bearer ${form?.token}`
     },
     params: {
-      user_id: 2
+      user_id: form?.userId
     },
   })
 
