@@ -1,28 +1,48 @@
 import Sidebar from "../../components/sidebar"
-import { Col, Row, Image, DropdownButton, Dropdown, Pagination } from "react-bootstrap"
+import { Col, Row, Image, DropdownButton, Dropdown, Pagination, Button } from "react-bootstrap"
 import { Header } from "../../components";
 import { useState, useEffect } from 'react'
 import { useForm } from "react-hook-form";
 import Link from "next/link";
 import { useAllClass } from '../api/class/useAllClass'
 import { useClassByUser } from "../api/class/useClassByUser";
-import useSWR from "swr";
+import useSWR, { mutate } from "swr";
 import { useRouter } from "next/router";
 import { userPage } from '../../libs/session'
 
 const UserActivity = () => {
   const router = useRouter()
   const { data: auth } = useSWR('api/users/getSession')
-  const { class: data } = useAllClass(auth?.user?.user_id)
+  const { class: data, mutateClass } = useAllClass({
+    user_id: auth?.user?.user_id,
+    page_size: 10,
+    current_page: router?.query?.page ? parseInt(router?.query?.page) : 1
+  })
   const { class: classUser } = useClassByUser({
     userId: auth?.user?.user_id,
     token: `${auth?.user?.token}`
   })
+  const [page, setPage] = useState()
+  const [currentPage, setCurrentPage] = useState(1)
+
   //   const [visiblePassword, setVisiblePassword] = useState(false);
   //   const [visibleConfirm, setVisibleConfirm] = useState(false);
-  console.log(data, 'dataaaaaaaaaa')
-  console.log(classUser, 'tessssssssssss')
-  console.log(auth, 'auth')
+
+  useEffect(() => {
+    let page = []
+    if (data?.total_pages > 1) {
+      for (let i = 1; i <= data?.total_pages; i++) {
+        page.push(i)
+      }
+    }
+    setPage(page)
+  }, [data])
+
+  useEffect(() => {
+    if (router?.query?.page == 1) router.push(`${router.pathname}`)
+    setCurrentPage(router.query.page || 1)
+    mutateClass('get_class')
+  }, [router.query.page])
 
   return (
     <>
@@ -56,33 +76,19 @@ const UserActivity = () => {
                       </tr>
                     </thead>
                     <tbody className="bg-white fs-400">
-                      <tr className="b-table text-grey-dark">
-                        <td className="text-center"><input type="checkbox" disabled checked="" /></td>
-                        <td colSpan={2}><h6>Front-end fundamentals</h6></td>
-                        <td colSpan={1}><h6>Software</h6></td>
-                        <td className="description" colSpan={3}><h6>Learn the fundamentals or front end</h6></td>
-                        <td colSpan={1}></td>
-                        <td></td>
-                        <td></td>
-                      </tr>
-                      <tr className="b-table text-grey-dark">
-                        <td className="text-center"><input type="checkbox" disabled checked="" /></td>
-                        <td colSpan={2}><h6>Front-end fundamentals</h6></td>
-                        <td colSpan={1}><h6>Software</h6></td>
-                        <td colSpan={3}><h6>Learn the fundamentals or front end</h6></td>
-                        <td colSpan={1}></td>
-                        <td></td>
-                        <td></td>
-                      </tr>
-                      <tr className="b-table text-grey-dark">
-                        <td className="text-center"><input type="checkbox" disabled checked="" /></td>
-                        <td colSpan={2}><h6>Front-end fundamentals</h6></td>
-                        <td colSpan={1}><h6>Software</h6></td>
-                        <td colSpan={3}><h6>Learn the fundamentals or front end</h6></td>
-                        <td colSpan={1}></td>
-                        <td></td>
-                        <td></td>
-                      </tr>
+                      {classUser && classUser?.map(item => {
+                        return (<>
+                          <tr className="b-table text-grey-dark">
+                            <td className="text-center"><input type="checkbox" disabled checked="" /></td>
+                            <td colSpan={2}><h6>{item?.name}</h6></td>
+                            <td colSpan={1}><h6>{item?.category}</h6></td>
+                            <td className="description" colSpan={3}><h6>{item?.description}</h6></td>
+                            <td colSpan={1}>{`${item?.topic_completed / item?.total_topic * 100}%`}</td>
+                            <td>{item?.topic_completed / item?.total_topic !== 1 ? 'On Going' : 'Completed'}</td>
+                            <td>{item?.avg ? Math.round(item?.avg) : '0'}</td>
+                          </tr>
+                        </>)
+                      })}
                     </tbody>
                   </table>
                 </div>
@@ -107,18 +113,18 @@ const UserActivity = () => {
                   </div>
                 </div>
 
-                <div className="d-flex b-grey border-bottom">
-                  <DropdownButton variant="secondary" className="b-category" title="Categories">
+                <div className="d-flex b-white border-bottom">
+                  <DropdownButton variant="tranparent" className="b-category" title="Categories">
                     <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
                     <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
                     <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
                   </DropdownButton>
-                  <DropdownButton variant="secondary" title="Level">
+                  <DropdownButton variant="tranparent" title="Level">
                     <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
                     <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
                     <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
                   </DropdownButton>
-                  <DropdownButton variant="secondary" title="Pricing">
+                  <DropdownButton variant="tranparent" title="Pricing">
                     <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
                     <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
                     <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
@@ -138,22 +144,30 @@ const UserActivity = () => {
                       </tr>
                     </thead>
                     <tbody className="bg-white fs-400 btm-table">
-                      <tr className="b-table text-grey-dark">
-                        <td colSpan={2} className="px-2">ClassName</td>
-                        <td colSpan={1}>Category</td>
-                        <td colSpan={3}>Learn the fundamentals or front end Learn the fundamentals or front end</td>
-                        <td colSpan={1}>Level</td>
-                        <td>Pricing</td>
-                        <td></td>
-                      </tr>
+                      {data && data?.class_list?.map(e => {
+                        return (<>
+                          <tr className="b-table text-grey-dark">
+                            <td colSpan={2} className="px-2">{e?.name}</td>
+                            <td colSpan={1}>{e?.category}</td>
+                            <td colSpan={3}>{e?.description}</td>
+                            <td colSpan={1}>{e?.level}</td>
+                            <td>{`$${e?.price}`}</td>
+                            <td><Button variant='success' className='rounded-pill'>Register</Button></td>
+                          </tr>
+                        </>)
+                      })}
                     </tbody>
                   </table>
                 </div>
 
                 <div className="d-flex mt-3 justify-content-between">
-                  <h6>Showing 10 out 64</h6>
-                  <div>
-                    <p></p>
+                  <h6>{`Showing ${data?.page_size >= data?.total_data ? 'all' : data?.page_size} out ${data?.total_data}`}</h6>
+                  <div className='d-flex'>
+                    {page && page.map(e => {
+                      return (<>
+                        <div className={`text-center py-1 px-2 mx-2 ${e == currentPage ? 'bg-success' : 'bg - blue - light'}`} onClick={() => router.push(`${location.pathname}?page=${e}`)} >{e}</div>
+                      </>)
+                    })}
                   </div>
                 </div>
               </Col>

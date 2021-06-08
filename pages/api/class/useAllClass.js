@@ -1,16 +1,15 @@
 import useSWR from "swr"
 import { globalGet } from "../../../libs/fetcher"
 
-export const useAllClass = (userId) => {
+export const useAllClass = (form) => {
   const getClass = () => globalGet({
     url: `${process.env.API_URL}/class`,
     params: {
-      user_id: userId
+      ...form
     }
   })
 
-
-  const { data, mutate, error } = useSWR(userId ? 'get_class' : null, getClass, {})
+  const { data, mutate, error } = useSWR(form.user_id ? 'get_class' : null, getClass, {})
   const loading = !data & !error
 
   return {
