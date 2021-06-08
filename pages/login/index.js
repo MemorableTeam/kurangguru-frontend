@@ -6,11 +6,15 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import { globalPost } from "../../libs/fetcher";
 import { session } from "../../libs/session";
+import useSWR from "swr";
 
 const Login = () => {
+  const { data: auth, error } = useSWR('api/users/getSession')
   //variable state untuk visible invisible password
   const [visible, setVisible] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  let loadAuth = !auth & !error
 
   const router = useRouter();
   //useform
@@ -38,7 +42,7 @@ const Login = () => {
         setLoading(false)
         alert(result.message);
       }
-    } catch (err) {}
+    } catch (err) { }
   };
 
   //ketika tekan toogle ditekan
@@ -49,6 +53,10 @@ const Login = () => {
       document.getElementById("input-password").type = "password";
     }
   }, [visible]);
+
+  useEffect(() => {
+    if (auth?.user && auth !== undefined) router.push('/')
+  }, [auth])
 
   return (
     <>
@@ -70,9 +78,8 @@ const Login = () => {
                     required: "Username Or Email can't be empty",
                   })}
                   type="text"
-                  className={`username form-control shadow-none border-radius-10 py-3 ${
-                    errors.username ? "is-invalid" : ""
-                  }`}
+                  className={`username form-control shadow-none border-radius-10 py-3 ${errors.username ? "is-invalid" : ""
+                    }`}
                   id="exampleInputEmail1"
                   aria-describedby="emailHelp"
                 />
@@ -94,9 +101,8 @@ const Login = () => {
                       required: "Password can't be empty",
                     })}
                     type="password"
-                    className={`password form-control shadow-none border-radius-10 py-3 r-none ${
-                      errors.password ? "is-invalid" : ""
-                    }`}
+                    className={`password form-control shadow-none border-radius-10 py-3 r-none ${errors.password ? "is-invalid" : ""
+                      }`}
                     id="input-password"
                   />
                   <div className="px-2 input-group-append toogle py-3">
@@ -158,8 +164,8 @@ const Login = () => {
           </Col>
         </Row>
       </Container>
-      <Modal show={loading}  aria-labelledby="contained-modal-title-vcenter"
-      centered onHide={(e) => setLoading(false)}>
+      <Modal show={loading} aria-labelledby="contained-modal-title-vcenter"
+        centered onHide={(e) => setLoading(false)}>
         <Modal.Body>
           <Spinner animation="grow" variant="none" className='bg-blue-light' />
           <Spinner animation="grow" variant="none" className='bg-blue-dark' />

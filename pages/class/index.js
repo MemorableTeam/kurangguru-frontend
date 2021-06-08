@@ -16,6 +16,10 @@ const UserActivity = () => {
     token: `${auth?.user?.token}`
   })
 
+  useEffect(() => {
+    if (auth?.logout && auth !== undefined) router.push('/login')
+  }, [auth])
+
   return (
     <>
       <Header title="My Class" />

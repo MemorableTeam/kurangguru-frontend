@@ -1,24 +1,34 @@
 import { Container, Row, Col, Button, Image } from "react-bootstrap";
 import { Header } from "../../components";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+import useSWR from "swr";
 
 const ForgotPassword = () => {
+  const router = useRouter()
+  const { data: auth } = useSWR('../api/users/getSession')
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const processForgot = (data)=>{
-      console.log(data)
+  const processForgot = (data) => {
+    console.log(data)
   }
+
+  useEffect(() => {
+    if (auth?.user && auth !== undefined) router.push('/')
+  }, [auth])
+
   return (
     <>
       <Header title="Forgot Password" url="./images/face1.png" />
       <Container fluid className="bg-blue-light bg-main">
         <Row>
           <Col md={6} xs={12} className='fg-left'>
-            <Image className="p-back" src="/icon/back-icon.svg"/>
+            <Image className="p-back" src="/icon/back-icon.svg" />
             <Row className="justify-content-center align-items-center bg-main mx-auto w-100">
               <Col md={6} xs={7} className="mx-auto">
                 <Image className="logo mx-4" src="/images/face1.png" />
@@ -48,9 +58,8 @@ const ForgotPassword = () => {
                         required: "Email can't be empty",
                       })}
                       type="email"
-                      className={`form-control shadow-none border-radius-10 py-3 ${
-                        errors.email ? "is-invalid" : ""
-                      }`}
+                      className={`form-control shadow-none border-radius-10 py-3 ${errors.email ? "is-invalid" : ""
+                        }`}
                       id="InputEmail1"
                       aria-describedby="emailHelp"
                     />

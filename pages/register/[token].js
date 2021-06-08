@@ -6,29 +6,31 @@ import { useForm } from 'react-hook-form'
 import { globalPost } from "../../libs/fetcher";
 import { useRouter } from 'next/router'
 import { session } from "../../libs/session";
+import useSWR from "swr";
 
 const Verify = () => {
   const router = useRouter()
+  const { data: auth } = useSWR('../api/users/getSession')
   const { register, handleSubmit, formState: { errors } } = useForm()
   // const [focus, setFocus] = useState('code1')
-  
+
   //process login
-  const processVerify = async(data) => {
+  const processVerify = async (data) => {
     let code = Object.values(data).toString().replace(/,/g, "")
     const { token } = router.query
-    try{
+    try {
       const result = await globalPost({
-        url:`${process.env.API_URL}/auth/register/email-verify`,
-        data:{code : code},
-        headers: {token : token}
+        url: `${process.env.API_URL}/auth/register/email-verify`,
+        data: { code: code },
+        headers: { token: token }
       })
       console.log(result)
-      if(result.status == 200){
+      if (result.status == 200) {
         session(result.data, router, "../api/users/session")
-      }else{
+      } else {
         alert(result.message)
       }
-    }catch{
+    } catch {
       throw error
     }
   }
@@ -55,6 +57,10 @@ const Verify = () => {
       }
     }
   }
+
+  useEffect(() => {
+    if (auth?.user && auth !== undefined) router.push('/')
+  }, [auth])
 
   return (
     <>
