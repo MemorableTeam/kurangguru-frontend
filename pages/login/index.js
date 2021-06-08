@@ -14,8 +14,6 @@ const Login = () => {
   const [visible, setVisible] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  let loadAuth = !auth & !error
-
   const router = useRouter();
   //useform
   const {

@@ -13,6 +13,7 @@ import moment from 'moment'
 
 function Home() {
   const router = useRouter()
+  const { data: auth } = useSWR('api/users/getSession')
   // const data = useSWR(userPage())
   /*if(data.data.user.role != 'user'){
     if(data.data.user.role == 'fasilitator'){
@@ -65,6 +66,10 @@ function Home() {
   //     end_at: "09.40",
   //   }
   // ]
+
+  useEffect(() => {
+    if (auth?.logout && auth !== undefined) router.push('/login')
+  }, [auth])
 
   return (
     <>
