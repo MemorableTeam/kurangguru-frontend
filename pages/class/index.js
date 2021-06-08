@@ -4,12 +4,20 @@ import { Header } from "../../components";
 import { useState, useEffect } from 'react'
 import { useForm } from "react-hook-form";
 import Link from "next/link";
+import { useClassByUser } from "../api/class/useClassByUser";
+import useSWR from "swr";
 
 const UserActivity = () => {
+  const { data: auth } = useSWR('api/users/getSession')
+  const { class: classUser } = useClassByUser({
+    userId: auth?.user?.user_id,
+    token: `${auth?.user?.token}`
+  })
+
   return (
     <>
       <Header title="My Class" />
-      <div className='container-fluid bg-blue-light sm-bg' style={{ height: '220vh' }}>
+      <div className='container-fluid bg-blue-light sm-bg' style={{ height: '100vh' }}>
         <Row className='gx-3 p-2' style={{ height: '100vh' }}>
           <Col md={5} lg={4} xl={3} className='p-0'>
             <Row>
@@ -43,11 +51,11 @@ const UserActivity = () => {
                     </div>
                   </Col>
                   <Col xs={3}>
-                      <DropdownButton variant="bg-white" className="mt-3 py-1 bg-white b-category"  title="Sort by: All Categories">
-                        <Dropdown.Item href="#/action-1">Categories</Dropdown.Item>
-                        <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                        <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-                      </DropdownButton>
+                    <DropdownButton variant="bg-white" className="mt-3 py-1 bg-white b-category" title="Sort by: All Categories">
+                      <Dropdown.Item href="#/action-1">Categories</Dropdown.Item>
+                      <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+                      <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+                    </DropdownButton>
                   </Col>
                 </Row>
 
@@ -65,33 +73,19 @@ const UserActivity = () => {
                       </tr>
                     </thead>
                     <tbody className="bg-white fs-400">
-                      <tr className="b-table text-grey-dark">
-                        <td className="text-center"><input type="checkbox" disabled checked="" /></td>
-                        <td colSpan={2}><h6>Front-end fundamentals</h6></td>
-                        <td colSpan={1}><h6>Software</h6></td>
-                        <td className="description" colSpan={3}><h6>Learn the fundamentals or front end</h6></td>
-                        <td colSpan={1}></td>
-                        <td></td>
-                        <td></td>
-                      </tr>
-                      <tr className="b-table text-grey-dark">
-                        <td className="text-center"><input type="checkbox" disabled checked="" /></td>
-                        <td colSpan={2}><h6>Front-end fundamentals</h6></td>
-                        <td colSpan={1}><h6>Software</h6></td>
-                        <td colSpan={3}><h6>Learn the fundamentals or front end</h6></td>
-                        <td colSpan={1}></td>
-                        <td></td>
-                        <td></td>
-                      </tr>
-                      <tr className="b-table text-grey-dark">
-                        <td className="text-center"><input type="checkbox" disabled checked="" /></td>
-                        <td colSpan={2}><h6>Front-end fundamentals</h6></td>
-                        <td colSpan={1}><h6>Software</h6></td>
-                        <td colSpan={3}><h6>Learn the fundamentals or front end</h6></td>
-                        <td colSpan={1}></td>
-                        <td></td>
-                        <td></td>
-                      </tr>
+                      {classUser && classUser?.map(item => {
+                        return (<>
+                          <tr className="b-table text-grey-dark">
+                            <td className="text-center"><input type="checkbox" disabled checked="" /></td>
+                            <td colSpan={2}><h6>{item?.name}</h6></td>
+                            <td colSpan={1}><h6>{item?.category}</h6></td>
+                            <td className="description" colSpan={3}><h6>{item?.description}</h6></td>
+                            <td colSpan={1}>{`${item?.topic_completed / item?.total_topic * 100}%`}</td>
+                            <td>{item?.topic_completed / item?.total_topic !== 1 ? 'On Going' : 'Completed'}</td>
+                            <td>{item?.avg ? Math.round(item?.avg) : '0'}</td>
+                          </tr>
+                        </>)
+                      })}
                     </tbody>
                   </table>
                 </div>
