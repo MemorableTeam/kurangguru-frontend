@@ -7,6 +7,7 @@ import Link from "next/link";
 import moment from 'moment'
 import {userPage} from '../../libs/session'
 import { useRouter } from 'next/router'
+import useSWR from "swr";
 
 const UserDashboard = () => {
   const [index, setIndex] = useState(0);
@@ -65,7 +66,7 @@ const UserDashboard = () => {
           <Col md={5} lg={4} xl={3} className='p-0'>
             <Row>
               <Col md={12} className="h-activity">
-                <Sidebar activeTabs={3} />
+                <Sidebar activeTabs={2} />
               </Col>
               <Col></Col>
             </Row>
