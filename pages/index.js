@@ -6,11 +6,11 @@ import styles from '../styles/Home.module.css'
 import useSWR from 'swr'
 import {useRouter} from 'next/router'
 import { useUser } from "./api/users/useUser";
+import { userPage } from '../libs/session'
 
 function Home() {
   const router = useRouter()
-  const data = useSWR('api/users/getSession')
-  console.log(data.data)
+  const data = useSWR(userPage())
   /*if(data.data.user.role != 'user'){
     if(data.data.user.role == 'fasilitator'){
       router.replace('fasilitator')
