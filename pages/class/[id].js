@@ -1,4 +1,5 @@
 import { useRouter } from "next/router"
+import { useEffect } from "react"
 import { Card, Col, Row } from "react-bootstrap"
 import useSWR from "swr"
 import Header from '../../components/header'
@@ -88,6 +89,10 @@ const classDetail = () => {
     if (score < 40 && score >= 0) return 'text-danger'
     return ''
   }
+
+  useEffect(() => {
+    if (auth?.logout && auth !== undefined) router.push('/login')
+  }, [auth])
 
   return (
     <>

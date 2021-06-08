@@ -6,8 +6,10 @@ import { useForm } from "react-hook-form";
 import { useUser } from "../api/users/useUser";
 import { actionUser } from "../api/users/actionUser";
 import useSWR from "swr";
+import { useRouter } from "next/router";
 
 const Profile = () => {
+  const router = useRouter()
   const { data: auth } = useSWR('api/users/getSession')
   const { user, errUser, mutateUser, loadUser } = useUser(auth?.user?.user_id)
   const [showPhone, setShowPhone] = useState(false);
@@ -54,6 +56,10 @@ const Profile = () => {
     mutateUser(actionUser.updateUser(formData))
     setDisabled(true)
   }
+
+  useEffect(() => {
+    if (auth?.logout && auth !== undefined) router.push('/login')
+  }, [auth])
 
   return (
     <>

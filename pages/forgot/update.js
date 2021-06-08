@@ -2,8 +2,12 @@ import { Container, Row, Col, Button, Image } from "react-bootstrap";
 import { Header } from "../../components";
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/router";
+import useSWR from "swr";
 
 const UpdateNew = () => {
+  const router = useRouter()
+  const { data: auth } = useSWR('../api/users/getSession')
   const {
     register,
     handleSubmit,
@@ -26,9 +30,13 @@ const UpdateNew = () => {
     }
   }, [visiblePassword, visibleConfirm]);
 
-  const processUpdate = (data) =>{
+  const processUpdate = (data) => {
     console.log(data)
   }
+
+  useEffect(() => {
+    if (auth?.user && auth !== undefined) router.push('/')
+  }, [auth])
   return (
     <>
       <Header title="Craete New Password" url="./images/face1.png" />
@@ -64,9 +72,8 @@ const UpdateNew = () => {
                             required: "Password can't be empty ! ",
                           })}
                           type="password"
-                          className={`form-control shadow-none border-radius-10 py-3 r-none ${
-                            errors.password ? "is-invalid" : ""
-                          }`}
+                          className={`form-control shadow-none border-radius-10 py-3 r-none ${errors.password ? "is-invalid" : ""
+                            }`}
                           id="input-password"
                         />
                         <div className="px-2 input-group-append toogle py-3">
@@ -100,9 +107,8 @@ const UpdateNew = () => {
                             required: "Confirm password can't be empty ! ",
                           })}
                           type="password"
-                          className={`form-control shadow-none border-radius-10 py-3 r-none ${
-                            errors.confirm_password ? "is-invalid" : ""
-                          }`}
+                          className={`form-control shadow-none border-radius-10 py-3 r-none ${errors.confirm_password ? "is-invalid" : ""
+                            }`}
                           id="input-confirm-password"
                         />
                         <div className="px-2 input-group-append toogle py-3">

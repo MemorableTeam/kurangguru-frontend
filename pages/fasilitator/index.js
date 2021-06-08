@@ -1,5 +1,5 @@
 import Sidebar from "../../components/sidebar"
-import { Container ,Col, Row, Carousel, Image, Card, Button, Modal, closeButton } from "react-bootstrap"
+import { Container, Col, Row, Carousel, Image, Card, Button, Modal, closeButton } from "react-bootstrap"
 import { Header } from "../../components";
 import { useState, useEffect } from 'react'
 import { useForm } from "react-hook-form";
@@ -25,12 +25,12 @@ const UserDashboard = () => {
   const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);
   };
-  const handleModals = (e) =>{
+  const handleModals = (e) => {
     e.preventDefault()
 
-    if(show){
+    if (show) {
       setShow(false);
-    }else{
+    } else {
       setShow(true);
     }
   }
@@ -62,18 +62,18 @@ const UserDashboard = () => {
     return moment(dayOfWeek).format("YYYY-MM-DD")
   });
   const dataDummy = [
-      {
-        from : '08.00',
-        to   : '09.40',
-        name : 'Front-end fundamentals',
-        user : 24
-      },
-      {
-        from : '11.00',
-        to   : '11.40',
-        name : 'HTML for Beginners',
-        user : 32
-  }
+    {
+      from: '08.00',
+      to: '09.40',
+      name: 'Front-end fundamentals',
+      user: 24
+    },
+    {
+      from: '11.00',
+      to: '11.40',
+      name: 'HTML for Beginners',
+      user: 32
+    }
   ]
   // const today = moment();
   // const from_date = today.startOf('week');
@@ -87,7 +87,7 @@ const UserDashboard = () => {
   return (
     <>
       <Header title="User Activity" url="./images/face1.png" />
-      <Container fluid  className='bg-blue-light bg-main sm-bg'>
+      <Container fluid className='bg-blue-light bg-main sm-bg'>
         <Row className='gx-3 p-2 pb-5'>
           <Col md={5} lg={4} xl={3} className='p-0'>
             <Row>
@@ -99,13 +99,13 @@ const UserDashboard = () => {
           </Col>
           <Col>
             <Row className='w-100 h-100 ms-2'>
-              <Col xs={8} className='bg-transparent' style={{ width: '60%', borderTopLeftRadius: '30px', borderTopRightRadius: '30px'}}>
+              <Col xs={8} className='bg-transparent' style={{ width: '60%', borderTopLeftRadius: '30px', borderTopRightRadius: '30px' }}>
                 <Row className='h-100'>
                   <Col xs={12} style={{ height: '40%' }}>
                     <h5 className="py-3 bg-white px-3 mb-0 fw-500" style={{ borderTopLeftRadius: '30px', borderTopRightRadius: '30px' }}>
                       News
                     </h5>
-                    <Carousel activeIndex={index} onSelect={handleSelect} className="bg-white b-news" style={{ borderBottomLeftRadius: '30px', borderBottomRightRadius : '30px'}}>
+                    <Carousel activeIndex={index} onSelect={handleSelect} className="bg-white b-news" style={{ borderBottomLeftRadius: '30px', borderBottomRightRadius: '30px' }}>
                       <Carousel.Item className="w-news">
                         <Image className="news" src="/images/gambar-1.png" style={{ height: '34.5vh' }} />
                         <Carousel.Caption>
@@ -127,7 +127,7 @@ const UserDashboard = () => {
                     </Carousel>
                   </Col>
                   <Col xs={12} className='mt-3 w-100' style={{ height: '52%', borderTopLeftRadius: '30px', borderTopRightRadius: '30px' }}>
-                  <h5 className="py-3 bg-white px-4 mb-0 fw-500" style={{ borderTopLeftRadius: '30px', borderTopRightRadius: '30px' }}>
+                    <h5 className="py-3 bg-white px-4 mb-0 fw-500" style={{ borderTopLeftRadius: '30px', borderTopRightRadius: '30px' }}>
                       {value ? format : today}
                       <input type="date" className="float-end" id="dateInput" name="dateInput" onChange={(e) => setValue(e.target.value)}></input>
                     </h5>
@@ -192,16 +192,16 @@ const UserDashboard = () => {
         </Row>
       </Container>
 
-      <Modal show={show} onHide={(e)=>setShow(false)}>
+      <Modal show={show} onHide={(e) => setShow(false)}>
         <Modal.Header>
           <Modal.Title>Modal heading</Modal.Title>
         </Modal.Header>
         <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={(e)=>setShow(false)}>
+          <Button variant="secondary" onClick={(e) => setShow(false)}>
             Close
           </Button>
-          <Button variant="primary" onClick={(e)=>setShow(false)}>
+          <Button variant="primary" onClick={(e) => setShow(false)}>
             Save Changes
           </Button>
         </Modal.Footer>

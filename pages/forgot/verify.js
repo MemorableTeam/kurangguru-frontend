@@ -2,8 +2,13 @@ import { Container, Row, Col, Button, Image } from "react-bootstrap";
 import { Header } from "../../components";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+import useSWR from "swr";
 
 const CodeVerify = () => {
+  const router = useRouter()
+  const { data: auth } = useSWR('../api/users/getSession')
   const {
     register,
     handleSubmit,
@@ -37,6 +42,11 @@ const CodeVerify = () => {
   const processVerify = (data) => {
     console.log(data)
   }
+
+  useEffect(() => {
+    if (auth?.user && auth !== undefined) router.push('/')
+  }, [auth])
+
   return (
     <>
       <Header title="Reset Password" url="./images/face1.png" />

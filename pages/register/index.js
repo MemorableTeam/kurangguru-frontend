@@ -4,10 +4,12 @@ import Link from "next/link";
 import { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { globalPost } from '../../libs/fetcher'
-import {useRouter} from 'next/router'
+import { useRouter } from 'next/router'
+import useSWR from "swr";
 
 const Register = () => {
   const router = useRouter()
+  const { data: auth } = useSWR('api/users/getSession')
   const [visiblePassword, setVisiblePassword] = useState(false)
   const [visibleConfirm, setVisibleConfirm] = useState(false)
   const { register, handleSubmit, formState: { errors } } = useForm()
@@ -26,24 +28,28 @@ const Register = () => {
     }
   }, [visiblePassword, visibleConfirm]);
 
-  const processRegister = async(data) =>{
-      try{
-        const result = await globalPost({
-          url:`${process.env.API_URL}/auth/register`,
-          data:{...data, acc : true}
-        })
-        console.log(result)
-        router.replace({
-          pathname: `/register/${result.data.token}`
-        })
-      }catch(err){
+  const processRegister = async (data) => {
+    try {
+      const result = await globalPost({
+        url: `${process.env.API_URL}/auth/register`,
+        data: { ...data, acc: true }
+      })
+      console.log(result)
+      router.replace({
+        pathname: `/register/${result.data.token}`
+      })
+    } catch (err) {
 
-      }
+    }
   }
+
+  useEffect(() => {
+    if (auth?.user && auth !== undefined) router.push('/')
+  }, [auth])
 
   return (
     <>
-      <Header title="Register" url="./images/face1.png"  />
+      <Header title="Register" url="./images/face1.png" />
       <Container fluid className="bg-blue-light bg-main">
         <Row className="align-content-center">
           <Col md={{ span: 4, offset: 4 }} className='mb-5'>
@@ -106,7 +112,7 @@ const Register = () => {
                 </label>
                 <div className='input-group'>
                   <input
-                    {...register('confirm_password', {required:"Re-password can;t be empty"})}
+                    {...register('confirm_password', { required: "Re-password can;t be empty" })}
                     type="password"
                     className={`form-control shadow-none border-radius-10 py-3 r-none ${errors.confirm_password ? 'is-invalid' : ''}`}
                     id="input-confirm-password"
