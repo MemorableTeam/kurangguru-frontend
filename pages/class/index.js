@@ -6,8 +6,10 @@ import { useForm } from "react-hook-form";
 import Link from "next/link";
 import { useClassByUser } from "../api/class/useClassByUser";
 import useSWR from "swr";
+import { useRouter } from "next/router";
 
 const UserActivity = () => {
+  const router = useRouter()
   const { data: auth } = useSWR('api/users/getSession')
   const { class: classUser } = useClassByUser({
     userId: auth?.user?.user_id,
@@ -75,7 +77,7 @@ const UserActivity = () => {
                     <tbody className="bg-white fs-400">
                       {classUser && classUser?.map(item => {
                         return (<>
-                          <tr className="b-table text-grey-dark">
+                          <tr className="b-table text-grey-dark" onClick={() => router.push(`/class/${item?.id}`)}>
                             <td className="text-center"><input type="checkbox" disabled checked="" /></td>
                             <td colSpan={2}><h6>{item?.name}</h6></td>
                             <td colSpan={1}><h6>{item?.category}</h6></td>

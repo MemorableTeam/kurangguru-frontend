@@ -78,7 +78,7 @@ const UserActivity = () => {
                     <tbody className="bg-white fs-400">
                       {classUser && classUser?.map(item => {
                         return (<>
-                          <tr className="b-table text-grey-dark">
+                          <tr className="b-table text-grey-dark" onClick={() => router.push(`/class/${item?.id}`)}>
                             <td className="text-center"><input type="checkbox" disabled checked="" /></td>
                             <td colSpan={2}><h6>{item?.name}</h6></td>
                             <td colSpan={1}><h6>{item?.category}</h6></td>
@@ -93,7 +93,7 @@ const UserActivity = () => {
                   </table>
                 </div>
                 <div className="text-center">
-                  <Link href="#">
+                  <Link href="/class">
                     <a className="text-black text-decoration-none">view all</a>
                   </Link>
                 </div>
