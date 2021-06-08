@@ -93,18 +93,18 @@ const UserActivity = () => {
                   </div>
                 </div>
 
-                <div className="d-flex b-white border-bottom">
-                  <DropdownButton variant="transparent" className="b-category" title="Categories">
+                <div className="d-flex b-grey border-bottom">
+                  <DropdownButton variant="secondary" className="b-category" title="Categories">
                     <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
                     <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
                     <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
                   </DropdownButton>
-                  <DropdownButton variant="transparent" title="Level">
+                  <DropdownButton variant="secondary" title="Level">
                     <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
                     <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
                     <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
                   </DropdownButton>
-                  <DropdownButton variant="transparent" title="Pricing">
+                  <DropdownButton variant="secondary" title="Pricing">
                     <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
                     <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
                     <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
