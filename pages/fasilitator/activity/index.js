@@ -129,7 +129,7 @@ const Activity = () => {
                 <h5 className="mt-3 mb-1 fw-500">Activity</h5>
                 <h6 className="mt-3 mb-2 ms-3 fw-500">My class</h6>
                 {classUser?.data?.status === 400 && (
-                  <div className='text-center text-muted'>You didn't join any class yet</div>
+                  <div className='text-center text-muted'>You didn't have any class yet</div>
                 )}
                 { classUser?.data?.status !== 400 && (
                 <>
