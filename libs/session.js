@@ -15,13 +15,12 @@ const session = async (data, cb, route, cb2) => {
         alert('error')
     }
 }
-const userLogout = async (cb) => {
-    const response = await fetch('api/users/logoutSession', {
-        method: 'GET',
+const userLogout = async (url,cb) => {
+    const response = await fetch(url, {
         headers: { "Content-Type": "application/json" }
     })
-    // if (response.ok) {
-    //     cb.replace('/login')
-    // }
+    if (response.ok) {
+        cb.replace('/login')
+    }
 }
 export { session, userLogout }
