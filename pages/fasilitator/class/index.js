@@ -39,7 +39,7 @@ const Class = () => {
               <Col xs={12} className='bg-transparent w-100' style={{ height: '100%', borderTopLeftRadius: '30px', borderTopRightRadius: '30px' }}>
                 <div className="d-flex mt-3">
                   <Link href="/activity">
-                    <Image className="back" src="/icon/back-icon.svg" style={{ height: '20px' }} />
+                    <Image className="back" src="/icon/back-icon.svg" style={{ height: '20px' }} onClick={()=>router.back()} />
                   </Link>
                   <h6 className="mb-2 ms-3 fw-500">My class</h6>
                 </div>
