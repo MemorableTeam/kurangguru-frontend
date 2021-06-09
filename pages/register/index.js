@@ -1,4 +1,4 @@
-import { Container, Row, Col, Button } from "react-bootstrap";
+import { Container, Row, Col, Button, Modal, Spinner } from "react-bootstrap";
 import { Header } from "../../components";
 import Link from "next/link";
 import { useState, useEffect } from 'react'
@@ -9,6 +9,7 @@ import useSWR from "swr";
 
 const Register = () => {
   const router = useRouter()
+  const [loading, setLoading] = useState(false)
   const { data: auth } = useSWR('api/users/getSession')
   const [visiblePassword, setVisiblePassword] = useState(false)
   const [visibleConfirm, setVisibleConfirm] = useState(false)
@@ -29,17 +30,19 @@ const Register = () => {
   }, [visiblePassword, visibleConfirm]);
 
   const processRegister = async (data) => {
+    setLoading(true)
     try {
       const result = await globalPost({
         url: `${process.env.API_URL}/auth/register`,
         data: { ...data, acc: true }
       })
       console.log(result)
+      setLoading(false)
       router.replace({
         pathname: `/register/${result.data.token}`
       })
     } catch (err) {
-
+      alert(err)
     }
   }
 
@@ -158,6 +161,21 @@ const Register = () => {
           </Col>
         </Row>
       </Container>
+      <Modal
+        show={loading}
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+        onHide={(e) => setLoading(false)}
+        backdrop='static'>
+        <Modal.Body className ='m-5'>
+          <Spinner animation="grow" variant="none" className="bg-blue-light" />
+          <Spinner animation="grow" variant="none" className="bg-blue-dark" />
+          <Spinner animation="grow" variant="none" className="bg-blue-light" />
+          <Spinner animation="grow" variant="none" className="bg-blue-dark" />
+          <Spinner animation="grow" variant="none" className="bg-blue-light" />
+          <Spinner animation="grow" variant="none" className="bg-blue-dark" />
+        </Modal.Body>
+      </Modal>
     </>
   );
 };

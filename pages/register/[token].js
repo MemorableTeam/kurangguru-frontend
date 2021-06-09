@@ -1,4 +1,4 @@
-import { Container, Row, Col, Button } from "react-bootstrap";
+import { Container, Row, Col, Button, Modal, Spinner } from "react-bootstrap";
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import { Header } from "../../components";
@@ -10,12 +10,14 @@ import useSWR from "swr";
 
 const Verify = () => {
   const router = useRouter()
+  const [loading, setLoading] = useState(false)
   const { data: auth } = useSWR('../api/users/getSession')
   const { register, handleSubmit, formState: { errors } } = useForm()
   // const [focus, setFocus] = useState('code1')
 
   //process login
   const processVerify = async (data) => {
+    setLoading(true)
     let code = Object.values(data).toString().replace(/,/g, "")
     const { token } = router.query
     try {
@@ -26,7 +28,7 @@ const Verify = () => {
       })
       console.log(result)
       if (result.status == 200) {
-        session(result.data, router, "../api/users/session")
+        session(result.data, router, "../api/users/session",setLoading)
       } else {
         alert(result.message)
       }
@@ -130,6 +132,21 @@ const Verify = () => {
           </Col>
         </Row>
       </Container>
+      <Modal
+        show={loading}
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+        onHide={(e) => setLoading(false)}
+        backdrop='static'>
+        <Modal.Body className ='m-5'>
+          <Spinner animation="grow" variant="none" className="bg-blue-light" />
+          <Spinner animation="grow" variant="none" className="bg-blue-dark" />
+          <Spinner animation="grow" variant="none" className="bg-blue-light" />
+          <Spinner animation="grow" variant="none" className="bg-blue-dark" />
+          <Spinner animation="grow" variant="none" className="bg-blue-light" />
+          <Spinner animation="grow" variant="none" className="bg-blue-dark" />
+        </Modal.Body>
+      </Modal>
     </>
   );
 };

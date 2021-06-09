@@ -178,11 +178,11 @@ const Login = () => {
         onHide={() => setShow(false)}
         >
         <div className='border-radius-10'>
-          <Modal.Body className='py-3'>
+          <Modal.Body className='py-3 px-3'>
             {/* <Image className="icon mx-4" src="/images/face1.png" /> */}
             <div className="d-flex flex-row bd-highlight mb-3">
               <Image className="icon-lg" src="/images/face1.png" />
-              <h3 className="ms-3 text-danger text-center align-self-center">{message}</h3>
+              <h3 className="mx-auto w-100 text-danger text-center align-self-center">{message}</h3>
             </div>
             <Button onClick={() => setShow(false)} className='float-end my-3'>Close</Button>
           </Modal.Body>
@@ -193,8 +193,9 @@ const Login = () => {
         show={loading}
         aria-labelledby="contained-modal-title-vcenter"
         centered
-        onHide={(e) => setLoading(false)}>
-        <Modal.Body>
+        onHide={(e) => setLoading(false)}
+        backdrop='static'>
+        <Modal.Body className='m-5'>
           <Spinner animation="grow" variant="none" className="bg-blue-light" />
           <Spinner animation="grow" variant="none" className="bg-blue-dark" />
           <Spinner animation="grow" variant="none" className="bg-blue-light" />
