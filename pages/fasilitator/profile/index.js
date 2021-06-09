@@ -68,7 +68,7 @@ const Profile = () => {
       <div className='container-fluid bg-blue-light bg-main sm-bg'>
         <Row className='gx-3 p-2' style={{ height: '100vh' }}>
           <Col md={5} lg={4} xl={3} className='p-0'>
-            <Sidebar activeTabs={1} rootDir={{ icon: '../icon', img: '../images' }} route={'../api/users/getSession'} />
+            <Sidebar activeTabs={1} rootDir={{ icon: '../../icon', img: '../../images' }} route={'../api/users/getSession'} />
           </Col>
           <Col>
             <Row className='w-100 h-100 ms-2'>
