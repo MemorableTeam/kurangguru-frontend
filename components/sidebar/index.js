@@ -3,7 +3,7 @@ import { useUser } from "../../pages/api/users/useUser"
 import { useRouter } from "next/router";
 import { userLogout } from '../../libs/session'
 
-const Sidebar = ({ activeTabs, rootDir, route = 'api/users/getSession' }) => {
+const Sidebar = (props,{ activeTabs, rootDir, route = 'api/users/getSession' }) => {
   const router = useRouter()
   const { data: auth, mutate } = useSWR('api/users/getSession')
   const { user, mutateUser, loadUser, errUser } = useUser(auth?.user?.user_id)
