@@ -16,6 +16,6 @@ To get the React app running locally:
 
 ![dashboard](https://i.ibb.co/DbHxKRY/Capture11.png)  ![profile](https://i.ibb.co/W0T7vLd/Capture12.png) 
 
-![class-detail](https://i.ibb.co/MRVvmfV/Capture13.png)  ![class-list](https://i.ibb.co/2hfKvhX/Capture14.png) 
+![class-detail](https://i.ibb.co/MRVvmfV/Capture13.png)
 
 
