@@ -162,7 +162,8 @@ const UserDashboard = () => {
                       </Button>
                     </div>
                     <Card className='w-100 border-0 mb-5'>
-                    {classUser.map((element)=>(
+                    {classUser &&
+                      classUser.map((element)=>(
                     <div className="d-flex bg-white py-3 px-3">
                     <Card className='w-100 shadow-lg border-0 py-3'>
                         <Card.Body>
