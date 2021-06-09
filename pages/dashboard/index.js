@@ -66,7 +66,7 @@ const UserDashboard = () => {
           <Col md={5} lg={4} xl={3} className='p-0'>
             <Row>
               <Col md={12} className="h-activity">
-                <Sidebar activeTabs={2} />
+                <Sidebar activeTabs={2}/>
               </Col>
               <Col></Col>
             </Row>

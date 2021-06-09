@@ -1,39 +1,44 @@
 import { useRouter } from "next/router"
+import { useEffect } from "react"
 import { Card, Col, Row } from "react-bootstrap"
+import useSWR from "swr"
 import Header from '../../../components/header'
 import Sidebar from '../../../components/sidebar'
+import { globalGet } from "../../../libs/fetcher"
+import { useClassById } from "../../api/class/useClassById"
+import { useTopics } from "../../api/class/useTopics"
 
-const data = {
-  id: 1,
-  name: 'Beginner Javascript',
-  day: 'Friday',
-  start_time: '18:00:00',
-  end_time: '20:00:00',
-  description: 'Mempelajari dasar- dasar Javascript.'
-}
+// const data = {
+//   id: 1,
+//   name: 'Beginner Javascript',
+//   day: 'Friday',
+//   start_time: '18:00:00',
+//   end_time: '20:00:00',
+//   description: 'Mempelajari dasar- dasar Javascript.'
+// }
 
-const topics = [
-  {
-    id: 1,
-    topic_name: 'Apa itu Javascript',
-    is_finished: true
-  },
-  {
-    id: 2,
-    topic_name: 'Sejarah Javascript',
-    is_finished: true
-  },
-  {
-    id: 3,
-    topic_name: 'Sintaks Javascript',
-    is_finished: false
-  },
-  {
-    id: 4,
-    topic_name: 'Type data Javascript',
-    is_finished: false
-  }
-]
+// const topics = [
+//   {
+//     id: 1,
+//     topic_name: 'Apa itu Javascript',
+//     is_finished: true
+//   },
+//   {
+//     id: 2,
+//     topic_name: 'Sejarah Javascript',
+//     is_finished: true
+//   },
+//   {
+//     id: 3,
+//     topic_name: 'Sintaks Javascript',
+//     is_finished: false
+//   },
+//   {
+//     id: 4,
+//     topic_name: 'Type data Javascript',
+//     is_finished: false
+//   }
+// ]
 
 const member = [
   {
@@ -61,16 +66,39 @@ const member = [
 const classDetail = () => {
   const router = useRouter()
   const { id } = router.query
+  const { data: auth } = useSWR('../../api/users/getSession')
+  const { class: data } = useClassById(id)
+  const { topic } = useTopics({
+    user_id: auth?.user?.user_id,
+    token: auth?.user?.token,
+    class_id: id,
+  })
 
+  console.log(data, 'Dataaaaaaaaaaaa')
+  console.log(auth, 'auth')
+  console.log(topic, 'topiccsss')
+
+  const setColor = (score) => {
+    if (score >= 90 && score <= 100) return 'text-success'
+    if (score < 90) return 'text-primary'
+    if (score < 80) return 'text-warning'
+    if (score < 40 && score >= 0) return 'text-danger'
+    return ''
+  }
+
+  useEffect(() => {
+    if (auth?.user?.role === 'user' && auth !== undefined) router.push('/')
+    if (auth?.logout && auth !== undefined) router.push('/login')
+  }, [auth])
   return (
     <>
-      <Header title="Class Detail" />
+      <Header title="Class Detail" url='../../images/face1.png' />
       <div className='container-fluid bg-blue-light sm-bg' style={{ height: '100vh' }}>
         <Row className='gx-3 p-2' style={{ height: '100vh' }}>
           <Col md={5} lg={4} xl={3} className='p-0'>
             <Row>
               <Col md={12} className="h-activity">
-                <Sidebar activeTabs={3} rootDir={{ icon: '../../icon', img: '../../images' }} />
+                <Sidebar activeTabs={3} rootDir={{ icon: '../../icon', img: '../../images' }} route='../../api/users/getSession' />
               </Col>
               <Col></Col>
             </Row>
@@ -102,7 +130,7 @@ const classDetail = () => {
             <Card className='border-radius-10 p-3 mt-3 mb-3'>
               <div className='w-100 h100'>
                 <h6 className='fw-700 mb-4'>Class Progress</h6>
-                {topics && topics?.map(item => {
+                {topic && topic?.map(item => {
                   return (<>
                     <div className='w-100 d-flex justify-content-start'>
                       <input type="checkbox" className="px-2 text-center mt-1 ms-2" value={item?.id} />
