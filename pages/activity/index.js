@@ -95,10 +95,10 @@ const UserActivity = () => {
                         <th>Score</th>
                       </tr>
                     </thead>
+                    {classUser?.data?.status === 400 && (
+                        <div className='w-100 text-center text-muted'>You didn't join any class yet</div>
+                    )}
                     <tbody className="bg-white fs-400">
-                      {classUser?.data?.status === 400 && (
-                        <div className='text-center text-muted'>You didn't join any class yet</div>
-                      )}
                       {classUser?.data?.status !== 400 && classUser?.map(item => {
                         return (<>
                           <tr className="b-table text-grey-dark" onClick={() => router.push(`/class/${item?.id}`)}>
