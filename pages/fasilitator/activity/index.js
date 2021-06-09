@@ -146,7 +146,9 @@ const Activity = () => {
                     </thead>
                     <tbody className="bg-white fs-400">
                       {classUser?.data?.status === 400 && (
-                        <div className='text-center text-muted'>You didn't join any class yet</div>
+                        <tr className="b-table text-grey-dark">
+                          <td colspan={6}><div className='text-center text-muted'>You didn't join any class yet</div></td>
+                        </tr>
                       )}
                       {classUser?.data?.status !== 400 && classUser?.map(item => {
                         return (<>

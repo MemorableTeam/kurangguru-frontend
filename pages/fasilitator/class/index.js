@@ -78,10 +78,10 @@ const Class = () => {
                         <th className='text-center'>Members</th>
                       </tr>
                     </thead>
+                    {classUser?.data?.status === 400 (
+                        <div className='text-center text-muted'>You didn't join any class yet</div>
+                    )}
                     <tbody className="bg-white fs-400">
-                      {classUser?.data?.status === 400 && (
-                        <div className='text-center text-muted'>You didn't have any class yet</div>
-                      )}
                       {classUser?.data?.status !== 400 && classUser?.map(item => {
                         return (<>
                           <tr className="b-table text-grey-dark" onClick={() => router.push(`/fasilitator/class/${item?.id}`)}>
