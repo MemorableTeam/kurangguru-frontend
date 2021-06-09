@@ -12,6 +12,34 @@
 7. SWR (for mutate for return the data from cache)
 8. sass (for styling css format)
 ```
+## Folder Structure
+
+    ├── components                   
+    │   ├── header        
+    │   ├── modalMessage            
+    │   ├── modalsMember           
+    │   ├── sidebar
+    |   ├── index.js
+    ├── libs
+    │   ├── fetcher.js
+    │   ├── session.js         
+    ├── pages
+    │   ├── auth.js              
+    │   ├── class.js              
+    │   ├── member.js             
+    │   ├── setup.js
+    |   ├── topics.js
+    |   └── users.js
+    ├── styles
+    │   ├── _activity.scss            
+    │   ├── _auth.scss
+    │   ├── _dashboard.scss
+    │   ├── profile.scss            
+    │   ├── global.scss
+    |   ├── sidebar.scss
+    └── next.config.js
+
+
 ### **Image :**
 ```
 Auth Page
@@ -48,33 +76,6 @@ Fasilitator Page
 |![Activity](https://user-images.githubusercontent.com/49930719/121395264-6e625d80-c97c-11eb-995f-d405b04cb78e.PNG)|**Coming Soon...**|
 |>**Activity**|
 |![Activity](https://user-images.githubusercontent.com/49930719/121395632-d749d580-c97c-11eb-9e59-4bf1ac1f8808.PNG)|![Activitym](https://user-images.githubusercontent.com/49930719/121395366-8c2fc280-c97c-11eb-8fe3-6c5021060b2e.PNG)|
-
-## Folder Structure
-
-    ├── components                   
-    │   ├── header        
-    │   ├── modalMessage            
-    │   ├── modalsMember           
-    │   ├── sidebar
-    |   ├── index.js
-    ├── libs
-    │   ├── fetcher.js
-    │   ├── session.js         
-    ├── pages
-    │   ├── auth.js              
-    │   ├── class.js              
-    │   ├── member.js             
-    │   ├── setup.js
-    |   ├── topics.js
-    |   └── users.js
-    ├── styles
-    │   ├── _activity.scss            
-    │   ├── _auth.scss
-    │   ├── _dashboard.scss
-    │   ├── profile.scss            
-    │   ├── global.scss
-    |   ├── sidebar.scss
-    └── next.config.js
 
 > **Resources :**
 1. [Backend](https://github.com/MemorableTeam/kurangguru-backend)
