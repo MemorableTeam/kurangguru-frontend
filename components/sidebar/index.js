@@ -90,7 +90,7 @@ const Sidebar = (props,{ activeTabs, rootDir, route = 'api/users/getSession' }) 
             </div>
           </div >
           <div className={`${activeTabs === 6 ? 'bg-grey' : 'bg-blue-dark'} position-absolute`} style={{ borderRadius: '30px', bottom: 0, left: 0, right: 0, zIndex: 6, height: '33%' }}>
-            <div className='w-100 d-flex justify-content-start mx-5 align-items-center pt-2' onClick={() => mutate('api/users/getSession', userLogout(router, route))}>
+            <div className='w-100 d-flex justify-content-start mx-5 align-items-center pt-2' onClick={() => mutate((props.goto)?props.goto:'api/users/getSession', userLogout(router, route))}>
               <img src={`${rootDir?.icon || './icon'}/logout-icon.svg`} className='me-3' />
               <p className='text-danger pt-3 fw-bold'>Logout</p>
             </div>
