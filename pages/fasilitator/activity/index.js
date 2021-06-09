@@ -177,7 +177,7 @@ const Activity = () => {
                   </table>
                 </div>
                 <div className="text-center mt-2">
-                  <Link href="/class">
+                  <Link href="/fasilitator/class">
                     <a className="text-black text-decoration-none">view all</a>
                   </Link>
                 </div>
