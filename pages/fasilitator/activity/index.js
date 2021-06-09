@@ -178,7 +178,7 @@ const Activity = () => {
                             <td colSpan={2}><h6>{item?.name}</h6></td>
                             <td colSpan={1}><h6>{item?.category}</h6></td>
                             <td className="description" colSpan={2}><h6>{item?.description}</h6></td>
-                            <td colSpan={2}>{`${item?.day}, ${item?.start_time} - ${item?.end_time}`}</td>
+                            <td colSpan={2}>{`${item?.day}, ${moment(`${item?.start_time}`, 'h:mm a').format('LT')} - ${moment(`${item?.start_time}`, 'h:mm a').format('LT')}`}</td>
                             <td className='text-center'>{item?.members}<img src='../../icon/student-icon.svg' className='icon' /></td>
                           </tr>
                         </>)
