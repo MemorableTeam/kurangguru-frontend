@@ -20,6 +20,7 @@ const UserActivity = () => {
     page_size: 10,
     current_page: router?.query?.page ? parseInt(router?.query?.page) : 1
   })
+  
   const { class: classUser, mutateClass : mutateByUser } = useClassByUser({
     userId: auth?.user?.user_id,
     token: `${auth?.user?.token}`
@@ -82,6 +83,11 @@ const UserActivity = () => {
               <Col xs={12} className='bg-transparent w-100' style={{ height: '32%', borderTopLeftRadius: '30px', borderTopRightRadius: '30px' }}>
                 <h5 className="mt-3 mb-1 fw-500">Activity</h5>
                 <h6 className="mt-3 mb-2 ms-3 fw-500">My class</h6>
+                {classUser?.data?.status === 400 && (
+                  <div className='text-center text-muted'>You didn't join any class yet</div>
+                )}
+                { classUser?.data?.status !== 400 && (
+                <>
                 <div className="table-responsive">
                   <table className="table table-borderless table-hover">
                     <thead>
@@ -96,10 +102,20 @@ const UserActivity = () => {
                       </tr>
                     </thead>
                     <tbody className="bg-white fs-400">
-                      {classUser?.data?.status === 400 && (
-                        <div className='text-center text-muted'>You didn't join any class yet</div>
-                      )}
-                      {classUser?.data?.status !== 400 && classUser?.map(item => {
+                      {classUser?.data?.status !== 400 && classUser?.length <= 3 && classUser?.map(item => {
+                        return (<>
+                          <tr className="b-table text-grey-dark" onClick={() => router.push(`/class/${item?.id}`)}>
+                            <td className="text-center"><input type="checkbox" disabled checked="" /></td>
+                            <td colSpan={2}><h6>{item?.name}</h6></td>
+                            <td colSpan={1}><h6>{item?.category}</h6></td>
+                            <td className="description" colSpan={3}><h6>{item?.description}</h6></td>
+                            <td colSpan={1}>{`${item?.topic_completed / item?.total_topic * 100}%`}</td>
+                            <td>{item?.topic_completed / item?.total_topic !== 1 ? 'On Going' : 'Completed'}</td>
+                            <td>{item?.avg ? Math.round(item?.avg) : '0'}</td>
+                          </tr>
+                        </>)
+                      })}
+                      {classUser?.data?.status !== 400 && classUser?.length > 3 && classUser?.splice(0, 3).map(item => {
                         return (<>
                           <tr className="b-table text-grey-dark" onClick={() => router.push(`/class/${item?.id}`)}>
                             <td className="text-center"><input type="checkbox" disabled checked="" /></td>
@@ -115,11 +131,13 @@ const UserActivity = () => {
                     </tbody>
                   </table>
                 </div>
-                <div className="text-center">
+                <div className="text-center mt-2">
                   <Link href="/class">
                     <a className="text-black text-decoration-none">view all</a>
                   </Link>
                 </div>
+                </>
+                )}
               </Col>
 
               <Col xs={12} className='px-4 bg-white border-radius-10 w-90 mb-3 mt-3' style={{ height: '72%', borderBottomLeftRadius: '30px', borderBottomRightRadius: '30px' }}>

@@ -20,13 +20,13 @@ import useSWR, { mutate } from "swr";
 import { useRouter } from "next/router";
 
 const Activity = () => {
-  const [dataClass,setDataclass] = useState({
-    price : 0,
-    categories : '',
-    level : '',
-    day : '',
-    start_time : '',
-    end_time : ''
+  const [dataClass, setDataclass] = useState({
+    price: 0,
+    categories: '',
+    level: '',
+    day: '',
+    start_time: '',
+    end_time: ''
   })
   const {
     register,
@@ -68,15 +68,15 @@ const Activity = () => {
 
   const addClass = async (data) => {
     const newBody = {
-      name : data.name,
-      category : dataClass.categories,
-      price : dataClass.price,
-      description : data.description,
-      day : dataClass.day,
+      name: data.name,
+      category: dataClass.categories,
+      price: dataClass.price,
+      description: data.description,
+      day: dataClass.day,
       start_time: dataClass.start_time,
-      end_time:dataClass.end_time,
-      level :dataClass.level,
-      fasilitator : auth?.user?.user_id,
+      end_time: dataClass.end_time,
+      level: dataClass.level,
+      fasilitator: auth?.user?.user_id,
     }
   }
   useEffect(() => {
@@ -84,7 +84,7 @@ const Activity = () => {
       document.getElementById("paid_field").required = true;
       document.getElementById("paid_field").type = "number";
     } else {
-      setDataclass({...dataClass, price : 0})
+      setDataclass({ ...dataClass, price: 0 })
       document.getElementById("paid_field").required = false;
       document.getElementById("paid_field").type = "hidden";
     }
@@ -128,48 +128,61 @@ const Activity = () => {
               >
                 <h5 className="mt-3 mb-1 fw-500">Activity</h5>
                 <h6 className="mt-3 mb-2 ms-3 fw-500">My class</h6>
+                {classUser?.data?.status === 400 && (
+                  <div className='text-center text-muted'>You didn't join any class yet</div>
+                )}
+                { classUser?.data?.status !== 400 && (
+                <>
                 <div className="table-responsive">
                   <table className="table table-borderless table-hover">
                     <thead>
                       <tr className="text-grey-dark">
-                        <th className="px-2 text-center">
-                          <input type="checkbox" disabled checked="" />
-                        </th>
+                        <th className="px-2 text-center"><input type="checkbox" disabled checked="" /></th>
                         <th colSpan={2}>Class Name</th>
                         <th colSpan={1}>Category</th>
-                        <th colSpan={2}>Description</th>
-                        <th className="text-center" colSpan={2}>
-                          Schedule
-                        </th>
-                        <th className="text-center">Members</th>
+                        <th colSpan={3}>Description</th>
+                        <th colSpan={1}>Progress</th>
+                        <th>Status</th>
+                        <th>Score</th>
                       </tr>
                     </thead>
                     <tbody className="bg-white fs-400">
-                      {classUser?.data?.status === 400 && (
-                        <tr className="b-table text-grey-dark">
-                          <td colspan={6}><div className='text-center text-muted'>You didn't join any class yet</div></td>
-                        </tr>
-                      )}
-                      {classUser?.data?.status !== 400 && classUser?.map(item => {
+                      {classUser?.data?.status !== 400 && classUser?.length <= 3 && classUser?.map(item => {
                         return (<>
-                          <tr className="b-table text-grey-dark" onClick={() => router.push(`/fasilitator/class/${item?.id}`)}>
+                          <tr className="b-table text-grey-dark" onClick={() => router.push(`/class/${item?.id}`)}>
                             <td className="text-center"><input type="checkbox" disabled checked="" /></td>
                             <td colSpan={2}><h6>{item?.name}</h6></td>
                             <td colSpan={1}><h6>{item?.category}</h6></td>
-                            <td className="description" colSpan={2}><h6>{item?.description}</h6></td>
-                            <td colSpan={2}>{`${item?.day}, ${item?.start_time} - ${item?.end_time}`}</td>
-                            <td className='text-center'>{item?.members}<img src='../../icon/student-icon.svg' className='icon' /></td>
+                            <td className="description" colSpan={3}><h6>{item?.description}</h6></td>
+                            <td colSpan={1}>{`${item?.topic_completed / item?.total_topic * 100}%`}</td>
+                            <td>{item?.topic_completed / item?.total_topic !== 1 ? 'On Going' : 'Completed'}</td>
+                            <td>{item?.avg ? Math.round(item?.avg) : '0'}</td>
+                          </tr>
+                        </>)
+                      })}
+                      {classUser?.data?.status !== 400 && classUser?.length > 3 && classUser?.splice(0, 3).map(item => {
+                        return (<>
+                          <tr className="b-table text-grey-dark" onClick={() => router.push(`/class/${item?.id}`)}>
+                            <td className="text-center"><input type="checkbox" disabled checked="" /></td>
+                            <td colSpan={2}><h6>{item?.name}</h6></td>
+                            <td colSpan={1}><h6>{item?.category}</h6></td>
+                            <td className="description" colSpan={3}><h6>{item?.description}</h6></td>
+                            <td colSpan={1}>{`${item?.topic_completed / item?.total_topic * 100}%`}</td>
+                            <td>{item?.topic_completed / item?.total_topic !== 1 ? 'On Going' : 'Completed'}</td>
+                            <td>{item?.avg ? Math.round(item?.avg) : '0'}</td>
                           </tr>
                         </>)
                       })}
                     </tbody>
                   </table>
                 </div>
-                <div className="text-center">
-                  <Link href="/fasilitator/class">
+                <div className="text-center mt-2">
+                  <Link href="/class">
                     <a className="text-black text-decoration-none">view all</a>
                   </Link>
                 </div>
+                </>
+                )}
               </Col>
               <Card className="bg-white border-radius-20 p-3 my-5">
                 <Form onSubmit={handleSubmit(addClass)}>
@@ -214,37 +227,37 @@ const Activity = () => {
                         </Form.Label>
                         <Col sm={9}>
                           <div key={`inline-radio`} className="mt-2">
-                          <Form.Group required>
-                            <Form.Check
-                              inline
-                              label="Free"
-                              name="group1"
-                              type="radio"
-                              id={`inline-radio-1`}
-                              required
-                              onChange={(e) =>
-                                e.target.checked
-                                  ? setPaid(false)
-                                  : setPaid(true)
-                              }
-                            />
-                            <Form.Check
-                              inline
-                              label="Paid"
-                              name="group1"
-                              type="radio"
-                              id={`inline-radio-1`}
-                              onChange={(e) =>
-                                e.target.checked
-                                  ? setPaid(true)
-                                  : setPaid(false)
-                              }
-                            />
-                            <input 
-                            className="is-invalid"
-                            type="number" id="paid_field"
-                            onChange = {(e)=>setDataclass({...dataClass, price : e.target.value})}
-                            />
+                            <Form.Group required>
+                              <Form.Check
+                                inline
+                                label="Free"
+                                name="group1"
+                                type="radio"
+                                id={`inline-radio-1`}
+                                required
+                                onChange={(e) =>
+                                  e.target.checked
+                                    ? setPaid(false)
+                                    : setPaid(true)
+                                }
+                              />
+                              <Form.Check
+                                inline
+                                label="Paid"
+                                name="group1"
+                                type="radio"
+                                id={`inline-radio-1`}
+                                onChange={(e) =>
+                                  e.target.checked
+                                    ? setPaid(true)
+                                    : setPaid(false)
+                                }
+                              />
+                              <input
+                                className="is-invalid"
+                                type="number" id="paid_field"
+                                onChange={(e) => setDataclass({ ...dataClass, price: e.target.value })}
+                              />
                             </Form.Group>
                           </div>
                         </Col>
@@ -266,7 +279,7 @@ const Activity = () => {
                           <select
                             className='mt-2'
                             aria-label="Default select example"
-                            onChange={(e)=>{setDataclass({...dataClass, categories : e.target.value})}}
+                            onChange={(e) => { setDataclass({ ...dataClass, categories: e.target.value }) }}
                           >
                             <option value={null} selected>Choose</option>
                             <option value="Software">Software</option>
@@ -292,7 +305,7 @@ const Activity = () => {
                           <select
                             className='mt-2'
                             aria-label="Default select example"
-                            onChange={(e)=>{setDataclass({...dataClass, day : e.target.value})}}
+                            onChange={(e) => { setDataclass({ ...dataClass, day: e.target.value }) }}
                           >
                             <option value={null} selected>Choose</option>
                             <option value="01">Monday</option>
@@ -309,7 +322,7 @@ const Activity = () => {
                             id="appt"
                             name="appt"
                             required
-                            onChange={(e)=>{setDataclass({...dataClass, start_time : e.target.value})}}
+                            onChange={(e) => { setDataclass({ ...dataClass, start_time: e.target.value }) }}
                           />{" "}
                           -{" "}
                           <input
@@ -318,7 +331,7 @@ const Activity = () => {
                             type="time"
                             id="appt"
                             name="appt"
-                            onChange={(e)=>{setDataclass({...dataClass, end_time : e.target.value})}}
+                            onChange={(e) => { setDataclass({ ...dataClass, end_time: e.target.value }) }}
                           />
                         </Col>
                       </Form.Group>
@@ -337,7 +350,7 @@ const Activity = () => {
                           <select
                             className="mt-2"
                             aria-label="Default select example monserrat px-3"
-                            onChange={(e)=>{setDataclass({...dataClass, level : e.target.value})}}
+                            onChange={(e) => { setDataclass({ ...dataClass, level: e.target.value }) }}
                           >
                             <option selected className="fw-bold montserrat">
                               Choose
