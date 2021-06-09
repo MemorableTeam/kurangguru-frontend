@@ -152,36 +152,33 @@ const Activity = () => {
                         <th className="px-2 text-center"><input type="checkbox" disabled checked="" /></th>
                         <th colSpan={2}>Class Name</th>
                         <th colSpan={1}>Category</th>
-                        <th colSpan={3}>Description</th>
-                        <th colSpan={1}>Progress</th>
-                        <th>Status</th>
-                        <th>Score</th>
+                        <th colSpan={2}>Description</th>
+                        <th className='text-center' colSpan={2}>Schedule</th>
+                        <th className='text-center'>Students</th>
                       </tr>
                     </thead>
                     <tbody className="bg-white fs-400">
                       {classUser?.data?.status !== 400 && classUser?.length <= 3 && classUser?.map(item => {
                         return (<>
-                          <tr className="b-table text-grey-dark" onClick={() => router.push(`/class/${item?.id}`)}>
+                          <tr className="b-table text-grey-dark" onClick={() => router.push(`/fasilitator/class/${item?.id}`)}>
                             <td className="text-center"><input type="checkbox" disabled checked="" /></td>
                             <td colSpan={2}><h6>{item?.name}</h6></td>
                             <td colSpan={1}><h6>{item?.category}</h6></td>
-                            <td className="description" colSpan={3}><h6>{item?.description}</h6></td>
-                            <td colSpan={1}>{`${item?.topic_completed / item?.total_topic * 100}%`}</td>
-                            <td>{item?.topic_completed / item?.total_topic !== 1 ? 'On Going' : 'Completed'}</td>
-                            <td>{item?.avg ? Math.round(item?.avg) : '0'}</td>
+                            <td className="description" colSpan={2}><h6>{item?.description}</h6></td>
+                            <td colSpan={2}>{`${item?.day}, ${item?.start_time} - ${item?.end_time}`}</td>
+                            <td className='text-center'>{item?.members}<img src='../../icon/student-icon.svg' className='icon' /></td>
                           </tr>
                         </>)
                       })}
                       {classUser?.data?.status !== 400 && classUser?.length > 3 && classUser?.splice(0, 3).map(item => {
                         return (<>
-                          <tr className="b-table text-grey-dark" onClick={() => router.push(`/class/${item?.id}`)}>
+                          <tr className="b-table text-grey-dark" onClick={() => router.push(`/fasilitator/class/${item?.id}`)}>
                             <td className="text-center"><input type="checkbox" disabled checked="" /></td>
                             <td colSpan={2}><h6>{item?.name}</h6></td>
                             <td colSpan={1}><h6>{item?.category}</h6></td>
-                            <td className="description" colSpan={3}><h6>{item?.description}</h6></td>
-                            <td colSpan={1}>{`${item?.topic_completed / item?.total_topic * 100}%`}</td>
-                            <td>{item?.topic_completed / item?.total_topic !== 1 ? 'On Going' : 'Completed'}</td>
-                            <td>{item?.avg ? Math.round(item?.avg) : '0'}</td>
+                            <td className="description" colSpan={2}><h6>{item?.description}</h6></td>
+                            <td colSpan={2}>{`${item?.day}, ${item?.start_time} - ${item?.end_time}`}</td>
+                            <td className='text-center'>{item?.members}<img src='../../icon/student-icon.svg' className='icon' /></td>
                           </tr>
                         </>)
                       })}
