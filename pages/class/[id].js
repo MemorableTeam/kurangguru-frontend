@@ -1,71 +1,14 @@
 import { useRouter } from "next/router"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { Card, Col, Row } from "react-bootstrap"
 import useSWR from "swr"
 import Header from '../../components/header'
+import ModalMember from "../../components/modalsMember"
 import Sidebar from '../../components/sidebar'
 import { globalGet } from "../../libs/fetcher"
 import { useClassById } from "../api/class/useClassById"
+import { useMembers } from "../api/class/useMembers"
 import { useTopics } from "../api/class/useTopics"
-
-// const data = {
-//   id: 1,
-//   name: 'Beginner Javascript',
-//   day: 'Friday',
-//   start_time: '18:00:00',
-//   end_time: '20:00:00',
-//   description: 'Mempelajari dasar- dasar Javascript.'
-// }
-
-// const topics = [
-//   {
-//     id: 1,
-//     topic_name: 'Apa itu Javascript',
-//     score: 86,
-//     is_finished: true
-//   },
-//   {
-//     id: 2,
-//     topic_name: 'Sejarah Javascript',
-//     score: 90,
-//     is_finished: true
-//   },
-//   {
-//     id: 3,
-//     topic_name: 'Sintaks Javascript',
-//     score: null,
-//     is_finished: false
-//   },
-//   {
-//     id: 4,
-//     topic_name: 'Type data Javascript',
-//     score: null,
-//     is_finished: false
-//   }
-// ]
-
-const member = [
-  {
-    id: 1,
-    username: 'Rpetz',
-    photo: null
-  },
-  {
-    id: 2,
-    username: 'Irvanswan',
-    photo: null
-  },
-  {
-    id: 3,
-    username: 'Dendy AR',
-    photo: null
-  },
-  {
-    id: 4,
-    username: 'Dea Edria',
-    photo: null
-  },
-]
 
 const classDetail = () => {
   const router = useRouter()
@@ -77,15 +20,15 @@ const classDetail = () => {
     token: auth?.user?.token,
     class_id: id,
   })
-
-  console.log(data, 'Dataaaaaaaaaaaa')
-  console.log(auth, 'auth')
-  console.log(topic, 'topiccsss')
+  const { member } = useMembers({
+    token: auth?.user?.token,
+    class_id: id,
+  })
 
   const setColor = (score) => {
     if (score >= 90 && score <= 100) return 'text-success'
-    if (score < 90) return 'text-primary'
-    if (score < 80) return 'text-warning'
+    if (score < 90 && score >= 80) return 'text-primary'
+    if (score < 80 && score >= 40) return 'text-warning'
     if (score < 40 && score >= 0) return 'text-danger'
     return ''
   }
@@ -102,7 +45,7 @@ const classDetail = () => {
           <Col md={5} lg={4} xl={3} className='p-0'>
             <Row>
               <Col md={12} className="h-activity">
-                <Sidebar activeTabs={3} rootDir={{ icon: '../icon', img: '../images' }} />
+                <Sidebar activeTabs={3} rootDir={{ icon: '../icon', img: '../images' }} route='../api/users/getSession' goto='../api/users/logoutSession' />
               </Col>
               <Col></Col>
             </Row>
@@ -134,7 +77,10 @@ const classDetail = () => {
             <Card className='border-radius-10 p-3 mt-3 mb-3'>
               <div className='w-100 h100'>
                 <h6 className='fw-700 mb-4'>Class Progress</h6>
-                {topic && topic?.map(item => {
+                {topic?.data?.status === 400 && (
+                  <div className='text-center text-muted'>There is 0 topic in this class</div>
+                )}
+                {topic?.data?.status !== 400 && topic?.map(item => {
                   return (<>
                     <div className='w-100 d-flex justify-content-start'>
                       <input type="checkbox" className="px-2 text-center mt-1 ms-2" value={item?.id} />
@@ -160,11 +106,14 @@ const classDetail = () => {
                 <p className='fw-bold text-center'><img src='../icon/list-icon.svg' /></p>
               </div>
               <hr />
-              {member && member?.map(item => {
+              {member?.data?.status === 400 && (
+                <div className='text-center text-muted'>There is 0 member in this class</div>
+              )}
+              {member?.data?.status !== 400 && member?.map(item => {
                 return (<>
                   <div className='w-100 d-flex justify-content-start align-items-center'>
                     <input type="checkbox" className="px-2 text-center mt-1 ms-2" value={item?.id} />
-                    <img src={item?.photo ? `${process.env.API_URL_IMG}/${item?.photo}` : '../images/photo_profile.png'} width='36px' height='36px' className='rounded-circle ms-3' />
+                    <img src={item?.photo && item?.photo !== 'null' ? `${process.env.API_URL_IMG}/${item?.photo}` : '../images/photo_profile.png'} width='36px' height='36px' className='rounded-circle ms-3' />
                     <p className='w-100 mx-3 pt-3'>{item?.username}</p>
                     <p className='fw-bold text-center mt-3'><img src='../icon/list-icon.svg' /></p>
                   </div>
@@ -174,6 +123,8 @@ const classDetail = () => {
           </Col>
         </Row>
       </div>
+
+      {/* <ModalMember show={showModal} onHide={() => setShowModal(false)} form={form} /> */}
     </>
   )
 }
