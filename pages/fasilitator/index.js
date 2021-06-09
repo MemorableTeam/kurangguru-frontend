@@ -16,7 +16,6 @@ const UserDashboard = () => {
     token: `${auth?.user?.token}`
   })
   console.log('class', classUser)
-  const [show, setShow] = useState(false)
   const [index, setIndex] = useState(0);
   const [value, setValue] = useState(null);
   const [activeTabs, setActiveTabs] = useState(1);
@@ -25,16 +24,6 @@ const UserDashboard = () => {
   const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);
   };
-  const handleModals = (e) => {
-    e.preventDefault()
-
-    if (show) {
-      setShow(false);
-    } else {
-      setShow(true);
-    }
-  }
-
   const today = moment().format("D MMMM gggg");
   const today1 = moment().format("YYYY-MM-DD");
   const format = moment(value).format("D MMMM gggg");
@@ -177,9 +166,11 @@ const UserDashboard = () => {
                     </div>
                     ))}
                     <div className='d-flex justify-content-center my-3'>
-                      <Button variant='none' className = 'bg-blue-dark rounded-pill' onClick={(e)=>handleModals(e)}>
+                    <Link href='/fasilitator/class'>
+                      <Button variant='none' className = 'bg-blue-dark rounded-pill'>
                         <img src='./icon/plus-icon.svg' className='rounded' /> <span className='text-white fw-bold kanit'>New Task</span> 
                       </Button>
+                    </Link>
                     </div>
                     </Card>
                   </Col>
@@ -192,22 +183,6 @@ const UserDashboard = () => {
           </Col>
         </Row>
       </Container>
-
-      <Modal show={show} onHide={(e) => setShow(false)}>
-        <Modal.Header>
-          <Modal.Title>Modal heading</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={(e) => setShow(false)}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={(e) => setShow(false)}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal>
-
     </>
   )
 }

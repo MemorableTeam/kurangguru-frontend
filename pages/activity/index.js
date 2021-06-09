@@ -9,16 +9,18 @@ import { useClassByUser } from "../api/class/useClassByUser";
 import useSWR, { mutate } from "swr";
 import { useRouter } from "next/router";
 import { userPage } from '../../libs/session'
+import { globalPost } from "../../libs/fetcher";
 
 const UserActivity = () => {
   const router = useRouter()
+  const [loading, setLoading] = useState(false)
   const { data: auth } = useSWR('api/users/getSession')
   const { class: data, mutateClass } = useAllClass({
     user_id: auth?.user?.user_id,
     page_size: 10,
     current_page: router?.query?.page ? parseInt(router?.query?.page) : 1
   })
-  const { class: classUser } = useClassByUser({
+  const { class: classUser, mutateClass : mutateByUser } = useClassByUser({
     userId: auth?.user?.user_id,
     token: `${auth?.user?.token}`
   })
@@ -27,7 +29,6 @@ const UserActivity = () => {
 
   //   const [visiblePassword, setVisiblePassword] = useState(false);
   //   const [visibleConfirm, setVisibleConfirm] = useState(false);
-
   useEffect(() => {
     let page = []
     if (data?.total_pages > 1) {
@@ -48,6 +49,21 @@ const UserActivity = () => {
     if (auth?.logout && auth !== undefined) router.push('/login')
   }, [auth])
 
+  const processRegister = async(id) =>{
+    try {
+      const result = await globalPost({
+        url: `${process.env.API_URL}/members`,
+        headers : {
+          Authorization: `Bearer ${auth?.user?.token}`
+        },
+        params: { user_id : auth?.user?.user_id, class_id : id }
+      })
+      console.log(result)
+      setLoading(false)
+    } catch (err) {
+      alert(err)
+    }
+  }
   return (
     <>
       <Header title="User Activity" url="./images/face1.png" />
@@ -156,7 +172,7 @@ const UserActivity = () => {
                             <td colSpan={3}>{e?.description}</td>
                             <td colSpan={1}>{e?.level}</td>
                             <td>{`$${e?.price}`}</td>
-                            <td><Button variant='success' className='rounded-pill'>Register</Button></td>
+                            <td><Button variant='success' data-id={e?.id} className='rounded-pill' onClick={(e)=>processRegister(e.target.getAttribute('data-id'))}>Register</Button></td>
                           </tr>
                         </>)
                       })}

@@ -29,7 +29,7 @@ const Class = () => {
           <Col md={5} lg={4} xl={3} className='p-0'>
             <Row>
               <Col md={12} className="h-activity">
-                <Sidebar activeTabs={3} rootDir={{ icon: '../../icon', img: '../../images' }} route='../api/users/getSession' />
+                <Sidebar activeTabs={3} rootDir={{ icon: '../../icon', img: '../../images' }} route='../../api/users/getSession' goto='../../api/users/logoutSession' />
               </Col>
               <Col></Col>
             </Row>
