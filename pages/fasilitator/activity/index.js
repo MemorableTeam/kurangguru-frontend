@@ -123,6 +123,7 @@ const Activity = () => {
                   activeTabs={3}
                   rootDir={{ icon: "../../icon", img: "../../images" }}
                   route="../api/users/getSession"
+                  goto="../api/users/logoutSession"
                 />
               </Col>
               <Col></Col>
