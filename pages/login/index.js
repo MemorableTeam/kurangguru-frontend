@@ -46,7 +46,7 @@ const Login = () => {
         setMessage(result.data.message);
         setShow(true);
       }
-    } catch (err) {}
+    } catch (err) { }
   };
 
   //ketika tekan toogle ditekan
@@ -82,9 +82,8 @@ const Login = () => {
                     required: "Username Or Email can't be empty",
                   })}
                   type="text"
-                  className={`username form-control shadow-none border-radius-10 py-3 ${
-                    errors.username ? "is-invalid" : ""
-                  }`}
+                  className={`username form-control shadow-none border-radius-10 py-3 ${errors.username ? "is-invalid" : ""
+                    }`}
                   id="exampleInputEmail1"
                   aria-describedby="emailHelp"
                 />
@@ -106,9 +105,8 @@ const Login = () => {
                       required: "Password can't be empty",
                     })}
                     type="password"
-                    className={`password form-control shadow-none border-radius-10 py-3 r-none ${
-                      errors.password ? "is-invalid" : ""
-                    }`}
+                    className={`password form-control shadow-none border-radius-10 py-3 r-none ${errors.password ? "is-invalid" : ""
+                      }`}
                     id="input-password"
                   />
                   <div className="px-2 input-group-append toogle py-3">
@@ -176,7 +174,7 @@ const Login = () => {
         aria-labelledby="contained-modal-title-vcenter"
         centered
         onHide={() => setShow(false)}
-        >
+      >
         <div className='border-radius-10'>
           <Modal.Body className='py-3 px-3'>
             {/* <Image className="icon mx-4" src="/images/face1.png" /> */}
@@ -186,8 +184,8 @@ const Login = () => {
             </div>
             <Button onClick={() => setShow(false)} className='float-end my-3'>Close</Button>
           </Modal.Body>
-          </div>
-        </Modal>
+        </div>
+      </Modal>
 
       <Modal
         show={loading}

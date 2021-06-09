@@ -65,6 +65,12 @@ const UserActivity = () => {
       alert(err)
     }
   }
+
+  useEffect(() => {
+    if (auth !== undefined && auth?.user?.role === 'fasilitator') router.push('/fasilitator')
+    if (auth?.logout && auth !== undefined) router.push('/login')
+  }, [auth])
+
   return (
     <>
       <Header title="User Activity" url="./images/face1.png" />

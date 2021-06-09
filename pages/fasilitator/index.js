@@ -73,6 +73,11 @@ const UserDashboard = () => {
   //   to_date: to_date.toString(),
   // });
 
+  useEffect(() => {
+    if (auth !== undefined && auth?.user?.role === "user") router.push("/");
+    if (auth?.logout && auth !== undefined) router.push("/login");
+  }, [auth]);
+
   return (
     <>
       <Header title="User Activity" url="./images/face1.png" />
@@ -81,7 +86,7 @@ const UserDashboard = () => {
           <Col md={5} lg={4} xl={3} className='p-0'>
             <Row>
               <Col md={12} className="h-activity">
-                <Sidebar activeTabs={2}/>
+                <Sidebar activeTabs={2} />
               </Col>
               <Col></Col>
             </Row>
@@ -151,27 +156,27 @@ const UserDashboard = () => {
                       </Button>
                     </div>
                     <Card className='w-100 border-0 mb-5'>
-                    {classUser &&
-                      classUser.map((element)=>(
-                    <div className="d-flex bg-white py-3 px-3">
-                    <Card className='w-100 shadow-lg border-0 py-3'>
-                        <Card.Body>
-                            <Row>
-                                <Col className='fw-bolder roboto col-4'>{moment(`${element?.start_time}`,'h:mm a').format('LT')} - {moment(`${element?.end_time}`,'h:mm a').format('LT')}</Col>
-                                <Col className='fw-bolder montserrat col-6'>{element.name}</Col>
-                                <Col className='col-2 montserrat'>{element.members} <img src='./icon/student-icon.svg' className='icon'/></Col>
-                            </Row>
-                        </Card.Body>
-                    </Card>
-                    </div>
-                    ))}
-                    <div className='d-flex justify-content-center my-3'>
-                    <Link href='/fasilitator/activity'>
-                      <Button variant='none' className = 'bg-blue-dark rounded-pill'>
-                        <img src='./icon/plus-icon.svg' className='rounded' /> <span className='text-white fw-bold kanit'>New Task</span> 
-                      </Button>
-                    </Link>
-                    </div>
+                      {classUser &&
+                        classUser.map((element) => (
+                          <div className="d-flex bg-white py-3 px-3">
+                            <Card className='w-100 shadow-lg border-0 py-3'>
+                              <Card.Body>
+                                <Row>
+                                  <Col className='fw-bolder roboto col-4'>{moment(`${element?.start_time}`, 'h:mm a').format('LT')} - {moment(`${element?.end_time}`, 'h:mm a').format('LT')}</Col>
+                                  <Col className='fw-bolder montserrat col-6'>{element.name}</Col>
+                                  <Col className='col-2 montserrat'>{element.members} <img src='./icon/student-icon.svg' className='icon' /></Col>
+                                </Row>
+                              </Card.Body>
+                            </Card>
+                          </div>
+                        ))}
+                      <div className='d-flex justify-content-center my-3'>
+                        <Link href='/fasilitator/activity'>
+                          <Button variant='none' className='bg-blue-dark rounded-pill'>
+                            <img src='./icon/plus-icon.svg' className='rounded' /> <span className='text-white fw-bold kanit'>New Task</span>
+                          </Button>
+                        </Link>
+                      </div>
                     </Card>
                   </Col>
                 </Row>
