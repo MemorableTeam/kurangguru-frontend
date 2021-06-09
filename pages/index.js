@@ -68,6 +68,7 @@ function Home() {
   // ]
 
   useEffect(() => {
+    if (auth !== undefined && auth?.user?.role === 'fasilitator') router.push('/fasilitator')
     if (auth?.logout && auth !== undefined) router.push('/login')
   }, [auth])
 
