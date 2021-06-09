@@ -79,7 +79,10 @@ const UserActivity = () => {
                       </tr>
                     </thead>
                     <tbody className="bg-white fs-400">
-                      {classUser && classUser?.map(item => {
+                      {classUser?.data?.status === 400 && (
+                        <div className='text-center text-muted'>You didn't join any class yet</div>
+                      )}
+                      {classUser?.data?.status !== 400 && classUser?.map(item => {
                         return (<>
                           <tr className="b-table text-grey-dark" onClick={() => router.push(`/class/${item?.id}`)}>
                             <td className="text-center"><input type="checkbox" disabled checked="" /></td>
