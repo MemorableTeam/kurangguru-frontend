@@ -166,7 +166,7 @@ const UserDashboard = () => {
                     </div>
                     ))}
                     <div className='d-flex justify-content-center my-3'>
-                    <Link href='/fasilitator/class'>
+                    <Link href='/fasilitator/activity'>
                       <Button variant='none' className = 'bg-blue-dark rounded-pill'>
                         <img src='./icon/plus-icon.svg' className='rounded' /> <span className='text-white fw-bold kanit'>New Task</span> 
                       </Button>

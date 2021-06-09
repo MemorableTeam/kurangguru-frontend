@@ -18,6 +18,7 @@ import { useAllClass } from "../../api/class/useAllClass";
 import { useClassByUser } from "../../api/class/useClassByUser";
 import useSWR, { mutate } from "swr";
 import { useRouter } from "next/router";
+import { globalPost } from "../../../libs/fetcher";
 
 const Activity = () => {
   const [dataClass, setDataclass] = useState({
@@ -77,6 +78,17 @@ const Activity = () => {
       end_time: dataClass.end_time,
       level: dataClass.level,
       fasilitator: auth?.user?.user_id,
+    }
+    try{
+      globalPost({
+        url: `${process.env.API_URL}/class`,
+        headers : {
+          Authorization: `Bearer ${auth?.user?.token}`
+        },
+        data: newBody,
+      })
+    }catch(err){
+
     }
   }
   useEffect(() => {
