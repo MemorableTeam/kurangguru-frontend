@@ -53,7 +53,7 @@ const classDetail = () => {
           <Col md={5} lg={5} xl={6}>
             <div className='ms-2 mt-3'>
               <h4 className=''>
-                <img src='../icon/back-icon.svg' className='p-0 me-2' />
+                <img src='../icon/back-icon.svg' className='p-0 me-2' onClick={() => router.back()} />
                 {data?.name}
               </h4>
             </div>
