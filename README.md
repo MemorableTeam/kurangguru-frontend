@@ -1,4 +1,4 @@
-## Tickitz-Frontend
+## KurangGuru-Frontend
 
 This is a frontend part for [api project](https://github.com/MemorableTeam/kurangguru-backend).
 
