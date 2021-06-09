@@ -320,13 +320,13 @@ const Activity = () => {
                             onChange={(e) => { setDataclass({ ...dataClass, day: e.target.value }) }}
                           >
                             <option value={null} selected>Choose</option>
-                            <option value="01">Monday</option>
-                            <option value="02">Tuesday</option>
-                            <option value="03">Wednesday</option>
-                            <option value="04">Thursday</option>
-                            <option value="05">Freeday</option>
-                            <option value="06">Saturday</option>
-                            <option value="07">Sunday</option>
+                            <option value="Monday">Monday</option>
+                            <option value="Tuesday">Tuesday</option>
+                            <option value="Wednesday">Wednesday</option>
+                            <option value="Thursday">Thursday</option>
+                            <option value="Freeday">Freeday</option>
+                            <option value="Saturday">Saturday</option>
+                            <option value="Sunday">Sunday</option>
                           </select>
                           <input
                             className="ms-2 w-30 bg-transparent border-top-0 border-start-0 border-end-0"
