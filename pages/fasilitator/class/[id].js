@@ -86,7 +86,7 @@ const classDetail = () => {
                 {topic?.data?.status !== 400 && topic?.map(item => {
                   return (<>
                     <div className='w-100 d-flex justify-content-start'>
-                      <input type="checkbox" className="px-2 text-center mt-1 ms-2" value={item?.id} />
+                      <input type="checkbox" className="px-2 text-center mt-1 ms-2" value={item?.id} checked={item?.is_finished ? "true" : ""} />
                       <p className='w-100 mx-3'>{item?.topic_name}</p>
                       <p className={`fw-bold text-center w-25`}>{item?.is_finished ? (<label className='badge bg-success rounded-pill'>Finished</label>) : (<label className='badge bg-danger rounded-pill'>Unfinished</label>)}</p>
                     </div>
