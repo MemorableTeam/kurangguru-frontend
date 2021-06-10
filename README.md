@@ -64,9 +64,9 @@ User Page
 | Dekstop  | Mobile |
 | - | - |
 |>**Dashboard**||
-|![Desktop](https://i.ibb.co/DbHxKRY/Capture11.png)|**Coming Soon ...**|
-|>**Activity**||
-|![Profile](https://i.ibb.co/W0T7vLd/Capture12.png)|**Coming Soon ...**|
+|![Desktop](https://i.ibb.co/84dJHFm/Capture1.png)|**Coming Soon ...**|
+|>**Profile**||
+|![Profile](https://i.ibb.co/Zh1hdvm/Capture.png)|**Coming Soon ...**|
 ```
 Fasilitator Page
 ```
