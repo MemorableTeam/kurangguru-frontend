@@ -1,34 +1,81 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Front End Kurang Guru App
+### This App Using Next JS Framework
 
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
+### **Depedencies** :
 ```
+1. Next JS (FrameWork React JS)
+2. React-Bootstrap (Library react-bootstrap)
+3. Bootstrap 5 (library bootstrap 5)
+4. Axios (library Fecthing Data From API)
+5. Moment (library for handling format date and time)
+6. Next-iron-session (library for auth session)
+7. SWR (for mutate for return the data from cache)
+8. sass (for styling css format)
+```
+## Folder Structure
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+    ├── components                   
+    │   ├── header        
+    │   ├── modalMessage            
+    │   ├── modalsMember           
+    │   ├── sidebar
+    |   ├── index.js
+    ├── libs
+    │   ├── fetcher.js
+    │   ├── session.js         
+    ├── pages
+    │   ├── auth.js              
+    │   ├── class.js              
+    │   ├── member.js             
+    │   ├── setup.js
+    |   ├── topics.js
+    |   └── users.js
+    ├── styles
+    │   ├── _activity.scss            
+    │   ├── _auth.scss
+    │   ├── _dashboard.scss
+    │   ├── profile.scss            
+    │   ├── global.scss
+    |   ├── sidebar.scss
+    └── next.config.js
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+### **Image :**
+```
+Auth Page
+```
+| Dekstop  | Mobile |
+| - | - |
+|> **Login Page**|
+| ![Desktop](https://user-images.githubusercontent.com/49930719/121392502-a916c680-c979-11eb-9292-75ff06b64bb7.PNG)   | !![Mobile](https://user-images.githubusercontent.com/49930719/121392666-cc417600-c979-11eb-8335-f648a13bcab0.PNG) |
+| ![ErrorDesktop](https://user-images.githubusercontent.com/49930719/121392888-fe52d800-c979-11eb-9fe1-3403c69f65fe.PNG) | ![ErrorMobile](https://user-images.githubusercontent.com/49930719/121392986-14f92f00-c97a-11eb-9791-ecaabf3fe5dd.PNG)  |
+|> **Register Page**|
+| ![Desktop](https://user-images.githubusercontent.com/49930719/121393231-5a1d6100-c97a-11eb-86bb-e91a3a0eebe7.PNG)   | ![Mobile](https://user-images.githubusercontent.com/49930719/121393325-6f928b00-c97a-11eb-8722-64054394bfa8.PNG) |
+```
+Forgot Password
+```
+| Dekstop  | Mobile |
+| - | - |
+|![Desktop](https://user-images.githubusercontent.com/49930719/121393780-e2036b00-c97a-11eb-8d54-7592c2a40f81.PNG)|![Mobile](https://user-images.githubusercontent.com/49930719/121393846-f21b4a80-c97a-11eb-80d4-519c88d1a719.PNG)|
+|![Vdekstop](https://user-images.githubusercontent.com/49930719/121394011-20008f00-c97b-11eb-9e2d-5ed0b3f8b9ca.PNG)|**Coming Soon...**|
+```
+User Page
+```
+| Dekstop  | Mobile |
+| - | - |
+|>**Dashboard**||
+|![Desktop](https://i.ibb.co/84dJHFm/Capture1.png)|**Coming Soon ...**|
+|>**Profile**||
+|![Profile](https://i.ibb.co/Zh1hdvm/Capture.png)|**Coming Soon ...**|
+```
+Fasilitator Page
+```
+| Desktop | Mobile |
+| - | - |
+|>**Dashboard**|
+|![Activity](https://user-images.githubusercontent.com/49930719/121395264-6e625d80-c97c-11eb-995f-d405b04cb78e.PNG)|**Coming Soon...**|
+|>**Activity**|
+|![Activity](https://user-images.githubusercontent.com/49930719/121395632-d749d580-c97c-11eb-9e59-4bf1ac1f8808.PNG)|![Activitym](https://user-images.githubusercontent.com/49930719/121395366-8c2fc280-c97c-11eb-8fe3-6c5021060b2e.PNG)|
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+> **Resources :**
+1. [Backend](https://github.com/MemorableTeam/kurangguru-backend)
