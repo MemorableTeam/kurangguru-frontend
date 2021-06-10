@@ -62,6 +62,7 @@ const UserActivity = () => {
       })
       console.log(result)
       setLoading(false)
+      router.reload()
     } catch (err) {
       alert(err)
     }
