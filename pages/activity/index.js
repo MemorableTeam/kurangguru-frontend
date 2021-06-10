@@ -15,11 +15,12 @@ const UserActivity = () => {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
   const { data: auth } = useSWR('api/users/getSession')
-  const { class: data, mutateClass } = useAllClass({
+  const [form, setForm] = useState({
     user_id: auth?.user?.user_id,
-    page_size: 10,
+    page_size: 4,
     current_page: router?.query?.page ? parseInt(router?.query?.page) : 1
   })
+  const { class: data, mutateClass } = useAllClass(form)
   
   const { class: classUser, mutateClass : mutateByUser } = useClassByUser({
     userId: auth?.user?.user_id,
@@ -43,7 +44,7 @@ const UserActivity = () => {
   useEffect(() => {
     if (router?.query?.page == 1) router.push(`${router.pathname}`)
     setCurrentPage(router.query.page || 1)
-    mutateClass('get_class')
+    setForm({ ...form, current_page: router?.query?.page ? parseInt(router?.query?.page) : 1, user_id: auth?.user?.user_id})
   }, [router.query.page])
 
   useEffect(() => {
@@ -215,7 +216,7 @@ const UserActivity = () => {
                   <div className='d-flex'>
                     {page && page.map(e => {
                       return (<>
-                        <div className={`text-center py-1 px-2 mx-2 ${e == currentPage ? 'bg-success' : 'bg - blue - light'}`} onClick={() => router.push(`${location.pathname}?page=${e}`)} >{e}</div>
+                        <div className={`text-center py-1 px-2 mx-2 ${e == currentPage ? 'bg-success' : 'bg - blue - light'}`} onClick={() => { router.push(`${location.pathname}?page=${e}`); window.location.href = `${location.pathname}?page=${e}`}} >{e}</div>
                       </>)
                     })}
                   </div>

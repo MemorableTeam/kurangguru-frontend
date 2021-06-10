@@ -9,7 +9,7 @@ export const useAllClass = (form) => {
     }
   })
 
-  const { data, mutate, error } = useSWR(form.user_id ? 'get_class' : null, getClass, {})
+  const { data, mutate, error } = useSWR(form?.user_id ? 'get_class' : null, getClass, {})
   const loading = !data & !error
 
   return {
