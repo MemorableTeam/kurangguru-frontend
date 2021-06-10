@@ -88,6 +88,7 @@ const Activity = () => {
         },
         data: newBody,
       })
+      router.reload(window.location.pathname)
     }catch(err){
 
     }

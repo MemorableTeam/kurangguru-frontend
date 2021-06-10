@@ -8,6 +8,8 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import moment from 'moment'
 import { useClassByUser } from "../api/class/useClassByUser";
+import { useScheduleByDay } from "../api/schedule/useScheduleByDay";
+import { useScheduleById } from "../api/schedule/useScheduleById";
 
 const UserDashboard = () => {
   const { data: auth } = useSWR('api/users/getSession')
@@ -18,6 +20,7 @@ const UserDashboard = () => {
   console.log('class', classUser)
   const [index, setIndex] = useState(0);
   const [value, setValue] = useState(null);
+  const [theDay, setTheDay] = useState(null);
   const [activeTabs, setActiveTabs] = useState(1);
   const router = useRouter()
 
@@ -26,11 +29,15 @@ const UserDashboard = () => {
   };
   const today = moment().format("D MMMM gggg");
   const today1 = moment().format("YYYY-MM-DD");
+  const today2 = moment().format("dddd");
   const format = moment(value).format("D MMMM gggg");
   const pickDay = moment(value).format("DD");
   const startOfWeek = moment(value ? value : setValue(today1)).startOf('isoWeek');
   const endOfWeek = moment(value ? value : setValue(today1)).endOf('isoWeek');
 
+  let id = null
+  const { list: data, mutateList: mutate } = useScheduleByDay(theDay ? theDay : today2, auth?.user?.user_id, auth?.user?.token)
+  
   var days = [];
   var day = startOfWeek;
 
@@ -88,7 +95,6 @@ const UserDashboard = () => {
               <Col md={12} className="h-activity">
                 <Sidebar activeTabs={2} />
               </Col>
-              <Col></Col>
             </Row>
           </Col>
           <Col>
@@ -156,8 +162,8 @@ const UserDashboard = () => {
                       </Button>
                     </div>
                     <Card className='w-100 border-0 mb-5'>
-                      {classUser &&
-                        classUser.map((element) => (
+                    {data?.class_list &&
+                        data?.class_list?.map((element) => (
                           <div className="d-flex bg-white py-3 px-3">
                             <Card className='w-100 shadow-lg border-0 py-3'>
                               <Card.Body>
@@ -181,7 +187,7 @@ const UserDashboard = () => {
                   </Col>
                 </Row>
               </Col>
-              <Col xs={4} className='bg-white ms-3' style={{ width: '38%', borderTopLeftRadius: '30px', borderTopRightRadius: '30px' }}>
+              <Col xs={4} className='bg-white ms-3 d-none d-md-block' style={{ width: '38%', borderTopLeftRadius: '30px', borderTopRightRadius: '30px' }}>
 
               </Col>
             </Row>

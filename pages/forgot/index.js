@@ -27,7 +27,7 @@ const ForgotPassword = () => {
       <Header title="Forgot Password" url="./images/face1.png" />
       <Container fluid className="bg-blue-light bg-main">
         <Row>
-          <Col md={6} xs={12} className='fg-left'>
+          <Col md={6} xs={12} className='float-left d-none d-md-block'>
             <Image className="p-back" src="/icon/back-icon.svg" />
             <Row className="justify-content-center align-items-center bg-main mx-auto w-100">
               <Col md={6} xs={7} className="mx-auto">
@@ -35,7 +35,7 @@ const ForgotPassword = () => {
               </Col>
             </Row>
           </Col>
-          <Col md={6} xs={12} className="fg-right bg-white kanit">
+          <Col md={6} xs={12} className="float-right d-block bg-white kanit">
             <Row className="justify-content-center align-items-center bg-main text-center">
               <Col md={8} xs={10}>
                 <h2 className="fw-bolder fgr-title">Reset Password</h2>

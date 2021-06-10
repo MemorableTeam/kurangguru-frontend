@@ -52,14 +52,14 @@ const CodeVerify = () => {
       <Header title="Reset Password" url="./images/face1.png" />
       <Container fluid className="bg-blue-light bg-main">
         <Row>
-          <Col md={6} xs={12} className="fg-left">
+          <Col md={6} xs={12} className="float-left d-none d-md-block">
             <Row className="justify-content-center align-items-center bg-main">
               <Col md={6} xs={7} className="mx-auto">
                 <Image className="logo mx-4" src="/images/face2.png" />
               </Col>
             </Row>
           </Col>
-          <Col md={6} xs={12} className="fg-right bg-white kanit">
+          <Col md={6} xs={12} className="float-right d-block bg-white kanit">
             <Row className="justify-content-center align-items-center bg-main text-center">
               <Col md={8} xs={12}>
                 <h2 className="fw-bolder fgr-title">Reset Password</h2>
@@ -67,7 +67,7 @@ const CodeVerify = () => {
                   Enter verification code we just sent to your email address
                 </h5>
                 <form onSubmit={handleSubmit(processVerify)}>
-                  <div>
+                  <div className='mx-auto'>
                     <div className="d-flex text-center">
                       <input
                         {...register('code1', { required: "Field can't be empty" })}
