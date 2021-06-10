@@ -88,7 +88,7 @@ const UserActivity = () => {
           </Col>
           <Col>
             <Row className='w-100 h-100 ms-2 mb-3'>
-              <Col xs={12} className='bg-transparent w-100' style={{ height: '32%', borderTopLeftRadius: '30px', borderTopRightRadius: '30px' }}>
+              <Col xs={12} className='bg-transparent w-100' style={{ height: '53%', borderTopLeftRadius: '30px', borderTopRightRadius: '30px' }}>
                 <h5 className="mt-3 mb-1 fw-500">Activity</h5>
                 <h6 className="mt-3 mb-2 ms-3 fw-500">My class</h6>
                 {classUser?.data?.status === 400 && (
@@ -116,7 +116,7 @@ const UserActivity = () => {
                       {classUser?.data?.status !== 400 && classUser?.length <= 3 && classUser?.map(item => {
                         return (<>
                           <tr className="b-table text-grey-dark" onClick={() => router.push(`/class/${item?.id}`)}>
-                            <td className="text-center"><input type="checkbox" disabled checked="" /></td>
+                            <td className="text-center"><input type="checkbox" disabled checked={item?.topic_completed / item?.total_topic !== 1 ? "" : "true"} /></td>
                             <td colSpan={2}><h6>{item?.name}</h6></td>
                             <td colSpan={1}><h6>{item?.category}</h6></td>
                             <td className="description" colSpan={3}><h6>{item?.description}</h6></td>
@@ -129,7 +129,7 @@ const UserActivity = () => {
                       {classUser?.data?.status !== 400 && classUser?.length > 3 && classUser?.splice(0, 3).map(item => {
                         return (<>
                           <tr className="b-table text-grey-dark" onClick={() => router.push(`/class/${item?.id}`)}>
-                            <td className="text-center"><input type="checkbox" disabled checked="" /></td>
+                            <td className="text-center"><input type="checkbox" disabled checked={item?.topic_completed / item?.total_topic !== 1 ? "" : "true"} /></td>
                             <td colSpan={2}><h6>{item?.name}</h6></td>
                             <td colSpan={1}><h6>{item?.category}</h6></td>
                             <td className="description" colSpan={3}><h6>{item?.description}</h6></td>
