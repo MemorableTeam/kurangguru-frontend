@@ -1,16 +1,16 @@
-import Sidebar from "../../components/sidebar"
+import Sidebar from "../../../components/sidebar"
 import { Col, Row, Image, Button, Modal, InputGroup, FormControl } from "react-bootstrap"
-import { Header } from "../../components";
+import { Header } from "../../../components";
 import { useState, useEffect } from 'react'
 import { useForm } from "react-hook-form";
-import { useUser } from "../api/users/useUser";
-import { actionUser } from "../api/users/actionUser";
+import { useUser } from "../../api/users/useUser";
+import { actionUser } from "../../api/users/actionUser";
 import useSWR from "swr";
 import { useRouter } from "next/router";
 
 const Profile = () => {
   const router = useRouter()
-  const { data: auth } = useSWR('api/users/getSession')
+  const { data: auth } = useSWR('../api/users/getSession')
   const { user, errUser, mutateUser, loadUser } = useUser(auth?.user?.user_id)
   const [showPhone, setShowPhone] = useState(false);
   const [showChange, setShowChange] = useState(false);
@@ -58,17 +58,17 @@ const Profile = () => {
   }
 
   useEffect(() => {
-    if (auth !== undefined && auth?.user?.role === 'fasilitator') router.push('/fasilitator')
+    if (auth !== undefined && auth?.user?.role === 'user') router.push('/')
     if (auth?.logout && auth !== undefined) router.push('/login')
   }, [auth])
 
   return (
     <>
-      <Header title="Profile" url="./images/face1.png" />
+      <Header title="Profile" url="../images/face1.png" />
       <div className='container-fluid bg-blue-light bg-main sm-bg'>
         <Row className='gx-3 p-2' style={{ height: '100vh' }}>
           <Col md={5} lg={4} xl={3} className='p-0'>
-            <Sidebar activeTabs={1} />
+            <Sidebar activeTabs={1} rootDir={{ icon: '../../icon', img: '../../images' }} route={'../api/users/getSession'} />
           </Col>
           <Col>
             <Row className='w-100 h-100 ms-2'>
@@ -79,7 +79,7 @@ const Profile = () => {
                     <label className='ps-content mx-auto rounded-circle'>
                       <input type="file" name="photo" accept="image" onChange={(e) => setImg(e.target.files[0])} className='d-none' disabled={disabled} />
                       {/* <img width='130px' height='130px' className='rounded-circle' src={(user.photo) ? `${process.env.REACT_APP_API_IMG_URL}${user.photo}` : `${process.env.PUBLIC_URL}/logo/no-photo.png`} alt='profile' /> */}
-                      <Image className="rounded-circle" src={user?.photo && user?.photo != 'null' ? `${process.env.API_URL_IMG}${user?.photo}` : './images/photo_profile.png'} style={{ height: '100%', width: '100%' }} />
+                      <Image className="rounded-circle" src={user?.photo && user?.photo != 'null' ? `${process.env.API_URL_IMG}${user?.photo}` : '../images/photo_profile.png'} style={{ height: '100%', width: '100%' }} />
                     </label>
                     <Button className="edit bg-transparent border-0 mt-3" onClick={() => setDisabled(!disabled)}>
                       <Image className="ps-content mx-4" src="/icon/edit-icon.svg" style={{ height: '30%', width: '30%' }} />

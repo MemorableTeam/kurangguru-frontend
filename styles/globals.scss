@@ -70,6 +70,13 @@ $white: #ffffff;
 .border-radius-10 {
   border-radius: 10px;
 }
+.border-radius-20{
+  border-radius: 20px;
+}
+
+.border-radius-30{
+  border-radius:30px
+}
 .w-100 {
   width: 100%;
 }
@@ -96,7 +103,9 @@ $white: #ffffff;
 .fw-400 {
   font-weight: 400;
 }
-
+.w-30{
+  width: 30%;
+}
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;

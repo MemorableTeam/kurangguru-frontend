@@ -16,7 +16,6 @@ const UserDashboard = () => {
     token: `${auth?.user?.token}`
   })
   console.log('class', classUser)
-  const [show, setShow] = useState(false)
   const [index, setIndex] = useState(0);
   const [value, setValue] = useState(null);
   const [activeTabs, setActiveTabs] = useState(1);
@@ -25,16 +24,6 @@ const UserDashboard = () => {
   const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);
   };
-  const handleModals = (e) => {
-    e.preventDefault()
-
-    if (show) {
-      setShow(false);
-    } else {
-      setShow(true);
-    }
-  }
-
   const today = moment().format("D MMMM gggg");
   const today1 = moment().format("YYYY-MM-DD");
   const format = moment(value).format("D MMMM gggg");
@@ -83,6 +72,11 @@ const UserDashboard = () => {
   //   today: moment().toString(),
   //   to_date: to_date.toString(),
   // });
+
+  useEffect(() => {
+    if (auth !== undefined && auth?.user?.role === "user") router.push("/");
+    if (auth?.logout && auth !== undefined) router.push("/login");
+  }, [auth]);
 
   return (
     <>
@@ -162,24 +156,27 @@ const UserDashboard = () => {
                       </Button>
                     </div>
                     <Card className='w-100 border-0 mb-5'>
-                    {classUser.map((element)=>(
-                    <div className="d-flex bg-white py-3 px-3">
-                    <Card className='w-100 shadow-lg border-0 py-3'>
-                        <Card.Body>
-                            <Row>
-                                <Col className='fw-bolder roboto col-4'>{moment(`${element?.start_time}`,'h:mm a').format('LT')} - {moment(`${element?.end_time}`,'h:mm a').format('LT')}</Col>
-                                <Col className='fw-bolder montserrat col-6'>{element.name}</Col>
-                                <Col className='col-2 montserrat'>{element.members} <img src='./icon/student-icon.svg' className='icon'/></Col>
-                            </Row>
-                        </Card.Body>
-                    </Card>
-                    </div>
-                    ))}
-                    <div className='d-flex justify-content-center my-3'>
-                      <Button variant='none' className = 'bg-blue-dark rounded-pill' onClick={(e)=>handleModals(e)}>
-                        <img src='./icon/plus-icon.svg' className='rounded' /> <span className='text-white fw-bold kanit'>New Task</span> 
-                      </Button>
-                    </div>
+                      {classUser &&
+                        classUser.map((element) => (
+                          <div className="d-flex bg-white py-3 px-3">
+                            <Card className='w-100 shadow-lg border-0 py-3'>
+                              <Card.Body>
+                                <Row>
+                                  <Col className='fw-bolder roboto col-4'>{moment(`${element?.start_time}`, 'h:mm a').format('LT')} - {moment(`${element?.end_time}`, 'h:mm a').format('LT')}</Col>
+                                  <Col className='fw-bolder montserrat col-6'>{element.name}</Col>
+                                  <Col className='col-2 montserrat'>{element.members} <img src='./icon/student-icon.svg' className='icon' /></Col>
+                                </Row>
+                              </Card.Body>
+                            </Card>
+                          </div>
+                        ))}
+                      <div className='d-flex justify-content-center my-3'>
+                        <Link href='/fasilitator/activity'>
+                          <Button variant='none' className='bg-blue-dark rounded-pill'>
+                            <img src='./icon/plus-icon.svg' className='rounded' /> <span className='text-white fw-bold kanit'>New Task</span>
+                          </Button>
+                        </Link>
+                      </div>
                     </Card>
                   </Col>
                 </Row>
@@ -191,22 +188,6 @@ const UserDashboard = () => {
           </Col>
         </Row>
       </Container>
-
-      <Modal show={show} onHide={(e) => setShow(false)}>
-        <Modal.Header>
-          <Modal.Title>Modal heading</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={(e) => setShow(false)}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={(e) => setShow(false)}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal>
-
     </>
   )
 }

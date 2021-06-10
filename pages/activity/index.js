@@ -9,16 +9,19 @@ import { useClassByUser } from "../api/class/useClassByUser";
 import useSWR, { mutate } from "swr";
 import { useRouter } from "next/router";
 import { userPage } from '../../libs/session'
+import { globalPost } from "../../libs/fetcher";
 
 const UserActivity = () => {
   const router = useRouter()
+  const [loading, setLoading] = useState(false)
   const { data: auth } = useSWR('api/users/getSession')
   const { class: data, mutateClass } = useAllClass({
     user_id: auth?.user?.user_id,
     page_size: 10,
     current_page: router?.query?.page ? parseInt(router?.query?.page) : 1
   })
-  const { class: classUser } = useClassByUser({
+  
+  const { class: classUser, mutateClass : mutateByUser } = useClassByUser({
     userId: auth?.user?.user_id,
     token: `${auth?.user?.token}`
   })
@@ -27,7 +30,6 @@ const UserActivity = () => {
 
   //   const [visiblePassword, setVisiblePassword] = useState(false);
   //   const [visibleConfirm, setVisibleConfirm] = useState(false);
-
   useEffect(() => {
     let page = []
     if (data?.total_pages > 1) {
@@ -45,6 +47,27 @@ const UserActivity = () => {
   }, [router.query.page])
 
   useEffect(() => {
+    if (auth?.logout && auth !== undefined) router.push('/login')
+  }, [auth])
+
+  const processRegister = async(id) =>{
+    try {
+      const result = await globalPost({
+        url: `${process.env.API_URL}/members`,
+        headers : {
+          Authorization: `Bearer ${auth?.user?.token}`
+        },
+        params: { user_id : auth?.user?.user_id, class_id : id }
+      })
+      console.log(result)
+      setLoading(false)
+    } catch (err) {
+      alert(err)
+    }
+  }
+
+  useEffect(() => {
+    if (auth !== undefined && auth?.user?.role === 'fasilitator') router.push('/fasilitator')
     if (auth?.logout && auth !== undefined) router.push('/login')
   }, [auth])
 
@@ -66,6 +89,11 @@ const UserActivity = () => {
               <Col xs={12} className='bg-transparent w-100' style={{ height: '32%', borderTopLeftRadius: '30px', borderTopRightRadius: '30px' }}>
                 <h5 className="mt-3 mb-1 fw-500">Activity</h5>
                 <h6 className="mt-3 mb-2 ms-3 fw-500">My class</h6>
+                {classUser?.data?.status === 400 && (
+                  <div className='text-center text-muted'>You didn't join any class yet</div>
+                )}
+                { classUser?.data?.status !== 400 && (
+                <>
                 <div className="table-responsive">
                   <table className="table table-borderless table-hover">
                     <thead>
@@ -79,8 +107,24 @@ const UserActivity = () => {
                         <th>Score</th>
                       </tr>
                     </thead>
+                    {classUser?.data?.status === 400 && (
+                        <div className='w-100 text-center text-muted'>You didn't join any class yet</div>
+                    )}
                     <tbody className="bg-white fs-400">
-                      {classUser && classUser?.map(item => {
+                      {classUser?.data?.status !== 400 && classUser?.length <= 3 && classUser?.map(item => {
+                        return (<>
+                          <tr className="b-table text-grey-dark" onClick={() => router.push(`/class/${item?.id}`)}>
+                            <td className="text-center"><input type="checkbox" disabled checked="" /></td>
+                            <td colSpan={2}><h6>{item?.name}</h6></td>
+                            <td colSpan={1}><h6>{item?.category}</h6></td>
+                            <td className="description" colSpan={3}><h6>{item?.description}</h6></td>
+                            <td colSpan={1}>{`${item?.topic_completed / item?.total_topic * 100}%`}</td>
+                            <td>{item?.topic_completed / item?.total_topic !== 1 ? 'On Going' : 'Completed'}</td>
+                            <td>{item?.avg ? Math.round(item?.avg) : '0'}</td>
+                          </tr>
+                        </>)
+                      })}
+                      {classUser?.data?.status !== 400 && classUser?.length > 3 && classUser?.splice(0, 3).map(item => {
                         return (<>
                           <tr className="b-table text-grey-dark" onClick={() => router.push(`/class/${item?.id}`)}>
                             <td className="text-center"><input type="checkbox" disabled checked="" /></td>
@@ -96,11 +140,13 @@ const UserActivity = () => {
                     </tbody>
                   </table>
                 </div>
-                <div className="text-center">
+                <div className="text-center mt-2">
                   <Link href="/class">
                     <a className="text-black text-decoration-none">view all</a>
                   </Link>
                 </div>
+                </>
+                )}
               </Col>
 
               <Col xs={12} className='px-4 bg-white border-radius-10 w-90 mb-3 mt-3' style={{ height: '72%', borderBottomLeftRadius: '30px', borderBottomRightRadius: '30px' }}>
@@ -156,7 +202,7 @@ const UserActivity = () => {
                             <td colSpan={3}>{e?.description}</td>
                             <td colSpan={1}>{e?.level}</td>
                             <td>{`$${e?.price}`}</td>
-                            <td><Button variant='success' className='rounded-pill'>Register</Button></td>
+                            <td><Button variant='success' data-id={e?.id} className='rounded-pill' onClick={(e)=>processRegister(e.target.getAttribute('data-id'))}>Register</Button></td>
                           </tr>
                         </>)
                       })}
