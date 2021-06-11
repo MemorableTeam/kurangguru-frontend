@@ -59,7 +59,7 @@ const Register = () => {
             <h1 className="my-5 text-center kanit">Register</h1>
             <form onSubmit={handleSubmit(processRegister)}>
               <div className="mb-3">
-                <label htmlFor="input-username" className="form-label text-grey-dark kanit label-top4">
+                <label htmlFor="input-username" className="form-label bg-blue-light px-1 text-grey-dark kanit label-top4">
                   Username
                 </label>
                 <input
@@ -73,7 +73,7 @@ const Register = () => {
               </div>
 
               <div className="mb-3">
-                <label htmlFor="input-email" className="form-label text-grey-dark kanit label-top4">
+                <label htmlFor="input-email" className="form-label bg-blue-light px-1 text-grey-dark kanit label-top4">
                   Email
                 </label>
                 <input
@@ -87,7 +87,7 @@ const Register = () => {
               </div>
 
               <div className="mb-3">
-                <label htmlFor="input-password" className="form-label text-grey-dark kanit label-top4">
+                <label htmlFor="input-password" className="form-label bg-blue-light px-1 text-grey-dark kanit label-top4">
                   Password
                 </label>
                 <div className='input-group'>
@@ -110,7 +110,7 @@ const Register = () => {
               </div>
 
               <div className="mb-5">
-                <label htmlFor="input-confirm-password" className="form-label text-grey-dark kanit label-top4">
+                <label htmlFor="input-confirm-password" className="form-label bg-blue-light px-1 text-grey-dark kanit label-top4">
                   Confirm Password
                 </label>
                 <div className='input-group'>

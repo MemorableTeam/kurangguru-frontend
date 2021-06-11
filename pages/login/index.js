@@ -73,7 +73,7 @@ const Login = () => {
               <div className="mb-3">
                 <label
                   htmlFor="exampleInputEmail1"
-                  className="form-label text-grey-dark kanit label-top4"
+                  className="form-label bg-blue-light px-1 text-grey-dark kanit label-top4"
                 >
                   Username or Email
                 </label>
@@ -82,7 +82,7 @@ const Login = () => {
                     required: "Username Or Email can't be empty",
                   })}
                   type="text"
-                  className={`username form-control shadow-none border-radius-10 py-3 ${errors.username ? "is-invalid" : ""
+                  className={`username form-control shadow-none border-radius-10 py-3 bg-transparent ${errors.username ? "is-invalid" : ""
                     }`}
                   id="exampleInputEmail1"
                   aria-describedby="emailHelp"
@@ -95,7 +95,7 @@ const Login = () => {
               <div className="mb-1">
                 <label
                   htmlFor="input-password"
-                  className="form-label text-grey-dark kanit label-top4"
+                  className="bg-blue-light px-1 form-label text-grey-dark kanit label-top4"
                 >
                   Password
                 </label>
@@ -105,7 +105,7 @@ const Login = () => {
                       required: "Password can't be empty",
                     })}
                     type="password"
-                    className={`password form-control shadow-none border-radius-10 py-3 r-none ${errors.password ? "is-invalid" : ""
+                    className={`password form-control shadow-none border-radius-10 py-3 r-none bg-transparent ${errors.password ? "is-invalid" : ""
                       }`}
                     id="input-password"
                   />
