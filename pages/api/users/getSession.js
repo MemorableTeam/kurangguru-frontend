@@ -2,7 +2,7 @@ import { withIronSession } from "next-iron-session";
 
 async function handler(req, res, session) {
   const user = await req.session.get("user");
-  user ? res.send({user}) : res.send({logout : true})
+  user ? res.send({ user }) : res.send({ logout: true })
 }
 
 export default withIronSession(handler, {
