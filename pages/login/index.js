@@ -1,4 +1,12 @@
-import { Container, Row, Col, Button, Modal, Spinner, Image } from "react-bootstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Button,
+  Modal,
+  Spinner,
+  Image,
+} from "react-bootstrap";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { Header } from "../../components";
@@ -46,7 +54,7 @@ const Login = () => {
         setMessage(result.data.message);
         setShow(true);
       }
-    } catch (err) { }
+    } catch (err) {}
   };
 
   //ketika tekan toogle ditekan
@@ -82,8 +90,9 @@ const Login = () => {
                     required: "Username Or Email can't be empty",
                   })}
                   type="text"
-                  className={`username form-control shadow-none border-radius-10 py-3 bg-transparent ${errors.username ? "is-invalid" : ""
-                    }`}
+                  className={`username form-control shadow-none border-radius-10 py-3 bg-transparent ${
+                    errors.username ? "is-invalid" : ""
+                  }`}
                   id="exampleInputEmail1"
                   aria-describedby="emailHelp"
                 />
@@ -105,8 +114,9 @@ const Login = () => {
                       required: "Password can't be empty",
                     })}
                     type="password"
-                    className={`password form-control shadow-none border-radius-10 py-3 r-none bg-transparent ${errors.password ? "is-invalid" : ""
-                      }`}
+                    className={`password form-control shadow-none border-radius-10 py-3 r-none bg-transparent ${
+                      errors.password ? "is-invalid" : ""
+                    }`}
                     id="input-password"
                   />
                   <div className="px-2 input-group-append toogle py-3">
@@ -175,14 +185,18 @@ const Login = () => {
         centered
         onHide={() => setShow(false)}
       >
-        <div className='border-radius-10'>
-          <Modal.Body className='py-3 px-3'>
+        <div className="border-radius-10">
+          <Modal.Body className="py-3 px-3">
             {/* <Image className="icon mx-4" src="/images/face1.png" /> */}
             <div className="d-flex flex-row bd-highlight mb-3">
               <Image className="icon-lg" src="/images/face1.png" />
-              <h3 className="mx-auto w-100 text-danger text-center align-self-center">{message}</h3>
+              <h3 className="mx-auto w-100 text-danger text-center align-self-center">
+                {message}
+              </h3>
             </div>
-            <Button onClick={() => setShow(false)} className='float-end my-3'>Close</Button>
+            <Button onClick={() => setShow(false)} className="float-end my-3">
+              Close
+            </Button>
           </Modal.Body>
         </div>
       </Modal>
@@ -192,8 +206,9 @@ const Login = () => {
         aria-labelledby="contained-modal-title-vcenter"
         centered
         onHide={(e) => setLoading(false)}
-        backdrop='static'>
-        <Modal.Body className='m-5'>
+        backdrop="static"
+      >
+        <Modal.Body className="m-5">
           <Spinner animation="grow" variant="none" className="bg-blue-light" />
           <Spinner animation="grow" variant="none" className="bg-blue-dark" />
           <Spinner animation="grow" variant="none" className="bg-blue-light" />
