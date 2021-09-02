@@ -167,19 +167,20 @@ const UserActivity = () => {
 
                 <div className="d-flex b-white border-bottom">
                   <DropdownButton variant="tranparent" className="b-category" title="Categories">
-                    <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                    <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                    <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+                    <Dropdown.Item >Software</Dropdown.Item>
+                    <Dropdown.Item >History</Dropdown.Item>
+                    <Dropdown.Item >Math</Dropdown.Item>
+                    <Dropdown.Item >Science</Dropdown.Item>
+                    <Dropdown.Item >Finance</Dropdown.Item>
                   </DropdownButton>
                   <DropdownButton variant="tranparent" title="Level">
-                    <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                    <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                    <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+                    <Dropdown.Item >Beginner</Dropdown.Item>
+                    <Dropdown.Item >Intermediet</Dropdown.Item>
+                    <Dropdown.Item >Advance</Dropdown.Item>
                   </DropdownButton>
                   <DropdownButton variant="tranparent" title="Pricing">
-                    <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                    <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                    <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+                    <Dropdown.Item >Free</Dropdown.Item>
+                    <Dropdown.Item >Paid</Dropdown.Item>
                   </DropdownButton>
                 </div>
 
@@ -217,7 +218,8 @@ const UserActivity = () => {
                   <div className='d-flex'>
                     {page && page.map(e => {
                       return (<>
-                        <div className={`text-center py-1 px-2 mx-2 ${e == currentPage ? 'bg-success' : 'bg - blue - light'}`} onClick={() => { router.push(`${location.pathname}?page=${e}`); window.location.href = `${location.pathname}?page=${e}`}} >{e}</div>
+                        <div className={`text-center py-1 px-2 mx-2 ${e == currentPage ? 'bg-success' : 'bg - blue - light'}`} onClick={() => { router.push(`${location.pathname}?page=${e}`); window.location.href = `${location.pathname}?page=${e}`
+                      }} >{e}</div>
                       </>)
                     })}
                   </div>
