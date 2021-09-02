@@ -66,8 +66,8 @@ function Home() {
   return (
     <>
       <Header title="User Dashboard" url="./images/face1.png" />
-      <div className='container-fluid bg-blue-light sm-bg h-dashboard' style={{ height: '100vh' }}>
-        <Row className='gx-3 p-2' style={{ height: '100vh' }}>
+      <div className='container-fluid bg-blue-light sm-bg h-dashboard'>
+        <Row className='gx-3 p-2' >
           <Col md={5} lg={4} xl={3} className='p-0'>
             <Row>
               <Col md={12} className="h-activity">
@@ -77,9 +77,9 @@ function Home() {
             </Row>
           </Col>
           <Col>
-            <Row className='w-100 h-100 ms-2'>
-              <Col xs={8} className='bg-transparent mb-4' style={{ width: '60%', height: 'fit-content', borderTopLeftRadius: '30px', borderTopRightRadius: '30px' }}>
-                <Row className='h-100'>
+            <Row className='w-100 bg-main ms-2'>
+              <Col xs={8} className='bg-transparent' style={{ width: '60%', height: 'fit-content', borderTopLeftRadius: '30px', borderTopRightRadius: '30px' }}>
+                <Row>
                   <Col xs={12} style={{ height: '40%' }}>
                     <h5 className="py-3 bg-white px-3 mb-0 fw-500" style={{ borderTopLeftRadius: '30px', borderTopRightRadius: '30px' }}>
                       News
@@ -106,37 +106,37 @@ function Home() {
                     </Carousel>
                   </Col>
 
-                  <Col xs={12} className='mt-3 w-100' style={{ height: 'min-content', borderTopLeftRadius: '30px', borderTopRightRadius: '30px' }}>
+                  <Col xs={12} className='mt-3 w-100' style={{ borderTopLeftRadius: '30px', borderTopRightRadius: '30px' }}>
                     <h5 className="py-3 bg-white px-4 mb-0 fw-500" style={{ borderTopLeftRadius: '30px', borderTopRightRadius: '30px' }}>
                       Schedule List
                       <input min={fullDate[0]} max={fullDate[6]} type="date" className="float-end" id="dateInput" name="dateInput" onChange={(e) => { setValue(e.target.value); activeTabs === 1 ? router.push(`/${moment(e.target.value).format("dddd")}?date=${moment(e.target.value).format("DD")}`) : router.push(`/${moment(e.target.value).format("dddd")}?ondate=${moment(e.target.value).format("DD")}&by=${auth?.user?.user_id}`) }}></input>
                     </h5>
-                    <div className="d-flex bg-white d-flex align-items-center justify-content-center">
-                      <Button className={`${pickDay == date[0] ? 'btn-blue-dark' : 'bg-white text-black'} b-hover border-radius-10 shadow-none border-0 me-4`} onClick={(e) => { setValue(fullDate[0]); setTheDay(byDay[0]); activeTabs === 1 ? router.push(`/${byDay[0].toLowerCase()}?date=${date[0]}`) : router.push(`/${byDay[0].toLowerCase()}?ondate=${date[0]}&by=${auth?.user?.user_id}`)  }}>
+                    <div className="d-flex bg-white d-flex align-items-center justify-content-between px-4">
+                      <Button className={`${pickDay == date[0] ? 'btn-blue-dark' : 'bg-white text-black'} b-hover border-radius-10 shadow-none border-0`} onClick={(e) => { setValue(fullDate[0]); setTheDay(byDay[0]); activeTabs === 1 ? router.push(`/${byDay[0].toLowerCase()}?date=${date[0]}`) : router.push(`/${byDay[0].toLowerCase()}?ondate=${date[0]}&by=${auth?.user?.user_id}`) }}>
                         <p className="fw-600">{week[0]} </p>
                         <p className="fw-600">{date[0]} </p>
                       </Button>
-                      <Button className={`${pickDay == date[1] ? 'btn-blue-dark' : 'bg-white text-black'} b-hover border-radius-10 shadow-none border-0 me-4`} onClick={(e) => { setValue(fullDate[1]); setTheDay(byDay[1]); activeTabs === 1 ? router.push(`/${byDay[1].toLowerCase()}?date=${date[1]}`) : router.push(`/${byDay[1].toLowerCase()}?ondate=${date[1]}&by=${auth?.user?.user_id}`)  }}>
+                      <Button className={`${pickDay == date[1] ? 'btn-blue-dark' : 'bg-white text-black'} b-hover border-radius-10 shadow-none border-0`} onClick={(e) => { setValue(fullDate[1]); setTheDay(byDay[1]); activeTabs === 1 ? router.push(`/${byDay[1].toLowerCase()}?date=${date[1]}`) : router.push(`/${byDay[1].toLowerCase()}?ondate=${date[1]}&by=${auth?.user?.user_id}`) }}>
                         <p className="fw-600">{week[1]} </p>
                         <p className="fw-600">{date[1]} </p>
                       </Button>
-                      <Button className={`${pickDay == date[2] ? 'btn-blue-dark' : 'bg-white text-black'} b-hover border-radius-10 shadow-none border-0 me-4`} onClick={(e) => { setValue(fullDate[2]); setTheDay(byDay[2]); activeTabs === 1 ? router.push(`/${byDay[2].toLowerCase()}?date=${date[2]}`) : router.push(`/${byDay[2].toLowerCase()}?ondate=${date[2]}&by=${auth?.user?.user_id}`)  }}>
+                      <Button className={`${pickDay == date[2] ? 'btn-blue-dark' : 'bg-white text-black'} b-hover border-radius-10 shadow-none border-0`} onClick={(e) => { setValue(fullDate[2]); setTheDay(byDay[2]); activeTabs === 1 ? router.push(`/${byDay[2].toLowerCase()}?date=${date[2]}`) : router.push(`/${byDay[2].toLowerCase()}?ondate=${date[2]}&by=${auth?.user?.user_id}`) }}>
                         <p className="fw-600">{week[2]} </p>
                         <p className="fw-600">{date[2]} </p>
                       </Button>
-                      <Button className={`${pickDay == date[3] ? 'btn-blue-dark' : 'bg-white text-black'} b-hover border-radius-10 shadow-none border-0 me-4`} onClick={(e) => { setValue(fullDate[3]); setTheDay(byDay[3]); activeTabs === 1 ? router.push(`/${byDay[3].toLowerCase()}?date=${date[3]}`) : router.push(`/${byDay[3].toLowerCase()}?ondate=${date[3]}&by=${auth?.user?.user_id}`)  }}>
+                      <Button className={`${pickDay == date[3] ? 'btn-blue-dark' : 'bg-white text-black'} b-hover border-radius-10 shadow-none border-0`} onClick={(e) => { setValue(fullDate[3]); setTheDay(byDay[3]); activeTabs === 1 ? router.push(`/${byDay[3].toLowerCase()}?date=${date[3]}`) : router.push(`/${byDay[3].toLowerCase()}?ondate=${date[3]}&by=${auth?.user?.user_id}`) }}>
                         <p className="fw-600">{week[3]} </p>
                         <p className="fw-600">{date[3]} </p>
                       </Button>
-                      <Button className={`${pickDay == date[4] ? 'btn-blue-dark' : 'bg-white text-black'} b-hover border-radius-10 shadow-none border-0 me-4`} onClick={(e) => { setValue(fullDate[4]); setTheDay(byDay[4]); activeTabs === 1 ? router.push(`/${byDay[4].toLowerCase()}?date=${date[4]}`) : router.push(`/${byDay[4].toLowerCase()}?ondate=${date[4]}&by=${auth?.user?.user_id}`)  }}>
+                      <Button className={`${pickDay == date[4] ? 'btn-blue-dark' : 'bg-white text-black'} b-hover border-radius-10 shadow-none border-0`} onClick={(e) => { setValue(fullDate[4]); setTheDay(byDay[4]); activeTabs === 1 ? router.push(`/${byDay[4].toLowerCase()}?date=${date[4]}`) : router.push(`/${byDay[4].toLowerCase()}?ondate=${date[4]}&by=${auth?.user?.user_id}`) }}>
                         <p className="fw-600">{week[4]} </p>
                         <p className="fw-600">{date[4]} </p>
                       </Button>
-                      <Button className={`${pickDay == date[5] ? 'btn-blue-dark' : 'bg-white text-black'} b-hover border-radius-10 shadow-none border-0 me-4`} onClick={(e) => { setValue(fullDate[5]); setTheDay(byDay[5]); activeTabs === 1 ? router.push(`/${byDay[5].toLowerCase()}?date=${date[5]}`) : router.push(`/${byDay[5].toLowerCase()}?ondate=${date[5]}&by=${auth?.user?.user_id}`)  }}>
+                      <Button className={`${pickDay == date[5] ? 'btn-blue-dark' : 'bg-white text-black'} b-hover border-radius-10 shadow-none border-0`} onClick={(e) => { setValue(fullDate[5]); setTheDay(byDay[5]); activeTabs === 1 ? router.push(`/${byDay[5].toLowerCase()}?date=${date[5]}`) : router.push(`/${byDay[5].toLowerCase()}?ondate=${date[5]}&by=${auth?.user?.user_id}`) }}>
                         <p className="fw-600">{week[5]} </p>
                         <p className="fw-600">{date[5]} </p>
                       </Button>
-                      <Button className={`${pickDay == date[6] ? 'btn-blue-dark' : 'bg-white text-black'} b-hover border-radius-10 shadow-none border-0 me-3`} onClick={(e) => { setValue(fullDate[6]); setTheDay(byDay[6]); activeTabs === 1 ? router.push(`/${byDay[6].toLowerCase()}?date=${date[6]}`) : router.push(`/${byDay[6].toLowerCase()}?ondate=${date[6]}&by=${auth?.user?.user_id}`)  }}>
+                      <Button className={`${pickDay == date[6] ? 'btn-blue-dark' : 'bg-white text-black'} b-hover border-radius-10 shadow-none border-0`} onClick={(e) => { setValue(fullDate[6]); setTheDay(byDay[6]); activeTabs === 1 ? router.push(`/${byDay[6].toLowerCase()}?date=${date[6]}`) : router.push(`/${byDay[6].toLowerCase()}?ondate=${date[6]}&by=${auth?.user?.user_id}`) }}>
                         <p className="fw-600">{week[6]} </p>
                         <p className="fw-600">{date[6]} </p>
                       </Button>
@@ -147,8 +147,8 @@ function Home() {
                       <div className={`mx-3 py-1 tab fs-900 ${activeTabs === 2 ? 'text-blue-dark' : 'text-grey-dark'}`} onClick={() => setActiveTabs(2)} >For you</div>
                     </div>
 
-                    <div className={`py-2 tab ${activeTabs === 1 ? 'd-block bg-white' : 'd-none'}`}>
-                      {data?.class_list &&
+                    <div className={`py-3 b-schedule tab ${activeTabs === 1 ? 'd-block bg-white' : 'd-none'}`}>
+                      {data?.class_list ? (
                         data?.class_list?.map((item) => (
                           <div className="d-flex bg-white px-3 py-1">
                             <Card className='w-100 shadow-lg border-0 py-3'>
@@ -161,12 +161,25 @@ function Home() {
                               </Card.Body>
                             </Card>
                           </div>
-                        ))}
+                        ))
+                      )
+                        : (
+                          <div className="d-flex bg-white px-3 py-1">
+                            <Card className='w-100 shadow-lg border-0 py-3'>
+                              <Card.Body>
+                                <Row>
+                                  <Col className='fw-bolder roboto col-12'>No Schedule Yet</Col>
+                                </Row>
+                              </Card.Body>
+                            </Card>
+                          </div>
+                        )
+                      }
                     </div>
 
 
-                    <div className={`py-2 tab ${activeTabs === 2 ? 'bg-white d-block' : 'd-none'}`}>
-                      {myData?.class_list &&
+                    <div className={`py-3 b-schedule tab ${activeTabs === 2 ? 'bg-white d-block' : 'd-none'}`}>
+                      {myData?.class_list ? (
                         myData?.class_list?.map((item) => (
                           <div className="d-flex bg-white px-3 py-1">
                             <Card className='w-100 shadow-lg border-0 py-3'>
@@ -179,7 +192,20 @@ function Home() {
                               </Card.Body>
                             </Card>
                           </div>
-                        ))}
+                        ))
+                      )
+                        : (
+                          <div className="d-flex bg-white px-3 py-1">
+                            <Card className='w-100 shadow-lg border-0 py-3'>
+                              <Card.Body>
+                                <Row>
+                                  <Col className='fw-bolder roboto col-12'>No Schedule Yet</Col>
+                                </Row>
+                              </Card.Body>
+                            </Card>
+                          </div>
+                        )
+                      }
                     </div>
                   </Col>
                 </Row>
