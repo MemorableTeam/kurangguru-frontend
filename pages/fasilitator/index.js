@@ -37,7 +37,7 @@ const UserDashboard = () => {
 
   let id = null
   const { list: data, mutateList: mutate } = useScheduleByDay(theDay ? theDay : today2, auth?.user?.user_id, auth?.user?.token)
-  
+
   var days = [];
   var day = startOfWeek;
 
@@ -162,7 +162,7 @@ const UserDashboard = () => {
                       </Button>
                     </div>
                     <Card className='w-100 border-0 mb-5'>
-                    {data?.class_list &&
+                      {data?.class_list &&
                         data?.class_list?.map((element) => (
                           <div className="d-flex bg-white py-3 px-3">
                             <Card className='w-100 shadow-lg border-0 py-3'>
@@ -188,7 +188,31 @@ const UserDashboard = () => {
                 </Row>
               </Col>
               <Col xs={4} className='bg-white ms-3 d-none d-md-block' style={{ width: '38%', borderTopLeftRadius: '30px', borderTopRightRadius: '30px' }}>
-
+                <Row className='h-100'>
+                  <Col xs={12} style={{ height: '9%' }}>
+                    <div className='d-flex justify-content-between'>
+                      <h5 className="py-3 bg-white px-3 mb-0 fw-500" style={{ borderTopLeftRadius: '30px', borderTopRightRadius: '30px' }}>
+                        Messages
+                      </h5>
+                      <Link href='#'>
+                        <Button variant='none'>
+                          <Image className="py-1" src="/icon/plus-black-icon.svg" style={{ width: '80%', height: '80%' }} />
+                        </Button>
+                      </Link>
+                    </div>
+                    <div className="mx-3 input-group" style={{ width: '91%' }}>
+                      <div className="input-group-prepend">
+                        <span className="input-group-text bg-blue-light b-search-chat">
+                          <Image className="py-1" src="/icon/search-icon.svg" />
+                        </span>
+                      </div>
+                      <input type="text" className="form-control search shadow-none bg-blue-light" placeholder="Search" />
+                    </div>
+                    <div>
+                      <div className='text-left text-muted fst-italic mt-3 mx-3'>You didn't have any messages yet</div>
+                    </div>
+                  </Col>
+                </Row>
               </Col>
             </Row>
           </Col>
